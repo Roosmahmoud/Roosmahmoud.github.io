@@ -4,108 +4,472 @@
    <meta charset="UTF-8">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <title>LumaDay - Je leven. Op één rustige plek.</title>
-   <!-- Tailwind CSS -->
-   <script src="https://cdn.tailwindcss.com"></script>
-   <!-- Lucide Icons -->
-   <script src="https://unpkg.com/lucide@latest"></script>
-   <!-- Google Fonts -->
-   <link rel="preconnect" href="https://fonts.googleapis.com">
-   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-   <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-<script>
-       tailwind.config = {
-           theme: {
-               extend: {
-                   colors: {
-                       cream: '#FBFBF9',
-                       'cream-card': '#F4F4EE',
-                       'pink-accent': '#F3E1E1',
-                       'pink-hover': '#EACACA',
-                       'pink-pill': '#F2C9D8',
-                       'green-accent': '#E1EFE6',
-                       'green-hover': '#CDE3D5',
-                       'green-pill': '#B2D8C0',
-                       'dark-text': '#1C1917',
-                       'subtle-gray': '#78716C',
-                       'border-warm': '#E7E5E4'
-                   },
-                   fontFamily: {
-                       serif: ['"Instrument Serif"', 'serif'],
-                       sans: ['"Plus Jakarta Sans"', 'sans-serif'],
-  }
-   </script>
+tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        cream: '#FBFBF9',
+                        'cream-card': '#F4F4EE',
+                        'pink-accent': '#F3E1E1',
+                        'pink<!DOCTYPE html>
+<html lang="nl" class="h-full">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LumaDay - Je leven. Op één rustige plek.</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <script>-hover': '#EACACA',
+                        'pink-pill': '#F2C9D8',
+                        'green-accent': '#E1EFE6',
+                        'green-hover': '#CDE3D5',
+                        'green-pill': '#B2D8C0',
+                        'dark-text': '#1C1917',
+                        'subtle-gray': '#78716C',
+                        'border-warm': '#E7E5E4'
+                    },
+                    fontFamily: {
+                        serif: ['"Instrument Serif"', 'serif'],
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
 
+    <style>
+        body {
+            background-color: #FBFBF9;
+            color: #1C1917;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-image: radial-gradient(#E7E5E4 0.75px, transparent 0.75px);
+            background-size: 24px 24px;
+        }
 
-   <style>
-       body {
-           background-color: #FBFBF9;
-           color: #1C1917;
-           font-family: 'Plus Jakarta Sans', sans-serif;
-           background-image: radial-gradient(#E7E5E4 0.75px, transparent 0.75px);
-           background-size: 24px 24px;
-       }
+        .serif-heading {
+            font-family: 'Instrument Serif', serif;
+        }
 
+        .pill-btn {
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+        }
 
-       .serif-heading {
-           font-family: 'Instrument Serif', serif;
-       }
+        .pill-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
 
-
-.pill-btn {
-           transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-       }
-
-
-       .pill-btn:hover {
-           transform: translateY(-2px);
-           box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-       }
-
-
-       /* Highlight animation for code mode */
-       .explainer-highlight {
-           outline: 2px dashed #059669 !important;
-           outline-offset: 4px;
-           background-color: rgba(225, 239, 230, 0.4) !important;
-       }
-   </style>
+        /* Highlight animation for code mode */
+        .explainer-highlight {
+            outline: 2px dashed #059669 !important;
+            outline-offset: 4px;
+            background-color: rgba(225, 239, 230, 0.4) !important;
+        }
+    </style>
 </head>
 <body class="min-h-full flex flex-col justify-between antialiased selection:bg-pink-pill selection:text-dark-text">
-<!-- Developer Explainer Drawer / Panel -->
-   <div id="developer-panel" class="fixed top-0 right-0 h-full w-full sm:w-[480px] bg-dark-text text-stone-200 z-50 transform translate-x-full transition-transform duration-300 ease-in-out shadow-2xl flex flex-col border-l border-stone-800">
-       <div class="p-5 border-b border-stone-800 flex justify-between items-center bg-stone-900">
-           <div class="flex items-center gap-2">
-               <i data-lucide="code" class="w-5 h-5 text-emerald-400"></i>
-               <h3 class="font-semibold text-stone-100">Developer & Concept Explainer</h3>
-           </div>
-           <button onclick="toggleDeveloperMode()" class="text-stone-400 hover:text-white p-1 rounded-lg hover:bg-stone-800 transition">
-               <i data-lucide="x" class="w-5 h-5"></i>
-           </button>
-       </div>
 
+    <!-- Developer Explainer Drawer / Panel -->
+    <div id="developer-panel" class="fixed top-0 right-0 h-full w-full sm:w-[480px] bg-dark-text text-stone-200 z-50 transform translate-x-full transition-transform duration-300 ease-in-out shadow-2xl flex flex-col border-l border-stone-800">
+        <div class="p-5 border-b border-stone-800 flex justify-between items-center bg-stone-900">
+            <div class="flex items-center gap-2">
+                <i data-lucide="code" class="w-5 h-5 text-emerald-400"></i>
+                <h3 class="font-semibold text-stone-100">Developer & Concept Explainer</h3>
+            </div>
+            <button onclick="toggleDeveloperMode()" class="text-stone-400 hover:text-white p-1 rounded-lg hover:bg-stone-800 transition">
+                <i data-lucide="x" class="w-5 h-5"></i>
+            </button>
+        </div>
 
-       <div class="p-6 overflow-y-auto space-y-6 flex-1 text-sm font-light">
-           <div class="bg-stone-900/80 p-4 rounded-xl border border-stone-800">
-               <h4 class="text-xs uppercase tracking-wider font-bold text-emerald-400 mb-2">💡 Project Visie</h4>
-               <p class="text-stone-300 leading-relaxed">
-                   LumaDay is ontworpen om de digitale stress van standaard to-do apps op te lossen door
-een zachte, esthetische en <strong>energie-gestuurde planner</strong> aan te bieden.
-               </p>
-           </div>
+        <div class="p-6 overflow-y-auto space-y-6 flex-1 text-sm font-light">
+            <div class="bg-stone-900/80 p-4 rounded-xl border border-stone-800">
+                <h4 class="text-xs uppercase tracking-wider font-bold text-emerald-400 mb-2">💡 Project Visie</h4>
+                <p class="text-stone-300 leading-relaxed">
+                    LumaDay is ontworpen om de digitale stress van standaard to-do apps op te lossen door een zachte, esthetische en <strong>energie-gestuurde planner</strong> aan te bieden.
+                </p>
+            </div>
 
+            <div>
+                <h4 class="text-xs uppercase tracking-wider font-bold text-stone-400 mb-3">Architectuur & Code Opbouw</h4>
+                <ul class="space-y-3">
+                    <li class="p-3 bg-stone-900 rounded-lg border border-stone-800 cursor-pointer hover:border-emerald-500/50 transition" onclick="highlightSection('hero-section')">
+                        <strong class="text-emerald-300 block mb-1">1. Clean Minimalistic UI</strong>
+                        <span class="text-xs text-stone-400">Warme pastel accenten (#F2C9D8 & #B2D8C0) met een zacht gebroken-wit textured grid. Geen harde contrasten of stressvolle rode alerts.</span>
+                    </li>
+                    <li class="p-3 bg-stone-900 rounded-lg border border-stone-800 cursor-pointer hover:border-emerald-500/50 transition" onclick="highlightSection('energy-feature')">
+                        <strong class="text-emerald-300 block mb-1">2. Dynamic Energy Planner (JS)</strong>
+                        <span class="text-xs text-stone-400">Een interactieve State Engine die je planning direct herstructureert op basis van hoe je je voelt (Low, Good, Energized).</span>
+                    </li>
+                    <li class="p-3 bg-stone-900 rounded-lg border border-stone-800 cursor-pointer hover:border-emerald-500/50 transition" onclick="highlightSection('goal-hierarchy')">
+                        <strong class="text-emerald-300 block mb-1">3. Goal Cascade Architecture</strong>
+                        <span class="text-xs text-stone-400">Vertaalt abstracte levensdoelen in hanteerbare dagelijkse acties (Macro naar Micro flow).</span>
+                    </li>
+                </ul>
+            </div>
 
-           <div>
-               <h4 class="text-xs uppercase tracking-wider font-bold text-stone-400 mb-3">Architectuur & Code Opbouw</h4>
-               <ul class="space-y-3">
-                   <li class="p-3 bg-stone-900 rounded-lg border border-stone-800 cursor-pointer hover:border-emerald-500/50 transition" onclick="highlightSection('hero-section')">
-                       <strong class="text-emerald-300 block mb-1">1. Clean Minimalistic UI</strong>
-                       <span class="text-xs text-stone-400">Warme pastel accenten (#F2C9D8 & #B2D8C0) met een zacht gebroken-wit textured grid. Geen harde contrasten of stressvolle rode
-alerts.</span>
-                   </li>
-                   <li class="p-3 bg-stone-900 rounded-lg border border-stone-800 cursor-pointer hover:border-emerald-500/50 transition" onclick="highlightSection('energy-feature')">
-                       <strong class="text-emerald-300 block mb-1">2. Dynamic Energy Planner (JS)</strong>
-                       <span class="text-xs text-stone-400">Een interactieve State Engine die je planning direct herstructureert op basis van hoe je je voelt (Low, Good, Energized).</span>
-                   </li>
-                   <li class="p-3 bg-stone-900 rounded-lg border border-stone-800 cursor-pointer hover:border-emerald-500/50 transition" onclick="highlightSection('goal-hierarchy')">
-                       <strong class="text-emerald-300 block mb-1">3. Goal Cascade Architecture</stro
+            <div class="bg-stone-900 p-4 rounded-xl border border-stone-800">
+                <h4 class="text-xs uppercase tracking-wider font-bold text-stone-400 mb-2">Live Console Logs</h4>
+                <div id="console-logs" class="font-mono text-xs text-emerald-400 space-y-1 h-28 overflow-y-auto bg-stone-950 p-3 rounded border border-stone-800">
+                    <div>> LumaDay System Initialized.</div>
+                    <div>> Energy mode: 'Good' (Default)</div>
+                </div>
+            </div>
+        </div>
 
+        <div class="p-4 border-t border-stone-800 bg-stone-900 text-center text-xs text-stone-500">
+            Klik op een onderdeel hierboven om het te markeren op het scherm.
+        </div>
+    </div>
+
+    <!-- Floating Developer Mode Button -->
+    <button onclick="toggleDeveloperMode()" class="fixed bottom-6 right-6 z-40 bg-dark-text text-white px-4 py-3 rounded-full shadow-2xl hover:scale-105 active:scale-95 transition flex items-center gap-2.5 text-xs font-semibold tracking-wide border border-stone-700">
+        <span class="relative flex h-2 w-2">
+            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+            <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+        </span>
+        <i data-lucide="terminal" class="w-4 h-4 text-emerald-400"></i>
+        <span>Developer Mode</span>
+    </button>
+
+    <!-- Navbar -->
+    <header class="max-w-6xl mx-auto px-6 py-8 w-full flex items-center justify-between">
+        <div class="flex items-center gap-2">
+            <div class="w-8 h-8 rounded-full bg-stone-900 flex items-center justify-center text-white font-serif italic text-lg shadow-sm">
+                L
+            </div>
+            <span class="font-bold tracking-tight text-xl text-dark-text">LumaDay</span>
+        </div>
+
+        <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-subtle-gray">
+            <a href="#features" class="hover:text-dark-text transition">Hoe het werkt</a>
+            <a href="#energy-feature" class="hover:text-dark-text transition">Energy Planner</a>
+            <a href="#goals" class="hover:text-dark-text transition">Doelen</a>
+        </nav>
+
+        <div class="flex items-center gap-3">
+            <button class="pill-btn px-5 py-2.5 rounded-full text-xs font-semibold bg-pink-accent hover:bg-pink-hover text-dark-text border border-stone-300/60 shadow-sm">
+                [ Login / Sign up ]
+            </button>
+        </div>
+    </header>
+
+    <main class="max-w-6xl mx-auto px-6 flex-1 w-full space-y-20 py-8">
+
+        <!-- Hero Section -->
+        <section id="hero-section" class="text-center max-w-3xl mx-auto pt-6 pb-4 space-y-6">
+            <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-stone-200/60 border border-stone-300/70 text-xs font-medium text-subtle-gray mb-2">
+                <i data-lucide="sparkles" class="w-3.5 h-3.5 text-amber-600"></i>
+                <span>Rust. Overzicht. Intentie.</span>
+            </div>
+
+            <h1 class="serif-heading text-5xl sm:text-6xl md:text-7xl font-normal text-dark-text leading-[1.08] tracking-tight">
+                Je leven. Op één <span class="italic">rustige</span> plek.
+            </h1>
+
+            <p class="text-lg sm:text-xl text-subtle-gray font-light max-w-xl mx-auto leading-relaxed">
+                Plan minder. Leef meer. Beheer je energie, doelen en dagelijkse focus zonder overweldigd te raken.
+            </p>
+
+            <div class="flex flex-wrap items-center justify-center gap-4 pt-4">
+                <button onclick="scrollToDemo()" class="pill-btn px-7 py-3.5 rounded-full text-sm font-semibold bg-pink-accent hover:bg-pink-hover text-dark-text border border-stone-300 shadow-sm flex items-center gap-2">
+                    <span>[ Start gratis ]</span>
+                </button>
+                <a href="#energy-feature" class="pill-btn px-7 py-3.5 rounded-full text-sm font-semibold bg-green-accent hover:bg-green-hover text-dark-text border border-stone-300 shadow-sm flex items-center gap-2">
+                    <span>[ Bekijk hoe het werkt ]</span>
+                </a>
+            </div>
+        </section>
+
+        <!-- Live Interactive Dashboard Preview -->
+        <section id="dashboard-preview" class="max-w-4xl mx-auto">
+            <div class="bg-cream-card rounded-3xl p-6 sm:p-8 border border-border-warm shadow-xl shadow-stone-200/40 relative overflow-hidden">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-stone-300/70">
+                    <div>
+                        <div class="flex items-center gap-2 text-xs font-semibold text-subtle-gray tracking-wider uppercase mb-1">
+                            <span class="w-2 h-2 rounded-full bg-emerald-500 inline-block"></span>
+                            Vandaag Overzicht
+                        </div>
+                        <h2 class="text-2xl font-bold text-dark-text">Good morning, Alex.</h2>
+                        <p class="text-xs text-subtle-gray mt-0.5" id="current-date">Thursday, September 11</p>
+                    </div>
+                    <div class="inline-flex items-center gap-2 px-4 py-2 rounded-2xl bg-white border border-stone-200 text-xs font-medium text-dark-text shadow-sm self-start sm:self-auto">
+                        <i data-lucide="sun" class="w-4 h-4 text-amber-500"></i>
+                        <span id="day-status-text">Your day looks balanced.</span>
+                    </div>
+                </div>
+
+                <!-- Stats Bar -->
+                <div class="grid grid-cols-3 gap-3 my-6">
+                    <div class="bg-white/80 backdrop-blur p-4 rounded-2xl border border-stone-200 text-center">
+                        <span class="text-xs text-subtle-gray block mb-1">Energie Level</span>
+                        <span id="stat-energy" class="text-xl font-bold text-dark-text">78%</span>
+                    </div>
+                    <div class="bg-white/80 backdrop-blur p-4 rounded-2xl border border-stone-200 text-center">
+                        <span class="text-xs text-subtle-gray block mb-1">Prioriteiten</span>
+                        <span id="stat-priorities" class="text-xl font-bold text-dark-text">3 taken</span>
+                    </div>
+                    <div class="bg-white/80 backdrop-blur p-4 rounded-2xl border border-stone-200 text-center">
+                        <span class="text-xs text-subtle-gray block mb-1">Focus Sessies</span>
+                        <span id="stat-focus" class="text-xl font-bold text-dark-text">1 gepland</span>
+                    </div>
+                </div>
+
+                <!-- Schedule List -->
+                <div class="space-y-3" id="schedule-container">
+                    <!-- Loaded dynamically via JS based on state -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Energy Feature Section -->
+        <section id="energy-feature" class="max-w-4xl mx-auto pt-10">
+            <div class="text-center space-y-3 mb-8">
+                <span class="text-xs uppercase font-bold tracking-widest text-emerald-700 bg-green-accent px-3 py-1 rounded-full border border-green-hover">Unieke Feature</span>
+                <h2 class="serif-heading text-3xl sm:text-4xl text-dark-text">Plan op basis van hoe je je voelt.</h2>
+                <p class="text-subtle-gray text-sm max-w-lg mx-auto">
+                    Geen enkele dag is hetzelfde. Pas je dagplanning direct aan met één klik op basis van jouw huidige energieniveau.
+                </p>
+            </div>
+
+            <div class="bg-white rounded-3xl p-6 sm:p-8 border border-border-warm shadow-md text-center space-y-6">
+                <h3 class="text-base font-semibold text-dark-text">Hoe voel je je vandaag?</h3>
+
+                <div class="flex flex-wrap justify-center gap-3">
+                    <button onclick="setEnergyState('low')" id="btn-low" class="pill-btn px-6 py-2.5 rounded-full text-xs font-semibold bg-pink-accent hover:bg-pink-hover text-dark-text border border-stone-300 flex items-center gap-2">
+                        <i data-lucide="battery-low" class="w-4 h-4 text-pink-700"></i>
+                        <span>Low Energy</span>
+                    </button>
+                    <button onclick="setEnergyState('good')" id="btn-good" class="pill-btn px-6 py-2.5 rounded-full text-xs font-semibold bg-stone-100 hover:bg-stone-200 text-dark-text border border-stone-300 ring-2 ring-dark-text flex items-center gap-2">
+                        <i data-lucide="battery-medium" class="w-4 h-4 text-amber-600"></i>
+                        <span>Good (Normaal)</span>
+                    </button>
+                    <button onclick="setEnergyState('energized')" id="btn-energized" class="pill-btn px-6 py-2.5 rounded-full text-xs font-semibold bg-green-accent hover:bg-green-hover text-dark-text border border-stone-300 flex items-center gap-2">
+                        <i data-lucide="battery-charging" class="w-4 h-4 text-emerald-700"></i>
+                        <span>Energized!</span>
+                    </button>
+                </div>
+
+                <div class="p-4 bg-cream-card rounded-2xl border border-stone-200/80 text-xs text-subtle-gray max-w-md mx-auto" id="energy-explanation">
+                    <strong>Normale modus:</strong> Een gebalanceerde mix van overleg, diepe focus en voldoende hersteltijd.
+                </div>
+            </div>
+        </section>
+
+        <!-- Goal Hierarchy Breakdown -->
+        <section id="goals" class="max-w-4xl mx-auto pt-6">
+            <div class="text-center space-y-3 mb-10">
+                <span class="text-xs uppercase font-bold tracking-widest text-pink-700 bg-pink-accent px-3 py-1 rounded-full border border-pink-hover">Structuur</span>
+                <h2 class="serif-heading text-3xl sm:text-4xl text-dark-text">Vervolgens: Je doelen worden eindelijk concreet.</h2>
+                <p class="text-subtle-gray text-sm max-w-lg mx-auto">
+                    Van droom naar dagelijkse stap. LumaDay splitst grote doelen automatisch op in behapbare acties.
+                </p>
+            </div>
+
+            <!-- Cascade Cards -->
+            <div class="relative space-y-3 max-w-2xl mx-auto">
+                <div class="p-4 rounded-2xl bg-white border border-stone-200 shadow-sm flex items-center justify-between gap-4">
+                    <div class="flex items-center gap-3">
+                        <span class="w-7 h-7 rounded-full bg-stone-100 border border-stone-300 flex items-center justify-center text-xs font-bold">1</span>
+                        <div>
+                            <span class="text-[10px] uppercase font-bold tracking-wider text-subtle-gray block">Hoofddoel (Visie)</span>
+                            <span class="text-sm font-semibold text-dark-text">"Ik wil fit en gezond worden"</span>
+                        </div>
+                    </div>
+                    <span class="px-2.5 py-1 rounded-full bg-stone-100 text-[10px] font-medium text-subtle-gray">Jaardoel</span>
+                </div>
+
+                <div class="ml-4 sm:ml-8 p-4 rounded-2xl bg-white border border-stone-200 shadow-sm flex items-center justify-between gap-4 border-l-4 border-l-emerald-400">
+                    <div class="flex items-center gap-3">
+                        <span class="w-7 h-7 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-800 flex items-center justify-center text-xs font-bold">2</span>
+                        <div>
+                            <span class="text-[10px] uppercase font-bold tracking-wider text-subtle-gray block">Subdoel</span>
+                            <span class="text-sm font-semibold text-dark-text">10 kg gewicht verliezen & conditie opbouwen</span>
+                        </div>
+                    </div>
+                    <span class="px-2.5 py-1 rounded-full bg-green-accent text-[10px] font-semibold text-dark-text">Kwartaal</span>
+                </div>
+
+                <div class="ml-8 sm:ml-16 p-4 rounded-2xl bg-white border border-stone-200 shadow-sm flex items-center justify-between gap-4 border-l-4 border-l-pink-400">
+                    <div class="flex items-center gap-3">
+                        <span class="w-7 h-7 rounded-full bg-pink-50 border border-pink-200 text-pink-800 flex items-center justify-center text-xs font-bold">3</span>
+                        <div>
+                            <span class="text-[10px] uppercase font-bold tracking-wider text-subtle-gray block">Deze Maand</span>
+                            <span class="text-sm font-semibold text-dark-text">3x per week regelmatig sporten</span>
+                        </div>
+                    </div>
+                    <span class="px-2.5 py-1 rounded-full bg-pink-accent text-[10px] font-semibold text-dark-text">Maand</span>
+                </div>
+
+                <div class="ml-12 sm:ml-24 p-4 rounded-2xl bg-dark-text text-white shadow-md flex items-center justify-between gap-4">
+                    <div class="flex items-center gap-3">
+                        <span class="w-7 h-7 rounded-full bg-stone-800 text-emerald-400 flex items-center justify-center text-xs font-bold">4</span>
+                        <div>
+                            <span class="text-[10px] uppercase font-bold tracking-wider text-stone-400 block">Vandaag Actie</span>
+                            <span class="text-sm font-semibold text-stone-100">30 minuten stevig wandelen in de pauze</span>
+                        </div>
+                    </div>
+                    <span class="px-2.5 py-1 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 text-[10px] font-semibold">Vandaag</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Final CTA Section -->
+        <section class="max-w-3xl mx-auto text-center py-12 px-6 bg-cream-card rounded-3xl border border-border-warm shadow-sm space-y-6">
+            <h2 class="serif-heading text-4xl sm:text-5xl text-dark-text leading-tight">
+                Een rustigere manier om je leven te organiseren.
+            </h2>
+            <p class="text-subtle-gray text-base max-w-md mx-auto">
+                Alles wat belangrijk is. Niets wat overbodig is. Begin vandaag nog met jouw gepersonaliseerde overzicht.
+            </p>
+            <div class="pt-2">
+                <button onclick="scrollToDemo()" class="pill-btn px-8 py-4 rounded-full text-sm font-bold bg-pink-accent hover:bg-pink-hover text-dark-text border border-stone-300/80 shadow-md inline-flex items-center gap-2">
+                    <span>Begin met LumaDay</span>
+                    <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                </button>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="max-w-6xl mx-auto px-6 py-8 w-full border-t border-stone-200/80 text-center sm:text-left flex flex-col sm:flex-row justify-between items-center text-xs text-subtle-gray gap-4">
+        <div>
+            &copy; 2026 LumaDay Inc. Alle rechten voorbehouden.
+        </div>
+        <div class="flex gap-6">
+            <a href="#" class="hover:text-dark-text transition">Privacy</a>
+            <a href="#" class="hover:text-dark-text transition">Voorwaarden</a>
+            <a href="#" class="hover:text-dark-text transition">Contact</a>
+        </div>
+    </footer>
+
+    <script>
+        // State management
+        const schedules = {
+            low: [
+                { time: "09:30", title: "Lichte e-mail & berichten afhandelen", type: "pink", tag: "Low effort" },
+                { time: "11:00", title: "Korte wandeling / Frisse lucht", type: "green", tag: "Herstel" },
+                { time: "14:00", title: "Eenvoudige administratie", type: "neutral", tag: "Routine" }
+            ],
+            good: [
+                { time: "09:00", title: "Team meeting & Alignment", type: "pink", tag: "Overleg" },
+                { time: "11:30", title: "Deep work: Strategie & Uitwerking", type: "green", tag: "Focus" },
+                { time: "14:00", title: "Gym / WOD sessie", type: "neutral", tag: "Sport" },
+                { time: "17:30", title: "Vrije tijd & Ontspanning", type: "neutral", tag: "Rust" }
+            ],
+            energized: [
+                { time: "08:30", title: "Belangrijkste project uitdaging (Deep Focus)", type: "green", tag: "Top Prioriteit" },
+                { time: "11:00", title: "Brainstorm met het team", type: "pink", tag: "Creatief" },
+                { time: "13:30", title: "Zware Workout / Hardlopen", type: "green", tag: "High Energy" },
+                { time: "16:00", title: "Toekomstige kwartaaldoelen plannen", type: "neutral", tag: "Strategie" }
+            ]
+        };
+
+        const explanations = {
+            low: "<strong>Low Energy modus:</strong> Zware focus-taken en intensieve meetings zijn verplaatst. Je focus ligt op herstel en eenvoudige routineklussen.",
+            good: "<strong>Normale modus:</strong> Een gebalanceerde mix van overleg, diepe focus en voldoende hersteltijd.",
+            energized: "<strong>Energized modus:</strong> Je dag is geoptimaliseerd voor maximale output, creativiteit en uitdagende projecten!"
+        };
+
+        function setEnergyState(state) {
+            // Update buttons styling
+            ['low', 'good', 'energized'].forEach(s => {
+                const btn = document.getElementById(`btn-${s}`);
+                if (s === state) {
+                    btn.classList.add('ring-2', 'ring-dark-text');
+                } else {
+                    btn.classList.remove('ring-2', 'ring-dark-text');
+                }
+            });
+
+            // Update statistics
+            if(state === 'low') {
+                document.getElementById('stat-energy').innerText = '35%';
+                document.getElementById('stat-priorities').innerText = '1 taak';
+                document.getElementById('stat-focus').innerText = '0 gepland';
+                document.getElementById('day-status-text').innerText = 'Taking it easy today.';
+            } else if(state === 'good') {
+                document.getElementById('stat-energy').innerText = '78%';
+                document.getElementById('stat-priorities').innerText = '3 taken';
+                document.getElementById('stat-focus').innerText = '1 gepland';
+                document.getElementById('day-status-text').innerText = 'Your day looks balanced.';
+            } else if(state === 'energized') {
+                document.getElementById('stat-energy').innerText = '95%';
+                document.getElementById('stat-priorities').innerText = '5 taken';
+                document.getElementById('stat-focus').innerText = '2 gepland';
+                document.getElementById('day-status-text').innerText = 'High performance mode!';
+            }
+
+            // Update explanation text
+            document.getElementById('energy-explanation').innerHTML = explanations[state];
+
+            // Render schedule
+            const container = document.getElementById('schedule-container');
+            container.innerHTML = '';
+
+            schedules[state].forEach(item => {
+                let badgeStyle = "bg-stone-100 text-stone-700 border-stone-200";
+                if(item.type === 'pink') badgeStyle = "bg-pink-accent hover:bg-pink-hover text-dark-text border-pink-hover";
+                if(item.type === 'green') badgeStyle = "bg-green-accent hover:bg-green-hover text-dark-text border-green-hover";
+
+                const row = document.createElement('div');
+                row.className = "flex items-center justify-between p-3.5 rounded-2xl bg-white border border-stone-200/80 shadow-sm transition hover:border-stone-300";
+                row.innerHTML = `
+                    <div class="flex items-center gap-3">
+                        <span class="text-xs font-bold text-subtle-gray font-mono">${item.time}</span>
+                        <span class="text-sm font-medium text-dark-text">${item.title}</span>
+                    </div>
+                    <span class="px-3 py-1 rounded-full text-xs font-semibold border ${badgeStyle}">${item.tag}</span>
+                `;
+                container.appendChild(row);
+            });
+
+            logConsole(`Energy set to '${state.toUpperCase()}'. Schedule recalculated.`);
+        }
+
+        // Toggle Developer Panel
+        function toggleDeveloperMode() {
+            const panel = document.getElementById('developer-panel');
+            panel.classList.toggle('translate-x-full');
+            logConsole("Developer Mode panel toggled.");
+        }
+
+        // Highlight sections from Dev panel
+        function highlightSection(id) {
+            const el = document.getElementById(id);
+            if(el) {
+                el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                el.classList.add('explainer-highlight');
+                setTimeout(() => {
+                    el.classList.remove('explainer-highlight');
+                }, 2000);
+            }
+        }
+
+        function scrollToDemo() {
+            document.getElementById('dashboard-preview').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function logConsole(msg) {
+            const logs = document.getElementById('console-logs');
+            const entry = document.createElement('div');
+            entry.innerText = `> ${msg}`;
+            logs.appendChild(entry);
+            logs.scrollTop = logs.scrollHeight;
+        }
+
+        // Initialize icons and default state
+        window.onload = function() {
+            lucide.createIcons();
+            setEnergyState('good');
+        }
+    </script>
+</body>
+</html>rm
