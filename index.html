@@ -1,19 +1,6 @@
 <!DOCTYPE html>
 <html lang="nl" class="h-full">
 <head>
-   <meta charset="UTF-8">
-   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <title>LumaDay - Je leven. Op één rustige plek.</title>
-tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        cream: '#FBFBF9',
-                        'cream-card': '#F4F4EE',
-                        'pink-accent': '#F3E1E1',
-                        'pink<!DOCTYPE html>
-<html lang="nl" class="h-full">
-<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LumaDay - Je leven. Op één rustige plek.</title>
@@ -26,7 +13,15 @@ tailwind.config = {
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     
-    <script>-hover': '#EACACA',
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        cream: '#FBFBF9',
+                        'cream-card': '#F4F4EE',
+                        'pink-accent': '#F3E1E1',
+                        'pink-hover': '#EACACA',
                         'pink-pill': '#F2C9D8',
                         'green-accent': '#E1EFE6',
                         'green-hover': '#CDE3D5',
@@ -41,7 +36,7 @@ tailwind.config = {
                     }
                 }
             }
-        }
+        };
     </script>
 
     <style>
@@ -66,7 +61,7 @@ tailwind.config = {
             box-shadow: 0 4px 12px rgba(0,0,0,0.05);
         }
 
-        /* Highlight animation for code mode */
+        /* Highlight animation for code explainer mode */
         .explainer-highlight {
             outline: 2px dashed #059669 !important;
             outline-offset: 4px;
@@ -196,8 +191,8 @@ tailwind.config = {
                             <span class="w-2 h-2 rounded-full bg-emerald-500 inline-block"></span>
                             Vandaag Overzicht
                         </div>
-                        <h2 class="text-2xl font-bold text-dark-text">Good morning, Alex.</h2>
-                        <p class="text-xs text-subtle-gray mt-0.5" id="current-date">Thursday, September 11</p>
+                        <h2 class="text-2xl font-bold text-dark-text">Good morning, Roos.</h2>
+                        <p class="text-xs text-subtle-gray mt-0.5" id="current-date">Friday, September 11</p>
                     </div>
                     <div class="inline-flex items-center gap-2 px-4 py-2 rounded-2xl bg-white border border-stone-200 text-xs font-medium text-dark-text shadow-sm self-start sm:self-auto">
                         <i data-lucide="sun" class="w-4 h-4 text-amber-500"></i>
@@ -223,7 +218,7 @@ tailwind.config = {
 
                 <!-- Schedule List -->
                 <div class="space-y-3" id="schedule-container">
-                    <!-- Loaded dynamically via JS based on state -->
+                    <!-- Loaded dynamically via JS -->
                 </div>
             </div>
         </section>
@@ -239,19 +234,19 @@ tailwind.config = {
             </div>
 
             <div class="bg-white rounded-3xl p-6 sm:p-8 border border-border-warm shadow-md text-center space-y-6">
-                <h3 class="text-base font-semibold text-dark-text">Hoe voel je je vandaag?</h3>
+                <h3 class="text-base font-semibold text-dark-text">How are you feeling today?</h3>
 
                 <div class="flex flex-wrap justify-center gap-3">
                     <button onclick="setEnergyState('low')" id="btn-low" class="pill-btn px-6 py-2.5 rounded-full text-xs font-semibold bg-pink-accent hover:bg-pink-hover text-dark-text border border-stone-300 flex items-center gap-2">
-                        <i data-lucide="battery-low" class="w-4 h-4 text-pink-700"></i>
+                        <i data-lucide="frown" class="w-4 h-4 text-pink-700"></i>
                         <span>Low Energy</span>
                     </button>
                     <button onclick="setEnergyState('good')" id="btn-good" class="pill-btn px-6 py-2.5 rounded-full text-xs font-semibold bg-stone-100 hover:bg-stone-200 text-dark-text border border-stone-300 ring-2 ring-dark-text flex items-center gap-2">
-                        <i data-lucide="battery-medium" class="w-4 h-4 text-amber-600"></i>
+                        <i data-lucide="smile" class="w-4 h-4 text-amber-600"></i>
                         <span>Good (Normaal)</span>
                     </button>
                     <button onclick="setEnergyState('energized')" id="btn-energized" class="pill-btn px-6 py-2.5 rounded-full text-xs font-semibold bg-green-accent hover:bg-green-hover text-dark-text border border-stone-300 flex items-center gap-2">
-                        <i data-lucide="battery-charging" class="w-4 h-4 text-emerald-700"></i>
+                        <i data-lucide="zap" class="w-4 h-4 text-emerald-700"></i>
                         <span>Energized!</span>
                     </button>
                 </div>
@@ -263,10 +258,10 @@ tailwind.config = {
         </section>
 
         <!-- Goal Hierarchy Breakdown -->
-        <section id="goals" class="max-w-4xl mx-auto pt-6">
+        <section id="goal-hierarchy" class="max-w-4xl mx-auto pt-6">
             <div class="text-center space-y-3 mb-10">
                 <span class="text-xs uppercase font-bold tracking-widest text-pink-700 bg-pink-accent px-3 py-1 rounded-full border border-pink-hover">Structuur</span>
-                <h2 class="serif-heading text-3xl sm:text-4xl text-dark-text">Vervolgens: Je doelen worden eindelijk concreet.</h2>
+                <h2 class="serif-heading text-3xl sm:text-4xl text-dark-text">Je doelen worden eindelijk concreet.</h2>
                 <p class="text-subtle-gray text-sm max-w-lg mx-auto">
                     Van droom naar dagelijkse stap. LumaDay splitst grote doelen automatisch op in behapbare acties.
                 </p>
@@ -278,8 +273,8 @@ tailwind.config = {
                     <div class="flex items-center gap-3">
                         <span class="w-7 h-7 rounded-full bg-stone-100 border border-stone-300 flex items-center justify-center text-xs font-bold">1</span>
                         <div>
-                            <span class="text-[10px] uppercase font-bold tracking-wider text-subtle-gray block">Hoofddoel (Visie)</span>
-                            <span class="text-sm font-semibold text-dark-text">"Ik wil fit en gezond worden"</span>
+                            <span class="text-[10px] uppercase font-bold tracking-wider text-subtle-gray block">Visie</span>
+                            <span class="text-sm font-semibold text-dark-text">"Ik wil fit worden"</span>
                         </div>
                     </div>
                     <span class="px-2.5 py-1 rounded-full bg-stone-100 text-[10px] font-medium text-subtle-gray">Jaardoel</span>
@@ -289,8 +284,8 @@ tailwind.config = {
                     <div class="flex items-center gap-3">
                         <span class="w-7 h-7 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-800 flex items-center justify-center text-xs font-bold">2</span>
                         <div>
-                            <span class="text-[10px] uppercase font-bold tracking-wider text-subtle-gray block">Subdoel</span>
-                            <span class="text-sm font-semibold text-dark-text">10 kg gewicht verliezen & conditie opbouwen</span>
+                            <span class="text-[10px] uppercase font-bold tracking-wider text-subtle-gray block">Hoofddoel</span>
+                            <span class="text-sm font-semibold text-dark-text">10 kg afvallen</span>
                         </div>
                     </div>
                     <span class="px-2.5 py-1 rounded-full bg-green-accent text-[10px] font-semibold text-dark-text">Kwartaal</span>
@@ -301,7 +296,7 @@ tailwind.config = {
                         <span class="w-7 h-7 rounded-full bg-pink-50 border border-pink-200 text-pink-800 flex items-center justify-center text-xs font-bold">3</span>
                         <div>
                             <span class="text-[10px] uppercase font-bold tracking-wider text-subtle-gray block">Deze Maand</span>
-                            <span class="text-sm font-semibold text-dark-text">3x per week regelmatig sporten</span>
+                            <span class="text-sm font-semibold text-dark-text">3x per week sporten</span>
                         </div>
                     </div>
                     <span class="px-2.5 py-1 rounded-full bg-pink-accent text-[10px] font-semibold text-dark-text">Maand</span>
@@ -312,7 +307,7 @@ tailwind.config = {
                         <span class="w-7 h-7 rounded-full bg-stone-800 text-emerald-400 flex items-center justify-center text-xs font-bold">4</span>
                         <div>
                             <span class="text-[10px] uppercase font-bold tracking-wider text-stone-400 block">Vandaag Actie</span>
-                            <span class="text-sm font-semibold text-stone-100">30 minuten stevig wandelen in de pauze</span>
+                            <span class="text-sm font-semibold text-stone-100">1.5 uur stevig wandelen</span>
                         </div>
                     </div>
                     <span class="px-2.5 py-1 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 text-[10px] font-semibold">Vandaag</span>
@@ -326,7 +321,7 @@ tailwind.config = {
                 Een rustigere manier om je leven te organiseren.
             </h2>
             <p class="text-subtle-gray text-base max-w-md mx-auto">
-                Alles wat belangrijk is. Niets wat overbodig is. Begin vandaag nog met jouw gepersonaliseerde overzicht.
+                Alles wat belangrijk is. Niets wat overbodig is.
             </p>
             <div class="pt-2">
                 <button onclick="scrollToDemo()" class="pill-btn px-8 py-4 rounded-full text-sm font-bold bg-pink-accent hover:bg-pink-hover text-dark-text border border-stone-300/80 shadow-md inline-flex items-center gap-2">
@@ -351,17 +346,17 @@ tailwind.config = {
     </footer>
 
     <script>
-        // State management
+        // State management for Schedules
         const schedules = {
             low: [
                 { time: "09:30", title: "Lichte e-mail & berichten afhandelen", type: "pink", tag: "Low effort" },
                 { time: "11:00", title: "Korte wandeling / Frisse lucht", type: "green", tag: "Herstel" },
-                { time: "14:00", title: "Eenvoudige administratie", type: "neutral", tag: "Routine" }
+                { time: "14:00", title: "Eenvoudige administratie & opruimen", type: "neutral", tag: "Routine" }
             ],
             good: [
                 { time: "09:00", title: "Team meeting & Alignment", type: "pink", tag: "Overleg" },
                 { time: "11:30", title: "Deep work: Strategie & Uitwerking", type: "green", tag: "Focus" },
-                { time: "14:00", title: "Gym / WOD sessie", type: "neutral", tag: "Sport" },
+                { time: "14:00", title: "Gym / Sportsessie", type: "neutral", tag: "Sport" },
                 { time: "17:30", title: "Vrije tijd & Ontspanning", type: "neutral", tag: "Rust" }
             ],
             energized: [
@@ -379,28 +374,30 @@ tailwind.config = {
         };
 
         function setEnergyState(state) {
-            // Update buttons styling
-            ['low', 'good', 'energized'].forEach(s => {
-                const btn = document.getElementById(`btn-${s}`);
-                if (s === state) {
-                    btn.classList.add('ring-2', 'ring-dark-text');
-                } else {
-                    btn.classList.remove('ring-2', 'ring-dark-text');
+            // Update button borders
+            ['low', 'good', 'energized'].forEach(function(s) {
+                const btn = document.getElementById('btn-' + s);
+                if (btn) {
+                    if (s === state) {
+                        btn.classList.add('ring-2', 'ring-dark-text');
+                    } else {
+                        btn.classList.remove('ring-2', 'ring-dark-text');
+                    }
                 }
             });
 
             // Update statistics
-            if(state === 'low') {
+            if (state === 'low') {
                 document.getElementById('stat-energy').innerText = '35%';
                 document.getElementById('stat-priorities').innerText = '1 taak';
                 document.getElementById('stat-focus').innerText = '0 gepland';
                 document.getElementById('day-status-text').innerText = 'Taking it easy today.';
-            } else if(state === 'good') {
+            } else if (state === 'good') {
                 document.getElementById('stat-energy').innerText = '78%';
                 document.getElementById('stat-priorities').innerText = '3 taken';
                 document.getElementById('stat-focus').innerText = '1 gepland';
                 document.getElementById('day-status-text').innerText = 'Your day looks balanced.';
-            } else if(state === 'energized') {
+            } else if (state === 'energized') {
                 document.getElementById('stat-energy').innerText = '95%';
                 document.getElementById('stat-priorities').innerText = '5 taken';
                 document.getElementById('stat-focus').innerText = '2 gepland';
@@ -414,62 +411,70 @@ tailwind.config = {
             const container = document.getElementById('schedule-container');
             container.innerHTML = '';
 
-            schedules[state].forEach(item => {
+            schedules[state].forEach(function(item) {
                 let badgeStyle = "bg-stone-100 text-stone-700 border-stone-200";
-                if(item.type === 'pink') badgeStyle = "bg-pink-accent hover:bg-pink-hover text-dark-text border-pink-hover";
-                if(item.type === 'green') badgeStyle = "bg-green-accent hover:bg-green-hover text-dark-text border-green-hover";
+                if (item.type === 'pink') badgeStyle = "bg-pink-accent hover:bg-pink-hover text-dark-text border-pink-hover";
+                if (item.type === 'green') badgeStyle = "bg-green-accent hover:bg-green-hover text-dark-text border-green-hover";
 
                 const row = document.createElement('div');
                 row.className = "flex items-center justify-between p-3.5 rounded-2xl bg-white border border-stone-200/80 shadow-sm transition hover:border-stone-300";
-                row.innerHTML = `
-                    <div class="flex items-center gap-3">
-                        <span class="text-xs font-bold text-subtle-gray font-mono">${item.time}</span>
-                        <span class="text-sm font-medium text-dark-text">${item.title}</span>
-                    </div>
-                    <span class="px-3 py-1 rounded-full text-xs font-semibold border ${badgeStyle}">${item.tag}</span>
-                `;
+                row.innerHTML = '<div class="flex items-center gap-3">' +
+                    '<span class="text-xs font-bold text-subtle-gray font-mono">' + item.time + '</span>' +
+                    '<span class="text-sm font-medium text-dark-text">' + item.title + '</span>' +
+                    '</div>' +
+                    '<span class="px-3 py-1 rounded-full text-xs font-semibold border ' + badgeStyle + '">' + item.tag + '</span>';
+                
                 container.appendChild(row);
             });
 
-            logConsole(`Energy set to '${state.toUpperCase()}'. Schedule recalculated.`);
+            logConsole("Energy set to '" + state.toUpperCase() + "'. Schedule recalculated.");
         }
 
         // Toggle Developer Panel
         function toggleDeveloperMode() {
             const panel = document.getElementById('developer-panel');
-            panel.classList.toggle('translate-x-full');
-            logConsole("Developer Mode panel toggled.");
+            if (panel) {
+                panel.classList.toggle('translate-x-full');
+                logConsole("Developer Mode panel toggled.");
+            }
         }
 
         // Highlight sections from Dev panel
         function highlightSection(id) {
             const el = document.getElementById(id);
-            if(el) {
+            if (el) {
                 el.scrollIntoView({ behavior: 'smooth', block: 'center' });
                 el.classList.add('explainer-highlight');
-                setTimeout(() => {
+                setTimeout(function() {
                     el.classList.remove('explainer-highlight');
                 }, 2000);
             }
         }
 
         function scrollToDemo() {
-            document.getElementById('dashboard-preview').scrollIntoView({ behavior: 'smooth' });
+            const demo = document.getElementById('dashboard-preview');
+            if (demo) {
+                demo.scrollIntoView({ behavior: 'smooth' });
+            }
         }
 
         function logConsole(msg) {
             const logs = document.getElementById('console-logs');
-            const entry = document.createElement('div');
-            entry.innerText = `> ${msg}`;
-            logs.appendChild(entry);
-            logs.scrollTop = logs.scrollHeight;
+            if (logs) {
+                const entry = document.createElement('div');
+                entry.innerText = '> ' + msg;
+                logs.appendChild(entry);
+                logs.scrollTop = logs.scrollHeight;
+            }
         }
 
         // Initialize icons and default state
         window.onload = function() {
-            lucide.createIcons();
+            if (typeof lucide !== 'undefined') {
+                lucide.createIcons();
+            }
             setEnergyState('good');
-        }
+        };
     </script>
 </body>
-</html> 
+</html>
