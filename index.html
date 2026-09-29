@@ -1,14 +1,111 @@
-<!DOCTYPE html> <!--dit is de homepage van mijn site-->
-<html> <!--dit is het html-element-->
-    <head>
-        <title>Het eerste begin</title>
-        <meta charset="utf-8">
-        </head>
-        <body>
-            Hier komt mijn eerst tekst
+<!DOCTYPE html>
+<html lang="nl" class="h-full">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>LumaDay - Je leven. Op één rustige plek.</title>
+   <!-- Tailwind CSS -->
+   <script src="https://cdn.tailwindcss.com"></script>
+   <!-- Lucide Icons -->
+   <script src="https://unpkg.com/lucide@latest"></script>
+   <!-- Google Fonts -->
+   <link rel="preconnect" href="https://fonts.googleapis.com">
+   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+   <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<script>
+       tailwind.config = {
+           theme: {
+               extend: {
+                   colors: {
+                       cream: '#FBFBF9',
+                       'cream-card': '#F4F4EE',
+                       'pink-accent': '#F3E1E1',
+                       'pink-hover': '#EACACA',
+                       'pink-pill': '#F2C9D8',
+                       'green-accent': '#E1EFE6',
+                       'green-hover': '#CDE3D5',
+                       'green-pill': '#B2D8C0',
+                       'dark-text': '#1C1917',
+                       'subtle-gray': '#78716C',
+                       'border-warm': '#E7E5E4'
+                   },
+                   fontFamily: {
+                       serif: ['"Instrument Serif"', 'serif'],
+                       sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+  }
+   </script>
 
-         <li><a href="binair.html">Uitleg binair stelsel</a></li>
 
-        </body>
-    </html>
+   <style>
+       body {
+           background-color: #FBFBF9;
+           color: #1C1917;
+           font-family: 'Plus Jakarta Sans', sans-serif;
+           background-image: radial-gradient(#E7E5E4 0.75px, transparent 0.75px);
+           background-size: 24px 24px;
+       }
+
+
+       .serif-heading {
+           font-family: 'Instrument Serif', serif;
+       }
+
+
+.pill-btn {
+           transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+       }
+
+
+       .pill-btn:hover {
+           transform: translateY(-2px);
+           box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+       }
+
+
+       /* Highlight animation for code mode */
+       .explainer-highlight {
+           outline: 2px dashed #059669 !important;
+           outline-offset: 4px;
+           background-color: rgba(225, 239, 230, 0.4) !important;
+       }
+   </style>
+</head>
+<body class="min-h-full flex flex-col justify-between antialiased selection:bg-pink-pill selection:text-dark-text">
+<!-- Developer Explainer Drawer / Panel -->
+   <div id="developer-panel" class="fixed top-0 right-0 h-full w-full sm:w-[480px] bg-dark-text text-stone-200 z-50 transform translate-x-full transition-transform duration-300 ease-in-out shadow-2xl flex flex-col border-l border-stone-800">
+       <div class="p-5 border-b border-stone-800 flex justify-between items-center bg-stone-900">
+           <div class="flex items-center gap-2">
+               <i data-lucide="code" class="w-5 h-5 text-emerald-400"></i>
+               <h3 class="font-semibold text-stone-100">Developer & Concept Explainer</h3>
+           </div>
+           <button onclick="toggleDeveloperMode()" class="text-stone-400 hover:text-white p-1 rounded-lg hover:bg-stone-800 transition">
+               <i data-lucide="x" class="w-5 h-5"></i>
+           </button>
+       </div>
+
+
+       <div class="p-6 overflow-y-auto space-y-6 flex-1 text-sm font-light">
+           <div class="bg-stone-900/80 p-4 rounded-xl border border-stone-800">
+               <h4 class="text-xs uppercase tracking-wider font-bold text-emerald-400 mb-2">💡 Project Visie</h4>
+               <p class="text-stone-300 leading-relaxed">
+                   LumaDay is ontworpen om de digitale stress van standaard to-do apps op te lossen door
+een zachte, esthetische en <strong>energie-gestuurde planner</strong> aan te bieden.
+               </p>
+           </div>
+
+
+           <div>
+               <h4 class="text-xs uppercase tracking-wider font-bold text-stone-400 mb-3">Architectuur & Code Opbouw</h4>
+               <ul class="space-y-3">
+                   <li class="p-3 bg-stone-900 rounded-lg border border-stone-800 cursor-pointer hover:border-emerald-500/50 transition" onclick="highlightSection('hero-section')">
+                       <strong class="text-emerald-300 block mb-1">1. Clean Minimalistic UI</strong>
+                       <span class="text-xs text-stone-400">Warme pastel accenten (#F2C9D8 & #B2D8C0) met een zacht gebroken-wit textured grid. Geen harde contrasten of stressvolle rode
+alerts.</span>
+                   </li>
+                   <li class="p-3 bg-stone-900 rounded-lg border border-stone-800 cursor-pointer hover:border-emerald-500/50 transition" onclick="highlightSection('energy-feature')">
+                       <strong class="text-emerald-300 block mb-1">2. Dynamic Energy Planner (JS)</strong>
+                       <span class="text-xs text-stone-400">Een interactieve State Engine die je planning direct herstructureert op basis van hoe je je voelt (Low, Good, Energized).</span>
+                   </li>
+                   <li class="p-3 bg-stone-900 rounded-lg border border-stone-800 cursor-pointer hover:border-emerald-500/50 transition" onclick="highlightSection('goal-hierarchy')">
+                       <strong class="text-emerald-300 block mb-1">3. Goal Cascade Architecture</stro
 
