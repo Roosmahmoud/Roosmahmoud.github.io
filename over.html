@@ -1,1 +1,95 @@
+<!DOCTYPE html>
+<html lang="nl" class="h-full">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Over LumaDay - Informatie & Visie</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="opmaak.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body class="min-h-full flex flex-col justify-between antialiased">
 
+    <!-- HORIZONTAAL MENU BOVENAAN -->
+    <header class="top-header">
+        <div class="header-container">
+            <a href="index.html" class="flex items-center gap-2.5 text-decoration-none">
+                <div class="w-9 h-9 rounded-full bg-stone-900 flex items-center justify-center text-white font-serif italic text-xl shadow-sm">L</div>
+                <span class="font-bold tracking-tight text-xl text-stone-900">LumaDay</span>
+            </a>
+
+            <nav>
+                <ul class="main-menu">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="planning.html">Mijn Planning</a></li>
+                    <li><a href="timer.html">Stopwatch & Timer</a></li>
+                    <li>
+                        <a href="#">Kennismodules ▾</a>
+                        <ul class="dropdown">
+                            <li><a href="binairstelsel.html">💻 Binairstelsel (0 & 1)</a></li>
+                            <li><a href="kleurmodellen.html">🎨 Kleurmodellen (RGB & CMYK)</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="over.html" class="active">Over LumaDay</a></li>
+                </ul>
+            </nav>
+
+            <div>
+                <a href="login.html" class="pill-btn px-4 py-2 text-xs bg-[#F3E1E1] hover:bg-[#EACACA] text-stone-900" id="nav-login-btn">
+                    🔑 Inloggen
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- HOOFDINHOUD OVER LUMADAY (GECENTREERD KAARTJE) -->
+    <main class="max-w-3xl mx-auto px-6 flex-1 w-full space-y-8 py-12 flex flex-col justify-center">
+        
+        <div class="luma-card bg-white p-8 sm:p-10 space-y-6 text-center border border-stone-200 shadow-md">
+            
+            <div class="w-16 h-16 rounded-full bg-[#E1EFE6] text-emerald-800 flex items-center justify-center mx-auto text-2xl font-serif italic font-bold">
+                L
+            </div>
+
+            <h1 class="serif-heading text-4xl sm:text-5xl text-stone-900">Over het LumaDay Dashboard</h1>
+
+            <p class="text-sm text-stone-600 leading-relaxed max-w-xl mx-auto">
+                <strong>LumaDay</strong> is een rustgevend digitaal platform ontworpen om stressvrij te plannen. In plaats van je te overladen met meldingen en strakke deadline-druk, helpt LumaDay je om je dagindeling af te stemmen op je eigen energieniveau.
+            </p>
+
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-4 border-t border-stone-200 text-left text-xs">
+                <div class="p-4 rounded-xl bg-[#F4F4EE]">
+                    <span class="font-bold text-stone-900 block mb-1">🌿 Energy Planner</span>
+                    <p class="text-stone-600">Past je dag-advies aan op basis van hoe je je voelt (Low, Good, Energized).</p>
+                </div>
+                <div class="p-4 rounded-xl bg-[#F4F4EE]">
+                    <span class="font-bold text-stone-900 block mb-1">📅 Eenvoudig Plannen</span>
+                    <p class="text-stone-600">Voeg taken toe, vink ze af en bewaar ze direct in je browser.</p>
+                </div>
+                <div class="p-4 rounded-xl bg-[#F4F4EE]">
+                    <span class="font-bold text-stone-900 block mb-1">📚 Educatie</span>
+                    <p class="text-stone-600">Geïntegreerde kennismodules over het binairstelsel en kleurmodellen.</p>
+                </div>
+            </div>
+
+            <div class="pt-4">
+                <a href="index.html" class="pill-btn px-6 py-2.5 text-xs bg-[#F3E1E1] hover:bg-[#EACACA] text-stone-900 font-bold">
+                    ← Terug naar de Hoofdpagina
+                </a>
+            </div>
+
+        </div>
+
+    </main>
+
+    <footer class="max-w-5xl mx-auto px-6 py-8 w-full border-t border-stone-200 flex justify-between text-xs text-stone-500">
+        <div>&copy; 2026 LumaDay - Over Module</div>
+        <div class="flex gap-4">
+            <a href="index.html" class="hover:text-stone-900">Home</a>
+            <a href="planning.html" class="hover:text-stone-900">Planning</a>
+        </div>
+    </footer>
+</body>
+</html>
