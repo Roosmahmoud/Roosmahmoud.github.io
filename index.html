@@ -2,19 +2,19 @@
 <html lang="nl" class="h-full">
 <head>
     <!-- ==========================================================================
-         METADATA EN EXTERNE LIBRARIES
+         METADATA EN BRONNEN
          ========================================================================== -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LumaDay - Personal Life Dashboard</title>
 
-    <!-- Tailwind CSS via CDN -->
+    <!-- Tailwind CSS via CDN voor snelle opmaak-classes -->
     <script src="https://cdn.tailwindcss.com"></script>
 
-    <!-- Koppeling met ons externe CSS-bestand -->
+    <!-- Koppeling met ons eigen externe opmaakbestand opmaak.css -->
     <link rel="stylesheet" href="opmaak.css">
 
-    <!-- Lucide Iconen Library -->
+    <!-- Lucide Iconen Bibliotheek -->
     <script src="https://unpkg.com/lucide@latest"></script>
 
     <!-- Google Fonts -->
@@ -25,51 +25,56 @@
 <body class="min-h-full flex flex-col justify-between antialiased">
 
     <!-- ==========================================================================
-         HEADER & NAVIGATIEMENU MET DROPDOWN (PAGINA 1 HOOFDNAVIGATIE)
+         1. HORIZONTALE HEADER EN NAVIGATIEMENU BOVENAAN
          ========================================================================== -->
-    <header class="max-w-6xl mx-auto px-6 py-6 w-full flex items-center justify-between border-b border-stone-200/60 bg-white/50 backdrop-blur-sm sticky top-0 z-50">
-        <!-- Logo -->
-        <a href="index.html" class="flex items-center gap-2 text-decoration-none">
-            <div class="w-9 h-9 rounded-full bg-stone-900 flex items-center justify-center text-white font-serif italic text-xl shadow-sm">
-                L
+    <header class="top-header">
+        <div class="header-container">
+            
+            <!-- Logo van LumaDay -->
+            <a href="index.html" class="flex items-center gap-2.5 text-decoration-none">
+                <div class="w-9 h-9 rounded-full bg-stone-900 flex items-center justify-center text-white font-serif italic text-xl shadow-sm">
+                    L
+                </div>
+                <span class="font-bold tracking-tight text-xl text-stone-900">LumaDay</span>
+            </a>
+
+            <!-- Horizontaal Navigatiemenu opgebouwd uit UL en LI -->
+            <nav>
+                <ul class="main-menu">
+                    <li><a href="index.html" class="active">Dashboard</a></li>
+                    
+                    <!-- Dropdown menu voor de 2 kennismodules -->
+                    <li>
+                        <a href="#">Kennismodules ▾</a>
+                        <ul class="dropdown">
+                            <li><a href="binairstelsel.html">💻 Binairstelsel (0 & 1)</a></li>
+                            <li><a href="kleurmodellen.html">🎨 Kleurmodellen (RGB & CMYK)</a></li>
+                        </ul>
+                    </li>
+                    
+                    <li><a href="#energy-section">Energy Planner</a></li>
+                    <li><a href="#planner-section">Mijn Planning</a></li>
+                    <li><button type="button" onclick="openInfoModal()" class="text-xs font-semibold px-3 py-1.5 text-stone-600 hover:text-stone-900">ℹ️ Over LumaDay</button></li>
+                </ul>
+            </nav>
+
+            <!-- Rechts in de header: Inlogknop & Account status -->
+            <div class="flex items-center gap-2" id="user-nav-area">
+                <button onclick="openLoginModal()" class="pill-btn px-4 py-2 text-xs bg-[#F3E1E1] hover:bg-[#EACACA] text-stone-900">
+                    🔑 Inloggen
+                </button>
             </div>
-            <span class="font-bold tracking-tight text-xl text-stone-900">LumaDay</span>
-        </a>
 
-        <!-- Navigatiemenu opgebouwd met UL en LI -->
-        <nav>
-            <ul class="main-menu">
-                <li>
-                    <a href="index.html" class="bg-pink-100 text-stone-900">Dashboard</a>
-                </li>
-                <!-- Dropdown met navigatie naar de overige HTML-pagina's -->
-                <li>
-                    <a href="#">Kennis & Thema's ▾</a>
-                    <ul class="dropdown">
-                        <li><a href="binairstelsel.html">💻 Binairstelsel (0 & 1)</a></li>
-                        <li><a href="kleurmodellen.html">🎨 Kleurmodellen (RGB & CMYK)</a></li>
-                    </ul>
-                </li>
-                <li><a href="#energy-section">Energy Planner</a></li>
-                <li><a href="#goals-section">Doelen</a></li>
-            </ul>
-        </nav>
-
-        <!-- Actieknop -->
-        <div class="flex items-center gap-3">
-            <button onclick="scrollToPlanner()" class="pill-btn px-5 py-2.5 text-xs bg-[#F3E1E1] hover:bg-[#EACACA] text-stone-900 border border-stone-300">
-                [ + Nieuwe Planning ]
-            </button>
         </div>
     </header>
 
     <!-- ==========================================================================
-         HOOFDINHOUD (MAIN)
+         2. HOOFDINHOUD VAN DE HOMEPAGE
          ========================================================================== -->
     <main class="max-w-6xl mx-auto px-6 flex-1 w-full space-y-12 py-8">
 
-        <!-- 1. HERO SECTION -->
-        <section id="hero-section" class="text-center max-w-3xl mx-auto pt-2 space-y-5">
+        <!-- HERO INTRODUCTIE SECTIE -->
+        <section class="text-center max-w-3xl mx-auto pt-4 space-y-5">
             <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#E1EFE6] border border-emerald-200 text-xs font-semibold text-emerald-900">
                 <i data-lucide="sparkles" class="w-3.5 h-3.5 text-emerald-700"></i>
                 <span>Je leven. Op één rustige plek.</span>
@@ -80,58 +85,55 @@
             </h1>
 
             <p class="text-base sm:text-lg text-stone-600 font-light max-w-xl mx-auto">
-                LumaDay brengt je dagelijkse planning, energie, focus, gewoontes en doelen samen in één rustgevende workspace.
+                LumaDay combineert je dagelijkse planning, energieniveau, focus en doelen in één overzichtelijk dashboard.
             </p>
 
-            <div class="flex flex-wrap items-center justify-center gap-4 pt-2">
-                <button onclick="scrollToPlanner()" class="pill-btn px-7 py-3.5 text-xs font-bold uppercase tracking-wider bg-[#F3E1E1] hover:bg-[#EACACA] text-stone-900 border border-stone-300 shadow-sm">
-                    [ Start gratis planning ]
-                </button>
-                <a href="#energy-section" class="pill-btn px-7 py-3.5 text-xs font-bold uppercase tracking-wider bg-[#E1EFE6] hover:bg-[#CDE3D5] text-stone-900 border border-stone-300">
-                    [ Bekijk hoe het werkt ]
+            <div class="flex flex-wrap items-center justify-center gap-3 pt-2">
+                <a href="#planner-section" class="pill-btn px-6 py-3 text-xs bg-[#F3E1E1] hover:bg-[#EACACA] text-stone-900">
+                    [ Direct Zelf Plannen ]
                 </a>
+                <button onclick="openInfoModal()" class="pill-btn px-6 py-3 text-xs bg-[#E1EFE6] hover:bg-[#CDE3D5] text-stone-900">
+                    [ Hoe werkt de website? ]
+                </button>
             </div>
         </section>
 
-        <!-- 2. ENERGY PLANNER SWITCHER -->
+        <!-- ENERGY PLANNER (PLAN OP BASIS VAN HOE JE JE VOELT) -->
         <section id="energy-section" class="max-w-4xl mx-auto">
-            <div class="luma-card bg-white rounded-3xl p-6 sm:p-8 border border-stone-200 shadow-sm space-y-6">
+            <div class="luma-card bg-white p-6 sm:p-8 space-y-6">
                 <div class="text-center space-y-2">
                     <span class="text-[11px] uppercase tracking-widest font-bold text-emerald-800 bg-[#E1EFE6] px-3 py-1 rounded-full border border-emerald-200">
                         Unieke Feature
                     </span>
-                    <h2 class="serif-heading text-3xl sm:text-4xl text-stone-900">Plan op basis van hoe je je voelt.</h2>
+                    <h2 class="serif-heading text-3xl sm:text-4xl text-stone-900">Plan op basis van hoe je je voelt</h2>
                     <p class="text-xs sm:text-sm text-stone-600 max-w-md mx-auto">
-                        Niet iedere dag heeft dezelfde energie. Kies jouw gemoedstoestand van vandaag en LumaDay past je dag-advies aan.
+                        Klik op je energieniveau van vandaag. LumaDay past het dag-advies en de intensiteit direct aan.
                     </p>
                 </div>
 
-                <div class="flex flex-wrap justify-center gap-3 pt-2">
-                    <button onclick="setEnergyState('low')" id="btn-low" class="pill-btn px-6 py-3 text-xs bg-[#F3E1E1] hover:bg-[#EACACA] text-stone-900 border border-stone-300">
-                        <span class="text-base mr-2">☹️</span>
-                        <span>Low Energy</span>
+                <div class="flex flex-wrap justify-center gap-3">
+                    <button onclick="setEnergyState('low')" id="btn-low" class="pill-btn px-5 py-2.5 text-xs bg-[#F3E1E1] hover:bg-[#EACACA] text-stone-900">
+                        ☹️ Low Energy
                     </button>
-                    <button onclick="setEnergyState('good')" id="btn-good" class="pill-btn px-6 py-3 text-xs bg-stone-100 hover:bg-stone-200 text-stone-900 border border-stone-300 ring-2 ring-stone-900">
-                        <span class="text-base mr-2">😐</span>
-                        <span>Good (Normaal)</span>
+                    <button onclick="setEnergyState('good')" id="btn-good" class="pill-btn px-5 py-2.5 text-xs bg-stone-100 hover:bg-stone-200 text-stone-900 ring-2 ring-stone-900">
+                        😐 Good (Normaal)
                     </button>
-                    <button onclick="setEnergyState('energized')" id="btn-energized" class="pill-btn px-6 py-3 text-xs bg-[#E1EFE6] hover:bg-[#CDE3D5] text-stone-900 border border-stone-300">
-                        <span class="text-base mr-2">⚡</span>
-                        <span>Energized!</span>
+                    <button onclick="setEnergyState('energized')" id="btn-energized" class="pill-btn px-5 py-2.5 text-xs bg-[#E1EFE6] hover:bg-[#CDE3D5] text-stone-900">
+                        ⚡ Energized!
                     </button>
                 </div>
 
                 <div id="energy-advice-box" class="p-4 bg-[#F4F4EE] rounded-2xl border border-stone-200 text-xs text-stone-700 text-center max-w-lg mx-auto">
-                    <strong>Normale Modus (78% Energie):</strong> Een evenwichtige dag met ruimte voor overleg, diepe focus en voldoende rust.
+                    <strong>Normale Modus (78% Energie):</strong> Een evenwichtige dag met ruimte voor studie, overleg en voldoende rust.
                 </div>
             </div>
         </section>
 
-        <!-- 3. INTERACTIEF DASHBOARD & ZELF PLANNING MAKEN -->
+        <!-- INTERACTIEF DAGSCHEMA & ZELF PLANNING MAKEN -->
         <section id="planner-section" class="max-w-5xl mx-auto space-y-6">
             <div class="flex flex-col md:flex-row gap-6">
                 
-                <!-- LINKERKANT: Het dagschema overzicht -->
+                <!-- LINKERZIJDE: HET ZICHTBARE DAGSCHEMA -->
                 <div class="md:w-7/12 luma-card space-y-6">
                     <div class="flex items-center justify-between border-b border-stone-200 pb-4">
                         <div>
@@ -139,125 +141,97 @@
                                 ✨ Productieve Dag
                             </span>
                             <h2 class="text-2xl font-bold text-stone-900 mt-2">Mijn Dagschema</h2>
-                            <p class="text-xs text-stone-500 font-mono">Vandaag</p>
+                            <p class="text-xs text-stone-500">Vandaag in te plannen taken</p>
                         </div>
-                        <div class="text-right space-y-1">
+                        <div class="text-right">
                             <div class="text-xs font-bold text-stone-700" id="stat-energy">⚡ 78% energy</div>
-                            <div class="text-xs text-stone-500" id="stat-priorities">🎯 <span id="task-count">0</span> Taken</div>
+                            <div class="text-xs text-stone-500"><span id="task-count">0</span> Taken</div>
                         </div>
                     </div>
 
-                    <!-- Lijst waar nieuwe taken dynamic verschijnen -->
+                    <!-- Hier verschijnen de dynamisch toegevoegde taken -->
                     <div class="space-y-3" id="schedule-list">
                         <!-- Wordt gevuld via JavaScript -->
                     </div>
                 </div>
 
-                <!-- RECHTERKANT: FORMULIER OM ZELF PLANNING TE MAKEN -->
-                <div class="md:w-5/12 luma-card bg-[#F4F4EE] space-y-5 border-2 border-stone-300">
+                <!-- RECHTERZIJDE: FORMULIER OM ZELF TAKEN TOE TE VOEGEN -->
+                <div class="md:w-5/12 luma-card bg-[#F4F4EE] space-y-4 border-2 border-stone-300">
                     <div class="border-b border-stone-200 pb-3">
-                        <h3 class="text-lg font-bold text-stone-900 flex items-center gap-2">
-                            <i data-lucide="plus-circle" class="w-5 h-5 text-emerald-700"></i>
+                        <h3 class="text-base font-bold text-stone-900 flex items-center gap-2">
+                            <i data-lucide="plus-circle" class="w-4 h-4 text-emerald-700"></i>
                             <span>Zelf Planning Maken</span>
                         </h3>
-                        <p class="text-xs text-stone-600 mt-0.5">Voeg je eigen afspraken of taken toe aan je dagschema.</p>
+                        <p class="text-xs text-stone-600 mt-0.5">Voeg een nieuwe afspraak of taak toe aan jouw schema.</p>
                     </div>
 
-                    <form id="add-task-form" onsubmit="handleAddTask(event)" class="space-y-4">
+                    <form id="add-task-form" onsubmit="handleAddTask(event)" class="space-y-3">
                         <div>
                             <label class="block text-xs font-bold text-stone-700 mb-1" for="input-time">Tijdstip:</label>
-                            <input type="text" id="input-time" placeholder="bijv. 10:30" required class="w-full px-3 py-2 rounded-xl border border-stone-300 text-xs focus:outline-none focus:ring-2 focus:ring-stone-800 bg-white">
+                            <input type="text" id="input-time" placeholder="bijv. 10:30" required class="w-full px-3 py-2 rounded-xl border border-stone-300 text-xs bg-white focus:outline-none focus:ring-2 focus:ring-stone-800">
                         </div>
 
                         <div>
                             <label class="block text-xs font-bold text-stone-700 mb-1" for="input-title">Activiteit / Taak:</label>
-                            <input type="text" id="input-title" placeholder="bijv. Wiskunde Huiswerk" required class="w-full px-3 py-2 rounded-xl border border-stone-300 text-xs focus:outline-none focus:ring-2 focus:ring-stone-800 bg-white">
+                            <input type="text" id="input-title" placeholder="bijv. Wiskunde Huiswerk" required class="w-full px-3 py-2 rounded-xl border border-stone-300 text-xs bg-white focus:outline-none focus:ring-2 focus:ring-stone-800">
                         </div>
 
                         <div>
-                            <label class="block text-xs font-bold text-stone-700 mb-1" for="input-tag">Categorie / Tag:</label>
-                            <select id="input-tag" class="w-full px-3 py-2 rounded-xl border border-stone-300 text-xs focus:outline-none focus:ring-2 focus:ring-stone-800 bg-white">
+                            <label class="block text-xs font-bold text-stone-700 mb-1" for="input-tag">Categorie:</label>
+                            <select id="input-tag" class="w-full px-3 py-2 rounded-xl border border-stone-300 text-xs bg-white focus:outline-none focus:ring-2 focus:ring-stone-800">
                                 <option value="Focus">🧠 Deep Work / Focus</option>
-                                <option value="Overleg">💬 Overleg / Meeting</option>
-                                <option value="Sport">🏋️ Sport & Bewegen</option>
-                                <option value="Vrij">☕ Vrije Tijd / Rust</option>
                                 <option value="School">📚 School / Studie</option>
+                                <option value="Overleg">💬 Overleg / Les</option>
+                                <option value="Sport">🏋️ Sport & Bewegen</option>
+                                <option value="Vrij">☕ Pauze / Vrij</option>
                             </select>
                         </div>
 
-                        <button type="submit" class="w-full pill-btn py-3 text-xs bg-[#E1EFE6] hover:bg-[#CDE3D5] text-stone-900 border border-stone-400 font-bold">
+                        <button type="submit" class="w-full pill-btn py-2.5 text-xs bg-[#E1EFE6] hover:bg-[#CDE3D5] text-stone-900 font-bold border-stone-400">
                             + Voeg toe aan Planning
                         </button>
                     </form>
 
-                    <div class="p-3 rounded-xl bg-white/70 border border-stone-200 text-[11px] text-stone-500">
-                        💡 <strong>Tip:</strong> Je toegevoegde taken worden automatisch opgeslagen in je browser!
+                    <div class="p-3 rounded-xl bg-white/80 border border-stone-200 text-[11px] text-stone-500">
+                        💡 <strong>Automatisch Opgeslagen:</strong> Je zelfgemaakte planning blijft in je browser bewaard!
                     </div>
                 </div>
 
             </div>
         </section>
 
-        <!-- 4. GEWOONTES, FOCUS TIMER & DOELEN -->
-        <section id="goals-section" class="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6">
+        <!-- FOCUS TIMER & DOELEN -->
+        <section class="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6">
             
-            <!-- STREAKS & GEWOONTES -->
-            <div class="luma-card space-y-4">
-                <div class="flex items-center justify-between border-b border-stone-200 pb-3">
-                    <h3 class="text-base font-bold text-stone-900 flex items-center gap-2">
-                        <i data-lucide="flame" class="w-4 h-4 text-amber-600"></i>
-                        <span>Streaks & Gewoontes</span>
-                    </h3>
-                </div>
-                <div class="space-y-2.5 text-xs" id="streaks-container">
-                    <!-- Dynamic van JS -->
-                </div>
-            </div>
-
             <!-- FOCUS TIMER -->
-            <div class="luma-card bg-[#F4F4EE] space-y-4 text-center flex flex-col justify-between border border-stone-300">
-                <div>
-                    <span class="text-[10px] font-bold uppercase tracking-wider text-emerald-800 bg-[#E1EFE6] px-2.5 py-1 rounded-full border border-emerald-200">
-                        Focus Modus
-                    </span>
-                    <h3 class="text-base font-bold text-stone-900 mt-2">Start Focus Sessie</h3>
-                    <p class="text-xs text-stone-500 mt-1">25 minuten ononderbroken werken.</p>
-                </div>
-
-                <div class="py-4 font-mono text-4xl font-bold text-stone-900" id="timer-display">
+            <div class="luma-card bg-[#F4F4EE] space-y-4 text-center border border-stone-300">
+                <span class="text-[10px] font-bold uppercase tracking-wider text-emerald-800 bg-[#E1EFE6] px-2.5 py-1 rounded-full border border-emerald-200">
+                    Focus Modus
+                </span>
+                <h3 class="text-base font-bold text-stone-900 mt-1">Pomodoro Timer</h3>
+                <div class="py-2 font-mono text-4xl font-bold text-stone-900" id="timer-display">
                     25:00
                 </div>
 
                 <div class="flex justify-center gap-2">
-                    <button onclick="toggleTimer()" id="timer-btn" class="pill-btn px-6 py-2.5 text-xs bg-[#E1EFE6] hover:bg-[#CDE3D5] text-stone-900 border border-stone-300">
+                    <button onclick="toggleTimer()" id="timer-btn" class="pill-btn px-6 py-2 text-xs bg-[#E1EFE6] hover:bg-[#CDE3D5] text-stone-900">
                         ▶️ Start
                     </button>
-                    <button onclick="resetTimer()" class="pill-btn px-4 py-2.5 text-xs bg-stone-200 hover:bg-stone-300 text-stone-800 border border-stone-300">
+                    <button onclick="resetTimer()" class="pill-btn px-4 py-2 text-xs bg-stone-200 hover:bg-stone-300 text-stone-800">
                         ↺ Reset
                     </button>
                 </div>
             </div>
 
-            <!-- DOELEN -->
+            <!-- DOEL VAN VANDAAG -->
             <div class="luma-card space-y-3">
                 <span class="text-[10px] font-bold uppercase tracking-wider text-pink-800 bg-[#F3E1E1] px-2.5 py-1 rounded-full border border-pink-200">
-                    Doelen Hiërarchie
+                    Doel van Vandaag
                 </span>
-                <h3 class="text-base font-bold text-stone-900">Van visie naar actie:</h3>
-
-                <div class="space-y-2 text-xs">
-                    <div class="p-2.5 rounded-xl bg-stone-50 border border-stone-200">
-                        <span class="text-[10px] text-stone-400 font-bold block">JAARDOEL</span>
-                        <span class="font-semibold text-stone-800">"Slaag voor mijn examens"</span>
-                    </div>
-                    <div class="p-2.5 rounded-xl bg-stone-50 border border-stone-200 border-l-4 border-l-emerald-400">
-                        <span class="text-[10px] text-emerald-700 font-bold block">KWARTAAL</span>
-                        <span class="font-semibold text-stone-800">Webdevelopment project opleveren</span>
-                    </div>
-                    <div class="p-2.5 rounded-xl bg-stone-900 text-white">
-                        <span class="text-[10px] text-emerald-400 font-bold block">ACTIE VANDAAG</span>
-                        <input type="text" id="today-goal-input" value="1.5 uur werken aan HTML & CSS" class="bg-transparent text-xs font-semibold text-white focus:outline-none w-full border-b border-stone-700 pb-1 mt-0.5">
-                    </div>
+                <h3 class="text-base font-bold text-stone-900">Wat wil je vandaag bereiken?</h3>
+                <div class="p-3 rounded-xl bg-stone-900 text-white">
+                    <span class="text-[10px] text-emerald-400 font-bold block uppercase">Belangrijkste Actie:</span>
+                    <input type="text" id="today-goal-input" value="1.5 uur werken aan HTML & CSS opdracht" class="bg-transparent text-xs font-semibold text-white focus:outline-none w-full border-b border-stone-700 pb-1 mt-1">
                 </div>
             </div>
 
@@ -265,12 +239,63 @@
 
     </main>
 
+    <!-- ==========================================================================
+         3. MODAL POP-UPS (INLOGGEN EN OVER LUMADAY)
+         ========================================================================== -->
+    
+    <!-- INLOG MODAL -->
+    <div id="login-modal" class="modal-backdrop">
+        <div class="modal-content space-y-5">
+            <div class="flex justify-between items-center border-b border-stone-200 pb-3">
+                <h3 class="text-lg font-bold text-stone-900">Inloggen bij LumaDay</h3>
+                <button onclick="closeLoginModal()" class="text-stone-400 hover:text-stone-700 font-bold">✕</button>
+            </div>
+            
+            <form onsubmit="handleLogin(event)" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-bold text-stone-700 mb-1">Jouw Naam:</label>
+                    <input type="text" id="login-username" placeholder="vul je naam in..." required class="w-full px-3 py-2 rounded-xl border border-stone-300 text-xs bg-white focus:outline-none focus:ring-2 focus:ring-stone-800">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-stone-700 mb-1">E-mailadres:</label>
+                    <input type="email" id="login-email" placeholder="naam@voorbeeld.nl" required class="w-full px-3 py-2 rounded-xl border border-stone-300 text-xs bg-white focus:outline-none focus:ring-2 focus:ring-stone-800">
+                </div>
+                <button type="submit" class="w-full pill-btn py-2.5 text-xs bg-[#F3E1E1] hover:bg-[#EACACA] text-stone-900 font-bold">
+                    Inloggen & Opslaan
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- INFORMATIE MODAL (OVER LUMADAY) -->
+    <div id="info-modal" class="modal-backdrop">
+        <div class="modal-content space-y-4">
+            <div class="flex justify-between items-center border-b border-stone-200 pb-3">
+                <h3 class="text-lg font-bold text-stone-900">ℹ️ Over de Website LumaDay</h3>
+                <button onclick="closeInfoModal()" class="text-stone-400 hover:text-stone-700 font-bold">✕</button>
+            </div>
+            <div class="text-xs text-stone-600 space-y-3 leading-relaxed">
+                <p>
+                    <strong>Wat is LumaDay?</strong><br>
+                    LumaDay is een rustgevend digitaal dashboard ontworpen om planning, doelen en informatica-kennis op één plek te combineren.
+                </p>
+                <p>
+                    <strong>Hoe werkt de website?</strong><br>
+                    1. <strong>Energy Planner:</strong> Pas je dag-advies aan op basis van hoe je je voelt (Low, Good, Energized).<br>
+                    2. <strong>Zelf Plannen:</strong> Voeg via het formulier je eigen huiswerk of afspraken toe.<br>
+                    3. <strong>Kennismodules:</strong> Gebruik het menu bovenaan om naar de educatieve pagina's over het Binairstelsel en Kleurmodellen te navigeren.
+                </p>
+            </div>
+            <button onclick="closeInfoModal()" class="w-full pill-btn py-2 text-xs bg-stone-100 hover:bg-stone-200 text-stone-800 font-bold">
+                Begrepen, sluit venster
+            </button>
+        </div>
+    </div>
+
     <!-- FOOTER VAN DE WEBSITE -->
     <footer class="max-w-6xl mx-auto px-6 py-8 w-full border-t border-stone-200 flex flex-col sm:flex-row justify-between items-center text-xs text-stone-500 gap-4 mt-12">
-        <div>
-            &copy; 2026 LumaDay - Personal Dashboard.
-        </div>
-        <div class="flex gap-6">
+        <div>&copy; 2026 LumaDay - Personal Dashboard.</div>
+        <div class="flex gap-4">
             <a href="index.html" class="hover:text-stone-900 font-bold">Home</a>
             <a href="binairstelsel.html" class="hover:text-stone-900">Binairstelsel</a>
             <a href="kleurmodellen.html" class="hover:text-stone-900">Kleurmodellen</a>
@@ -278,22 +303,20 @@
     </footer>
 
     <!-- ==========================================================================
-         JAVASCRIPT LOGICA
+         JAVASCRIPT LOGICA VOOR INTERACTIE EN OPSLAG
          ========================================================================== -->
     <script>
+        // Takenlijst ophalen uit localStorage of standaard taken laden
         let scheduleTasks = JSON.parse(localStorage.getItem('lumaday_tasks')) || [
-            { id: 1, time: "09:00", title: "Team Meeting / Les", tag: "Overleg", done: false },
-            { id: 2, time: "11:00", title: "Deep work (Informatica Studie)", tag: "Focus", done: false },
-            { id: 3, time: "13:15", title: "Wandeling & Pauze", tag: "Vrij", done: false },
-            { id: 4, time: "14:45", title: "Programmeren & Opdrachten", tag: "School", done: false }
+            { id: 1, time: "09:00", title: "Informatica Les & Theorie", tag: "School", done: false },
+            { id: 2, time: "11:15", title: "Werken aan HTML & CSS Opdracht", tag: "Focus", done: false },
+            { id: 3, time: "13:00", title: "Pauze & Wandeling", tag: "Vrij", done: false }
         ];
 
-        let habits = JSON.parse(localStorage.getItem('lumaday_habits')) || [
-            { id: 1, name: "Water drinken", streak: 14 },
-            { id: 2, name: "Boek lezen (15 min)", streak: 9 },
-            { id: 3, name: "Wandelen", streak: 25 }
-        ];
+        // Gebruikersstatus laden
+        let currentUser = JSON.parse(localStorage.getItem('lumaday_user')) || null;
 
+        // Render het dagschema op het scherm
         function renderSchedule() {
             const container = document.getElementById('schedule-list');
             const taskCountEl = document.getElementById('task-count');
@@ -302,13 +325,13 @@
             taskCountEl.innerText = scheduleTasks.length;
 
             if (scheduleTasks.length === 0) {
-                container.innerHTML = '<p class="text-xs text-stone-500 italic py-4 text-center">Nog geen taken ingepland. Voeg er een toe via het formulier hiernaast!</p>';
+                container.innerHTML = '<p class="text-xs text-stone-500 italic py-4 text-center">Nog geen taken ingepland. Voeg er een toe via de rechterzijde!</p>';
                 return;
             }
 
             scheduleTasks.forEach((item) => {
                 const div = document.createElement('div');
-                div.className = "oval-task-badge flex items-center justify-between shadow-sm " + (item.done ? 'opacity-50 line-through bg-stone-100' : '');
+                div.className = "task-item " + (item.done ? 'done' : '');
                 
                 div.innerHTML = `
                     <div class="flex items-center gap-3">
@@ -325,6 +348,7 @@
             });
         }
 
+        // Taak toevoegen via het formulier
         function handleAddTask(e) {
             e.preventDefault();
             const timeInput = document.getElementById('input-time').value;
@@ -349,47 +373,21 @@
         }
 
         function toggleTaskDone(id) {
-            scheduleTasks = scheduleTasks.map(task => {
-                if (task.id === id) task.done = !task.done;
-                return task;
+            scheduleTasks = scheduleTasks.map(t => {
+                if (t.id === id) t.done = !t.done;
+                return t;
             });
             localStorage.setItem('lumaday_tasks', JSON.stringify(scheduleTasks));
             renderSchedule();
         }
 
         function deleteTask(id) {
-            scheduleTasks = scheduleTasks.filter(task => task.id !== id);
+            scheduleTasks = scheduleTasks.filter(t => t.id !== id);
             localStorage.setItem('lumaday_tasks', JSON.stringify(scheduleTasks));
             renderSchedule();
         }
 
-        function renderHabits() {
-            const container = document.getElementById('streaks-container');
-            container.innerHTML = '';
-
-            habits.forEach(habit => {
-                const div = document.createElement('div');
-                div.className = "flex items-center justify-between p-2.5 rounded-xl bg-stone-50 border border-stone-200";
-                div.innerHTML = `
-                    <span class="font-medium text-stone-800">${habit.name}</span>
-                    <div class="flex items-center gap-2">
-                        <span class="font-mono font-bold text-amber-700 bg-amber-50 px-2 py-0.5 rounded-md border border-amber-200">${habit.streak}d</span>
-                        <button onclick="incrementStreak(${habit.id})" class="px-2 py-0.5 rounded bg-emerald-100 hover:bg-emerald-200 text-emerald-800 font-bold text-xs">+</button>
-                    </div>
-                `;
-                container.appendChild(div);
-            });
-        }
-
-        function incrementStreak(id) {
-            habits = habits.map(h => {
-                if (h.id === id) h.streak += 1;
-                return h;
-            });
-            localStorage.setItem('lumaday_habits', JSON.stringify(habits));
-            renderHabits();
-        }
-
+        // Energy Planner Switcher
         function setEnergyState(state) {
             const adviceBox = document.getElementById('energy-advice-box');
             const statEnergy = document.getElementById('stat-energy');
@@ -404,19 +402,59 @@
 
             if (state === 'low') {
                 statEnergy.innerText = '⚡ 35% energy';
-                dayStatusBadge.innerText = '😴 Rustige dag voorgesteld';
-                adviceBox.innerHTML = '<strong>Lage Energie Modus:</strong> Focus op lichte taken, neem extra pauzes en wandel even buiten.';
+                dayStatusBadge.innerText = '😴 Rustige Dag';
+                adviceBox.innerHTML = '<strong>Lage Energie Modus:</strong> Focus vandaag op lichte herhaaltaken en neem voldoende pauze.';
             } else if (state === 'good') {
                 statEnergy.innerText = '⚡ 78% energy';
-                dayStatusBadge.innerText = '✨ Productieve dag';
-                adviceBox.innerHTML = '<strong>Normale Modus (78% Energie):</strong> Een evenwichtige dag met ruimte voor overleg, diepe focus en voldoende rust.';
+                dayStatusBadge.innerText = '✨ Productieve Dag';
+                adviceBox.innerHTML = '<strong>Normale Modus (78% Energie):</strong> Een evenwichtige dag met ruimte voor studie, overleg en voldoende rust.';
             } else if (state === 'energized') {
                 statEnergy.innerText = '⚡ 95% energy';
-                dayStatusBadge.innerText = '🔥 High Performance Mode!';
-                adviceBox.innerHTML = '<strong>Energized Modus:</strong> Geweldig! Pak vandaag je lastigste doelen en focus-projecten als eerste aan.';
+                dayStatusBadge.innerText = '🔥 High Performance!';
+                adviceBox.innerHTML = '<strong>Energized Modus:</strong> Top! Pak vandaag je lastigste opdrachten als eerste aan.';
             }
         }
 
+        // Modal besturing (Inloggen & Over LumaDay)
+        function openLoginModal() { document.getElementById('login-modal').classList.add('active'); }
+        function closeLoginModal() { document.getElementById('login-modal').classList.remove('active'); }
+        function openInfoModal() { document.getElementById('info-modal').classList.add('active'); }
+        function closeInfoModal() { document.getElementById('info-modal').classList.remove('active'); }
+
+        function handleLogin(e) {
+            e.preventDefault();
+            const username = document.getElementById('login-username').value;
+            currentUser = { name: username };
+            localStorage.setItem('lumaday_user', JSON.stringify(currentUser));
+            updateUserUI();
+            closeLoginModal();
+        }
+
+        function logout() {
+            localStorage.removeItem('lumaday_user');
+            currentUser = null;
+            updateUserUI();
+        }
+
+        function updateUserUI() {
+            const area = document.getElementById('user-nav-area');
+            if (currentUser) {
+                area.innerHTML = `
+                    <span class="text-xs font-bold text-stone-800 bg-[#E1EFE6] px-3 py-1.5 rounded-full border border-emerald-300">
+                        👤 ${currentUser.name}
+                    </span>
+                    <button onclick="logout()" class="text-xs text-stone-500 hover:text-red-500 font-semibold px-1">Uitloggen</button>
+                `;
+            } else {
+                area.innerHTML = `
+                    <button onclick="openLoginModal()" class="pill-btn px-4 py-2 text-xs bg-[#F3E1E1] hover:bg-[#EACACA] text-stone-900">
+                        🔑 Inloggen
+                    </button>
+                `;
+            }
+        }
+
+        // Focus Timer Logica
         let timerSeconds = 1500;
         let timerInterval = null;
 
@@ -455,14 +493,10 @@
                 `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
         }
 
-        function scrollToPlanner() {
-            document.getElementById('planner-section').scrollIntoView({ behavior: 'smooth' });
-        }
-
         window.onload = function() {
             if (typeof lucide !== 'undefined') lucide.createIcons();
             renderSchedule();
-            renderHabits();
+            updateUserUI();
         };
     </script>
 </body>
