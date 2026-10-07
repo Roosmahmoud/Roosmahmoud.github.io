@@ -11,10 +11,62 @@ margin: 0;
 padding: 0;
 background-image: radial-gradient(#E7E5E4 0.75px, transparent 0.75px);
 background-size: 24px 24px;
+transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .serif-heading {
 font-family: 'Instrument Serif', serif;
+}
+
+/* 🌙 DARK MODE STIJLEN (IDEE 2) */
+body.dark-mode {
+background-color: #121212;
+color: #E7E5E4;
+background-image: radial-gradient(#262626 0.75px, transparent 0.75px);
+}
+
+body.dark-mode header.top-header {
+background-color: rgba(24, 24, 27, 0.95);
+border-bottom-color: #27272A;
+}
+
+body.dark-mode nav ul.main-menu a {
+color: #A1A1AA;
+}
+
+body.dark-mode nav ul.main-menu a:hover {
+color: #FFFFFF;
+background-color: #27272A;
+}
+
+body.dark-mode .luma-card {
+background-color: #18181B;
+border-color: #27272A;
+color: #E7E5E4;
+}
+
+body.dark-mode .task-item {
+background-color: #27272A;
+border-color: #3F3F46;
+color: #E7E5E4;
+}
+
+body.dark-mode nav ul.main-menu li .dropdown {
+background-color: #18181B;
+border-color: #27272A;
+}
+
+body.dark-mode nav ul.main-menu li .dropdown a {
+color: #E7E5E4;
+}
+
+body.dark-mode nav ul.main-menu li .dropdown a:hover {
+background-color: #27272A;
+}
+
+body.dark-mode .fun-fact-box {
+background: linear-gradient(135deg, #18181B 0%, #27272A 100%);
+border-color: #27272A;
 }
 
 /* 2. Horizontale Navigatiebalk Bovenaan met Dropdown */
@@ -152,4 +204,33 @@ background-color: #E7E5E4;
 .fun-fact-box {
 background: linear-gradient(135deg, #FFFDF8 0%, #F4F4EE 100%);
 border: 1.5px solid #E1EFE6;
+}
+
+/* Quiz opties */
+.quiz-option {
+display: block;
+width: 100%;
+text-align: left;
+padding: 0.6rem 1rem;
+border-radius: 0.75rem;
+border: 1px solid #E7E5E4;
+margin-top: 0.5rem;
+font-size: 0.85rem;
+background-color: #FAFAFA;
+cursor: pointer;
+transition: all 0.2s;
+}
+
+body.dark-mode .quiz-option {
+background-color: #27272A;
+border-color: #3F3F46;
+color: #E7E5E4;
+}
+
+.quiz-option:hover {
+background-color: #F3E1E1;
+}
+
+body.dark-mode .quiz-option:hover {
+background-color: #3F3F46;
 }
