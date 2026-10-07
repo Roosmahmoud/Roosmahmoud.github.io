@@ -1,1 +1,132 @@
+<!DOCTYPE html>
+<html lang="nl" class="h-full">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inloggen bij LumaDay</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="opmaak.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body class="min-h-full flex flex-col justify-between antialiased">
 
+    <!-- HORIZONTAAL MENU BOVENAAN -->
+    <header class="top-header">
+        <div class="header-container">
+            <a href="index.html" class="flex items-center gap-2.5 text-decoration-none">
+                <div class="w-9 h-9 rounded-full bg-stone-900 flex items-center justify-center text-white font-serif italic text-xl shadow-sm">L</div>
+                <span class="font-bold tracking-tight text-xl text-stone-900">LumaDay</span>
+            </a>
+
+            <nav>
+                <ul class="main-menu">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="planning.html">Mijn Planning</a></li>
+                    <li><a href="timer.html">Stopwatch & Timer</a></li>
+                    <li>
+                        <a href="#">Kennismodules ▾</a>
+                        <ul class="dropdown">
+                            <li><a href="binairstelsel.html">💻 Binairstelsel (0 & 1)</a></li>
+                            <li><a href="kleurmodellen.html">🎨 Kleurmodellen (RGB & CMYK)</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="over.html">Over LumaDay</a></li>
+                </ul>
+            </nav>
+
+            <div>
+                <a href="login.html" class="pill-btn px-4 py-2 text-xs bg-[#F3E1E1] hover:bg-[#EACACA] text-stone-900 active">
+                    🔑 Inloggen
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- INLOGFORMULIER OP EEN EIGEN OVERZICHTELIJKE PAGINA -->
+    <main class="max-w-md mx-auto px-6 flex-1 w-full space-y-6 py-12 flex flex-col justify-center">
+        
+        <div class="luma-card bg-white p-8 space-y-6 border border-stone-200 shadow-md">
+            
+            <div class="text-center space-y-1">
+                <h1 class="serif-heading text-3xl text-stone-900">Inloggen bij LumaDay</h1>
+                <p class="text-xs text-stone-500">Vul je gegevens in om je profiel op te slaan.</p>
+            </div>
+
+            <div id="login-status-box" class="hidden p-3 bg-[#E1EFE6] text-emerald-900 rounded-xl text-xs font-bold text-center">
+                Je bent ingelogd!
+            </div>
+
+            <form onsubmit="handleLogin(event)" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-bold text-stone-700 mb-1" for="login-username">Jouw Naam / Gebruikersnaam:</label>
+                    <input type="text" id="login-username" placeholder="bijv. Alex" required class="w-full px-3 py-2.5 rounded-xl border border-stone-300 text-xs bg-white focus:outline-none focus:ring-2 focus:ring-stone-800">
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold text-stone-700 mb-1" for="login-email">E-mailadres:</label>
+                    <input type="email" id="login-email" placeholder="naam@voorbeeld.nl" required class="w-full px-3 py-2.5 rounded-xl border border-stone-300 text-xs bg-white focus:outline-none focus:ring-2 focus:ring-stone-800">
+                </div>
+
+                <button type="submit" class="w-full pill-btn py-3 text-xs bg-[#F3E1E1] hover:bg-[#EACACA] text-stone-900 font-bold">
+                    Inloggen & Opslaan
+                </button>
+            </form>
+
+            <div class="text-center pt-2">
+                <button onclick="logout()" class="text-xs text-stone-400 hover:text-red-500 font-semibold">
+                    Uitloggen / Account Wissen
+                </button>
+            </div>
+
+        </div>
+
+    </main>
+
+    <footer class="max-w-5xl mx-auto px-6 py-8 w-full border-t border-stone-200 flex justify-between text-xs text-stone-500">
+        <div>&copy; 2026 LumaDay - Inlog Module</div>
+        <div class="flex gap-4">
+            <a href="index.html" class="hover:text-stone-900">Home</a>
+        </div>
+    </footer>
+
+    <!-- JAVASCRIPT VOOR INLOGGEN -->
+    <script>
+        function handleLogin(e) {
+            e.preventDefault();
+            const name = document.getElementById('login-username').value;
+            const email = document.getElementById('login-email').value;
+            
+            const user = { name: name, email: email };
+            localStorage.setItem('lumaday_user', JSON.stringify(user));
+            
+            showLoggedInState(user);
+            alert(`Welkom terug, ${name}! Your account is opgeslagen.`);
+        }
+
+        function logout() {
+            localStorage.removeItem('lumaday_user');
+            document.getElementById('login-status-box').classList.add('hidden');
+            document.getElementById('login-username').value = '';
+            document.getElementById('login-email').value = '';
+            alert('Je bent uitgelogd.');
+        }
+
+        function showLoggedInState(user) {
+            const statusBox = document.getElementById('login-status-box');
+            statusBox.classList.remove('hidden');
+            statusBox.innerText = `Ingelogd als: ${user.name} (${user.email})`;
+            document.getElementById('login-username').value = user.name;
+            if (user.email) document.getElementById('login-email').value = user.email;
+        }
+
+        window.onload = function() {
+            const storedUser = JSON.parse(localStorage.getItem('lumaday_user'));
+            if (storedUser) {
+                showLoggedInState(storedUser);
+            }
+        };
+    </script>
+</body>
+</html>
