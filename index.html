@@ -1,600 +1,771 @@
 <!DOCTYPE html>
 <html lang="nl" class="h-full">
 <head>
+    <!-- ==========================================================================
+         METADATA EN EXTERNE LIBRARIES
+         ========================================================================== -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LumaDay - Je leven. Op één rustige plek.</title>
+    <title>LumaDay - Personal Life Dashboard & Kennis</title>
 
-    <!-- Tailwind CSS -->
+    <!-- Tailwind CSS via CDN voor snelle utility styling -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        cream: '#FBFBF9',
-                        'cream-card': '#F4F4EE',
-                        'pink-accent': '#F3E1E1',
-                        'pink-hover': '#EACACA',
-                        'pink-pill': '#F2C9D8',
-                        'green-accent': '#E1EFE6',
-                        'green-hover': '#CDE3D5',
-                        'green-pill': '#B2D8C0',
-                        'dark-text': '#1C1917',
-                        'subtle-gray': '#78716C',
-                        'border-warm': '#E7E5E4'
-                    },
-                    fontFamily: {
-                        serif: ['"Instrument Serif"', 'serif'],
-                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
-                    }
-                }
-            }
-        };
-    </script>
-    
-    <!-- Lucide Icons -->
+
+    <!-- Lucide Iconen Library voor mooie minimalistische pictogrammen -->
     <script src="https://unpkg.com/lucide@latest"></script>
-    <!-- Google Fonts -->
+
+    <!-- Google Fonts: Instrument Serif voor elegante titels en Plus Jakarta Sans voor hoofdtekst -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
+    <!-- ==========================================================================
+         EXTERNE / INTERNE CSS OPMAAK
+         Hierin staat alle vormgeving, menu-dropdowns, pastelkleuren en de knoppen.
+         ========================================================================== -->
     <style>
+        /* 1. Basiselementen en achtergrond van de website */
         body {
-            background-color: #FBFBF9;
-            color: #1C1917;
+            background-color: #FBFBF9; /* Gebroken wit / cream achtergrond */
+            color: #1C1917; /* Donkere, zachte tekstkleur */
             font-family: 'Plus Jakarta Sans', sans-serif;
+            margin: 0;
+            padding: 0;
+            /* Subtiel stippenpatroon voor papier-textuur */
             background-image: radial-gradient(#E7E5E4 0.75px, transparent 0.75px);
             background-size: 24px 24px;
         }
 
+        /* Serif typografie voor elegante, grote titels */
         .serif-heading {
             font-family: 'Instrument Serif', serif;
         }
 
+        /* ==========================================================================
+           2. Navigatiemenu & Dropdown Styling (ul, li, a)
+           Zoals voorgeschreven in de schoolopdracht.
+           ========================================================================== */
+        nav ul.main-menu {
+            list-style-type: none; /* Verwijdert de standaard opsommingsbolletjes */
+            margin: 0;
+            padding: 0;
+            display: flex; /* Zet menu-items horizontaal naast elkaar */
+            align-items: center;
+            gap: 1.25rem;
+        }
+
+        nav ul.main-menu > li {
+            position: relative; /* Nodig voor de positionering van het zwevende dropdownmenu */
+        }
+
+        /* Links in het hoofdmenu */
+        nav ul.main-menu a {
+            text-decoration: none; /* Geen onderstreping van links */
+            color: #57534E; /* Subtiel grijze tekstkleur */
+            font-weight: 600;
+            font-size: 0.875rem;
+            padding: 8px 16px;
+            display: block; /* Maakt de hele knop klikbaar */
+            border-radius: 9999px; /* Ronde pil-vorm */
+            transition: all 0.2s ease;
+        }
+
+        nav ul.main-menu a:hover {
+            color: #1C1917;
+            background-color: #F3E1E1; /* Zachtroze achtergrond bij zweven (hover) */
+        }
+
+        /* Dropdown menu container (standaard onzichtbaar) */
+        nav ul.main-menu li .dropdown {
+            display: none; /* Standaard verborgen */
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: #FFFFFF;
+            min-width: 230px;
+            box-shadow: 0px 10px 25px rgba(0, 0, 0, 0.08);
+            border: 1px solid #E7E5E4;
+            border-radius: 1rem;
+            padding: 0.5rem;
+            z-index: 100;
+        }
+
+        /* Maak het dropdownmenu zichtbaar wanneer de muis erover zweeft (hover) */
+        nav ul.main-menu li:hover .dropdown {
+            display: block;
+        }
+
+        nav ul.main-menu li .dropdown a {
+            color: #1C1917;
+            border-radius: 0.5rem;
+            padding: 10px 14px;
+        }
+
+        nav ul.main-menu li .dropdown a:hover {
+            background-color: #E1EFE6; /* Mintgroene achtergrond bij dropdown hover */
+        }
+
+        /* ==========================================================================
+           3. Custom Knoppen, Kaarten en Randen
+           ========================================================================== */
         .pill-btn {
-            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 9999px;
+            font-weight: 600;
+            cursor: pointer;
         }
 
         .pill-btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
         }
 
-        /* Highlight animation for code explainer mode */
-        .explainer-highlight {
-            outline: 2px dashed #059669 !important;
-            outline-offset: 4px;
-            background-color: rgba(225, 239, 230, 0.4) !important;
+        /* Zachte kaarten voor het dashboard */
+        .luma-card {
+            background-color: #FFFFFF;
+            border: 1px solid #E7E5E4;
+            border-radius: 1.5rem;
+            padding: 1.5rem;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+        }
+
+        /* Getekende ovale tijdsblokken (geïnspireerd op de schets) */
+        .oval-task-badge {
+            border: 2px solid #38BDF8; /* Lichtblauwe getekende rand */
+            background-color: #F0F9FF;
+            border-radius: 9999px;
+            padding: 8px 18px;
+            transition: all 0.2s ease;
+        }
+
+        .oval-task-badge:hover {
+            background-color: #E0F2FE;
+            transform: scale(1.01);
+        }
+
+        /* Verborgen secties voor het overschakelen tussen pagina's */
+        .page-section {
+            display: none;
+        }
+        .page-section.active {
+            display: block;
         }
     </style>
 </head>
-<body class="min-h-full flex flex-col justify-between antialiased selection:bg-pink-pill selection:text-dark-text">
-
-    <!-- Developer Explainer Drawer / Panel -->
-    <div id="developer-panel" class="fixed top-0 right-0 h-full w-full sm:w-[480px] bg-dark-text text-stone-200 z-50 transform translate-x-full transition-transform duration-300 ease-in-out shadow-2xl flex flex-col border-l border-stone-800">
-        <div class="p-5 border-b border-stone-800 flex justify-between items-center bg-stone-900">
-            <div class="flex items-center gap-2">
-                <i data-lucide="code" class="w-5 h-5 text-emerald-400"></i>
-                <h3 class="font-semibold text-stone-100">Developer & Concept Explainer</h3>
-            </div>
-            <button onclick="toggleDeveloperMode()" class="text-stone-400 hover:text-white p-1 rounded-lg hover:bg-stone-800 transition">
-                <i data-lucide="x" class="w-5 h-5"></i>
-            </button>
-        </div>
-
-        <div class="p-6 overflow-y-auto space-y-6 flex-1 text-sm font-light">
-            <div class="bg-stone-900/80 p-4 rounded-xl border border-stone-800">
-                <h4 class="text-xs uppercase tracking-wider font-bold text-emerald-400 mb-2">💡 Project Visie</h4>
-                <p class="text-stone-300 leading-relaxed">
-                    LumaDay is ontworpen om de digitale stress van standaard to-do apps op te lossen door een zachte, esthetische en <strong>energie-gestuurde planner</strong> aan te bieden.
-                </p>
-            </div>
-
-            <div>
-                <h4 class="text-xs uppercase tracking-wider font-bold text-stone-400 mb-3">Architectuur & Code Opbouw</h4>
-                <ul class="space-y-3">
-                    <li class="p-3 bg-stone-900 rounded-lg border border-stone-800 cursor-pointer hover:border-emerald-500/50 transition" onclick="highlightSection('hero-section')">
-                        <strong class="text-emerald-300 block mb-1">1. Clean Minimalistic UI</strong>
-                        <span class="text-xs text-stone-400">Warme pastel accenten (#F2C9D8 & #B2D8C0) met een zacht gebroken-wit textured grid. Geen harde contrasten of stressvolle rode alerts.</span>
-                    </li>
-                    <li class="p-3 bg-stone-900 rounded-lg border border-stone-800 cursor-pointer hover:border-emerald-500/50 transition" onclick="highlightSection('energy-feature')">
-                        <strong class="text-emerald-300 block mb-1">2. Dynamic Energy Planner (JS)</strong>
-                        <span class="text-xs text-stone-400">Een interactieve State Engine die je planning direct herstructureert op basis van hoe je je voelt (Low, Good, Energized).</span>
-                    </li>
-                    <li class="p-3 bg-stone-900 rounded-lg border border-stone-800 cursor-pointer hover:border-emerald-500/50 transition" onclick="highlightSection('goal-hierarchy')">
-                        <strong class="text-emerald-300 block mb-1">3. Goal Cascade Architecture</strong>
-                        <span class="text-xs text-stone-400">Vertaalt abstracte levensdoelen in hanteerbare dagelijkse acties (Macro naar Micro flow).</span>
-                    </li>
-                </ul>
-            </div>
-
-            <div class="bg-stone-900 p-4 rounded-xl border border-stone-800">
-                <h4 class="text-xs uppercase tracking-wider font-bold text-stone-400 mb-2">Live Console Logs</h4>
-                <div id="console-logs" class="font-mono text-xs text-emerald-400 space-y-1 h-28 overflow-y-auto bg-stone-950 p-3 rounded border border-stone-800">
-                    <div>> LumaDay System Initialized.</div>
-                    <div>> Energy mode: 'Good' (Default)</div>
-                </div>
-            </div>
-        </div>
-
-        <div class="p-4 border-t border-stone-800 bg-stone-900 text-center text-xs text-stone-500">
-            Klik op een onderdeel hierboven om het te markeren op het scherm.
-        </div>
-    </div>
-
-    <!-- Floating Developer Mode Button -->
-    <button onclick="toggleDeveloperMode()" class="fixed bottom-6 right-6 z-40 bg-dark-text text-white px-4 py-3 rounded-full shadow-2xl hover:scale-105 active:scale-95 transition flex items-center gap-2.5 text-xs font-semibold tracking-wide border border-stone-700">
-        <span class="relative flex h-2 w-2">
-            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-            <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
-        </span>
-        <i data-lucide="terminal" class="w-4 h-4 text-emerald-400"></i>
-        <span>Developer Mode</span>
-    </button>
-
-    <!-- Navbar -->
-    <header class="max-w-6xl mx-auto px-6 py-8 w-full flex items-center justify-between">
-        <div class="flex items-center gap-2">
-            <div class="w-8 h-8 rounded-full bg-stone-900 flex items-center justify-center text-white font-serif italic text-lg shadow-sm">
-                L
-            </div>
-            <span class="font-bold tracking-tight text-xl text-dark-text">LumaDay</span>
-        </div>
-
-        <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-subtle-gray">
-            <a href="#features" class="hover:text-dark-text transition">Hoe het werkt</a>
-            <a href="#energy-feature" class="hover:text-dark-text transition">Energy Planner</a>
-            <a href="#goals" class="hover:text-dark-text transition">Doelen</a>
-        </nav>
-
-        <div class="flex items-center gap-3">
-            <button class="pill-btn px-5 py-2.5 rounded-full text-xs font-semibold bg-pink-accent hover:bg-pink-hover text-dark-text border border-stone-300/60 shadow-sm">
-                [ Login / Sign up ]
-            </button>
-        </div>
-    </header>
-
-    <main class="max-w-6xl mx-auto px-6 flex-1 w-full space-y-20 py-8">
-
-        <!-- Hero Section -->
-        <section id="hero-section" class="text-center max-w-3xl mx-auto pt-6 pb-4 space-y-6">
-            <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-stone-200/60 border border-stone-300/70 text-xs font-medium text-subtle-gray mb-2">
-                <i data-lucide="sparkles" class="w-3.5 h-3.5 text-amber-600"></i>
-                <span>Rust. Overzicht. Intentie.</span>
-            </div>
-
-            <h1 class="serif-heading text-5xl sm:text-6xl md:text-7xl font-normal text-dark-text leading-[1.08] tracking-tight">
-                Je leven. Op één <span class="italic">rustige</span> plek.
-            </h1>
-
-            <p class="text-lg sm:text-xl text-subtle-gray font-light max-w-xl mx-auto leading-relaxed">
-                Plan minder. Leef meer. Beheer je energie, doelen en dagelijkse focus zonder overweldigd te raken.
-            </p>
-
-            <div class="flex flex-wrap items-center justify-center gap-4 pt-4">
-                <button onclick="scrollToDemo()" class="pill-btn px-7 py-3.5 rounded-full text-sm font-semibold bg-pink-accent hover:bg-pink-hover text-dark-text border border-stone-300 shadow-sm flex items-center gap-2">
-                    <span>[ Start gratis ]</span>
-                </button>
-                <a href="#energy-feature" class="pill-btn px-7 py-3.5 rounded-full text-sm font-semibold bg-green-accent hover:bg-green-hover text-dark-text border border-stone-300 shadow-sm flex items-center gap-2">
-                    <span>[ Bekijk hoe het werkt ]</span>
-                </a>
-            </div>
-        </section>
-
-        <!-- Live Interactive Dashboard Preview -->
-        <section id="dashboard-preview" class="max-w-4xl mx-auto">
-            <div class="bg-cream-card rounded-3xl p-6 sm:p-8 border border-border-warm shadow-xl shadow-stone-200/40 relative overflow-hidden">
-                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-stone-300/70">
-                    <div>
-                        <div class="flex items-center gap-2 text-xs font-semibold text-subtle-gray tracking-wider uppercase mb-1">
-                            <span class="w-2 h-2 rounded-full bg-emerald-500 inline-block"></span>
-                            Vandaag Overzicht
-                        </div>
-                        <h2 class="text-2xl font-bold text-dark-text">Good morning, Roos.</h2>
-                        <p class="text-xs text-subtle-gray mt-0.5" id="current-date">Friday, September 11</p>
-                    </div>
-                    <div class="inline-flex items-center gap-2 px-4 py-2 rounded-2xl bg-white border border-stone-200 text-xs font-medium text-dark-text shadow-sm self-start sm:self-auto">
-                        <i data-lucide="sun" class="w-4 h-4 text-amber-500"></i>
-                        <span id="day-status-text">Your day looks balanced.</span>
-                    </div>
-                </div>
-
-                <!-- Stats Bar -->
-                <div class="grid grid-cols-3 gap-3 my-6">
-                    <div class="bg-white/80 backdrop-blur p-4 rounded-2xl border border-stone-200 text-center">
-                        <span class="text-xs text-subtle-gray block mb-1">Energie Level</span>
-                        <span id="stat-energy" class="text-xl font-bold text-dark-text">78%</span>
-                    </div>
-                    <div class="bg-white/80 backdrop-blur p-4 rounded-2xl border border-stone-200 text-center">
-                        <span class="text-xs text-subtle-gray block mb-1">Prioriteiten</span>
-                        <span id="stat-priorities" class="text-xl font-bold text-dark-text">3 taken</span>
-                    </div>
-                    <div class="bg-white/80 backdrop-blur p-4 rounded-2xl border border-stone-200 text-center">
-                        <span class="text-xs text-subtle-gray block mb-1">Focus Sessies</span>
-                        <span id="stat-focus" class="text-xl font-bold text-dark-text">1 gepland</span>
-                    </div>
-                </div>
-
-                <!-- Schedule List -->
-                <div class="space-y-3" id="schedule-container">
-                    <!-- Loaded dynamically via JS -->
-                </div>
-            </div>
-        </section>
-
-        <!-- Energy Feature Section -->
-        <section id="energy-feature" class="max-w-4xl mx-auto pt-10">
-            <div class="text-center space-y-3 mb-8">
-                <span class="text-xs uppercase font-bold tracking-widest text-emerald-700 bg-green-accent px-3 py-1 rounded-full border border-green-hover">Unieke Feature</span>
-                <h2 class="serif-heading text-3xl sm:text-4xl text-dark-text">Plan op basis van hoe je je voelt.</h2>
-                <p class="text-subtle-gray text-sm max-w-lg mx-auto">
-                    Geen enkele dag is hetzelfde. Pas je dagplanning direct aan met één klik op basis van jouw huidige energieniveau.
-                </p>
-            </div>
-
-            <div class="bg-white rounded-3xl p-6 sm:p-8 border border-border-warm shadow-md text-center space-y-6">
-                <h3 class="text-base font-semibold text-dark-text">How are you feeling today?</h3>
-
-                <div class="flex flex-wrap justify-center gap-3">
-                    <button onclick="setEnergyState('low')" id="btn-low" class="pill-btn px-6 py-2.5 rounded-full text-xs font-semibold bg-pink-accent hover:bg-pink-hover text-dark-text border border-stone-300 flex items-center gap-2">
-                        <i data-lucide="frown" class="w-4 h-4 text-pink-700"></i>
-                        <span>Low Energy</span>
-                    </button>
-                    <button onclick="setEnergyState('good')" id="btn-good" class="pill-btn px-6 py-2.5 rounded-full text-xs font-semibold bg-stone-100 hover:bg-stone-200 text-dark-text border border-stone-300 ring-2 ring-dark-text flex items-center gap-2">
-                        <i data-lucide="smile" class="w-4 h-4 text-amber-600"></i>
-                        <span>Good (Normaal)</span>
-                    </button>
-                    <button onclick="setEnergyState('energized')" id="btn-energized" class="pill-btn px-6 py-2.5 rounded-full text-xs font-semibold bg-green-accent hover:bg-green-hover text-dark-text border border-stone-300 flex items-center gap-2">
-                        <i data-lucide="zap" class="w-4 h-4 text-emerald-700"></i>
-                        <span>Energized!</span>
-                    </button>
-                </div>
-
-                <div class="p-4 bg-cream-card rounded-2xl border border-stone-200/80 text-xs text-subtle-gray max-w-md mx-auto" id="energy-explanation">
-                    <strong>Normale modus:</strong> Een gebalanceerde mix van overleg, diepe focus en voldoende hersteltijd.
-                </div>
-            </div>
-        </section>
-
-        <!-- Goal Hierarchy Breakdown -->
-        <section id="goal-hierarchy" class="max-w-4xl mx-auto pt-6">
-            <div class="text-center space-y-3 mb-10">
-                <span class="text-xs uppercase font-bold tracking-widest text-pink-700 bg-pink-accent px-3 py-1 rounded-full border border-pink-hover">Structuur</span>
-                <h2 class="serif-heading text-3xl sm:text-4xl text-dark-text">Je doelen worden eindelijk concreet.</h2>
-                <p class="text-subtle-gray text-sm max-w-lg mx-auto">
-                    Van droom naar dagelijkse stap. LumaDay splitst grote doelen automatisch op in behapbare acties.
-                </p>
-            </div>
-
-            <!-- Cascade Cards -->
-            <div class="relative space-y-3 max-w-2xl mx-auto">
-                <div class="p-4 rounded-2xl bg-white border border-stone-200 shadow-sm flex items-center justify-between gap-4">
-                    <div class="flex items-center gap-3">
-                        <span class="w-7 h-7 rounded-full bg-stone-100 border border-stone-300 flex items-center justify-center text-xs font-bold">1</span>
-                        <div>
-                            <span class="text-[10px] uppercase font-bold tracking-wider text-subtle-gray block">Visie</span>
-                            <span class="text-sm font-semibold text-dark-text">"Ik wil fit worden"</span>
-                        </div>
-                    </div>
-                    <span class="px-2.5 py-1 rounded-full bg-stone-100 text-[10px] font-medium text-subtle-gray">Jaardoel</span>
-                </div>
-
-                <div class="ml-4 sm:ml-8 p-4 rounded-2xl bg-white border border-stone-200 shadow-sm flex items-center justify-between gap-4 border-l-4 border-l-emerald-400">
-                    <div class="flex items-center gap-3">
-                        <span class="w-7 h-7 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-800 flex items-center justify-center text-xs font-bold">2</span>
-                        <div>
-                            <span class="text-[10px] uppercase font-bold tracking-wider text-subtle-gray block">Hoofddoel</span>
-                            <span class="text-sm font-semibold text-dark-text">10 kg afvallen</span>
-                        </div>
-                    </div>
-                    <span class="px-2.5 py-1 rounded-full bg-green-accent text-[10px] font-semibold text-dark-text">Kwartaal</span>
-                </div>
-
-                <div class="ml-8 sm:ml-16 p-4 rounded-2xl bg-white border border-stone-200 shadow-sm flex items-center justify-between gap-4 border-l-4 border-l-pink-400">
-                    <div class="flex items-center gap-3">
-                        <span class="w-7 h-7 rounded-full bg-pink-50 border border-pink-200 text-pink-800 flex items-center justify-center text-xs font-bold">3</span>
-                        <div>
-                            <span class="text-[10px] uppercase font-bold tracking-wider text-subtle-gray block">Deze Maand</span>
-                            <span class="text-sm font-semibold text-dark-text">3x per week sporten</span>
-                        </div>
-                    </div>
-                    <span class="px-2.5 py-1 rounded-full bg-pink-accent text-[10px] font-semibold text-dark-text">Maand</span>
-                </div>
-
-                <div class="ml-12 sm:ml-24 p-4 rounded-2xl bg-dark-text text-white shadow-md flex items-center justify-between gap-4">
-                    <div class="flex items-center gap-3">
-                        <span class="w-7 h-7 rounded-full bg-stone-800 text-emerald-400 flex items-center justify-center text-xs font-bold">4</span>
-                        <div>
-                            <span class="text-[10px] uppercase font-bold tracking-wider text-stone-400 block">Vandaag Actie</span>
-                            <span class="text-sm font-semibold text-stone-100">1.5 uur stevig wandelen</span>
-                        </div>
-                    </div>
-                    <span class="px-2.5 py-1 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 text-[10px] font-semibold">Vandaag</span>
-                </div>
-            </div>
-        </section>
-
-        <!-- Final CTA Section -->
-        <section class="max-w-3xl mx-auto text-center py-12 px-6 bg-cream-card rounded-3xl border border-border-warm shadow-sm space-y-6">
-            <h2 class="serif-heading text-4xl sm:text-5xl text-dark-text leading-tight">
-                Een rustigere manier om je leven te organiseren.
-            </h2>
-            <p class="text-subtle-gray text-base max-w-md mx-auto">
-                Alles wat belangrijk is. Niets wat overbodig is.
-            </p>
-            <div class="pt-2">
-                <button onclick="scrollToDemo()" class="pill-btn px-8 py-4 rounded-full text-sm font-bold bg-pink-accent hover:bg-pink-hover text-dark-text border border-stone-300/80 shadow-md inline-flex items-center gap-2">
-                    <span>Begin met LumaDay</span>
-                    <i data-lucide="arrow-right" class="w-4 h-4"></i>
-                </button>
-            </div>
-        </section>
-
-    </main>
-
-    <!-- Footer -->
-    <footer class="max-w-6xl mx-auto px-6 py-8 w-full border-t border-stone-200/80 text-center sm:text-left flex flex-col sm:flex-row justify-between items-center text-xs text-subtle-gray gap-4">
-        <div>
-            &copy; 2026 LumaDay Inc. Alle rechten voorbehouden.
-        </div>
-        <div class="flex gap-6">
-            <a href="#" class="hover:text-dark-text transition">Privacy</a>
-            <a href="#" class="hover:text-dark-text transition">Voorwaarden</a>
-            <a href="#" class="hover:text-dark-text transition">Contact</a>
-        </div>
-    </footer>
-
-    <script>
-        // State management for Schedules
-        const schedules = {
-            low: [
-                { time: "09:30", title: "Lichte e-mail & berichten afhandelen", type: "pink", tag: "Low effort" },
-                { time: "11:00", title: "Korte wandeling / Frisse lucht", type: "green", tag: "Herstel" },
-                { time: "14:00", title: "Eenvoudige administratie & opruimen", type: "neutral", tag: "Routine" }
-            ],
-            good: [
-                { time: "09:00", title: "Team meeting & Alignment", type: "pink", tag: "Overleg" },
-                { time: "11:30", title: "Deep work: Strategie & Uitwerking", type: "green", tag: "Focus" },
-                { time: "14:00", title: "Gym / Sportsessie", type: "neutral", tag: "Sport" },
-                { time: "17:30", title: "Vrije tijd & Ontspanning", type: "neutral", tag: "Rust" }
-            ],
-            energized: [
-                { time: "08:30", title: "Belangrijkste project uitdaging (Deep Focus)", type: "green", tag: "Top Prioriteit" },
-                { time: "11:00", title: "Brainstorm met het team", type: "pink", tag: "Creatief" },
-                { time: "13:30", title: "Zware Workout / Hardlopen", type: "green", tag: "High Energy" },
-                { time: "16:00", title: "Toekomstige kwartaaldoelen plannen", type: "neutral", tag: "Strategie" }
-            ]
-        };
-
-        const explanations = {
-            low: "<strong>Low Energy modus:</strong> Zware focus-taken en intensieve meetings zijn verplaatst. Je focus ligt op herstel en eenvoudige routineklussen.",
-            good: "<strong>Normale modus:</strong> Een gebalanceerde mix van overleg, diepe focus en voldoende hersteltijd.",
-            energized: "<strong>Energized modus:</strong> Je dag is geoptimaliseerd voor maximale output, creativiteit en uitdagende projecten!"
-        };
-
-        function setEnergyState(state) {
-            // Update button borders
-            ['low', 'good', 'energized'].forEach(function(s) {
-                const btn = document.getElementById('btn-' + s);
-                if (btn) {
-                    if (s === state) {
-                        btn.classList.add('ring-2', 'ring-dark-text');
-                    } else {
-                        btn.classList.remove('ring-2', 'ring-dark-text');
-                    }
-                }
-            });
-
-            // Update statistics
-            if (state === 'low') {
-                document.getElementById('stat-energy').innerText = '35%';
-                document.getElementById('stat-priorities').innerText = '1 taak';
-                document.getElementById('stat-focus').innerText = '0 gepland';
-                document.getElementById('day-status-text').innerText = 'Taking it easy today.';
-            } else if (state === 'good') {
-                document.getElementById('stat-energy').innerText = '78%';
-                document.getElementById('stat-priorities').innerText = '3 taken';
-                document.getElementById('stat-focus').innerText = '1 gepland';
-                document.getElementById('day-status-text').innerText = 'Your day looks balanced.';
-            } else if (state === 'energized') {
-                document.getElementById('stat-energy').innerText = '95%';
-                document.getElementById('stat-priorities').innerText = '5 taken';
-                document.getElementById('stat-focus').innerText = '2 gepland';
-                document.getElementById('day-status-text').innerText = 'High performance mode!';
-            }
-
-            // Update explanation text
-            document.getElementById('energy-explanation').innerHTML = explanations[state];
-
-            // Render schedule
-            const container = document.getElementById('schedule-container');
-            container.innerHTML = '';
-
-            schedules[state].forEach(function(item) {
-                let badgeStyle = "bg-stone-100 text-stone-700 border-stone-200";
-                if (item.type === 'pink') badgeStyle = "bg-pink-accent hover:bg-pink-hover text-dark-text border-pink-hover";
-                if (item.type === 'green') badgeStyle = "bg-green-accent hover:bg-green-hover text-dark-text border-green-hover";
-
-                const row = document.createElement('div');
-                row.className = "flex items-center justify-between p-3.5 rounded-2xl bg-white border border-stone-200/80 shadow-sm transition hover:border-stone-300";
-                row.innerHTML = '<div class="flex items-center gap-3">' +
-                    '<span class="text-xs font-bold text-subtle-gray font-mono">' + item.time + '</span>' +
-                    '<span class="text-sm font-medium text-dark-text">' + item.title + '</span>' +
-                    '</div>' +
-                    '<span class="px-3 py-1 rounded-full text-xs font-semibold border ' + badgeStyle + '">' + item.tag + '</span>';
-                
-                container.appendChild(row);
-            });
-
-            logConsole("Energy set to '" + state.toUpperCase() + "'. Schedule recalculated.");
-        }
-
-        // Toggle Developer Panel
-        function toggleDeveloperMode() {
-            const panel = document.getElementById('developer-panel');
-            if (panel) {
-                panel.classList.toggle('translate-x-full');
-                logConsole("Developer Mode panel toggled.");
-            }
-        }
-
-        // Highlight sections from Dev panel
-        function highlightSection(id) {
-            const el = document.getElementById(id);
-            if (el) {
-                el.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                el.classList.add('explainer-highlight');
-                setTimeout(function() {
-                    el.classList.remove('explainer-highlight');
-                }, 2000);
-            }
-        }
-
-        function scrollToDemo() {
-            const demo = document.getElementById('dashboard-preview');
-            if (demo) {
-                demo.scrollIntoView({ behavior: 'smooth' });
-            }
-        }
-
-        function logConsole(msg) {
-            const logs = document.getElementById('console-logs');
-            if (logs) {
-                const entry = document.createElement('div');
-                entry.innerText = '> ' + msg;
-                logs.appendChild(entry);
-                logs.scrollTop = logs.scrollHeight;
-            }
-        }
-
-        // Initialize icons and default state
-        window.onload = function() {
-            if (typeof lucide !== 'undefined') {
-                lucide.createIcons();
-            }
-            setEnergyState('good');
-        };
-    </script>
-</body>
-</html>
-<!DOCTYPE html>
-<html lang="nl" class="h-full">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LumaDay Kennis - Het Binairstelsel</title>
-
-    <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    
-    <!-- Link naar ons eigen externe CSS opmaakbestand -->
-    <link rel="stylesheet" type="text/css" href="opmaak.css">
-
-    <!-- Lucide Iconen Library -->
-    <script src="https://unpkg.com/lucide@latest"></script>
-    
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-</head>
 <body class="min-h-full flex flex-col justify-between antialiased">
 
-    <!-- HEADER MET MENU & DROPDOWN -->
-    <header class="max-w-6xl mx-auto px-6 py-6 w-full flex items-center justify-between">
-        <div class="flex items-center gap-2">
-            <div class="w-8 h-8 rounded-full bg-stone-900 flex items-center justify-center text-white font-serif italic text-lg shadow-sm">
+    <!-- ==========================================================================
+         HEADER & HOOFDNAVIGATIE WITH DROPDOWN
+         Opgebouwd met semantische HTML-tags (<header>, <nav>, <ul>, <li>, <a>)
+         ========================================================================== -->
+    <header class="max-w-6xl mx-auto px-6 py-6 w-full flex items-center justify-between border-b border-stone-200/60 bg-white/50 backdrop-blur-sm sticky top-0 z-50">
+        <!-- Logo van LumaDay -->
+        <a href="#" onclick="showPage('home')" class="flex items-center gap-2 text-decoration-none">
+            <div class="w-9 h-9 rounded-full bg-stone-900 flex items-center justify-center text-white font-serif italic text-xl shadow-sm">
                 L
             </div>
-            <span class="font-bold tracking-tight text-xl text-stone-900">LumaDay Kennis</span>
-        </div>
+            <span class="font-bold tracking-tight text-xl text-stone-900">LumaDay</span>
+        </a>
 
+        <!-- Het Navigatiemenu opgebouwd uit een Unordered List (ul) -->
         <nav>
             <ul class="main-menu">
-                <li><a href="index.html">Home</a></li>
                 <li>
-                    <a href="#" class="bg-pink-100 text-stone-900">Kennis & Thema's ▾</a>
+                    <a href="#" onclick="showPage('home')" id="nav-home" class="bg-pink-100 text-stone-900">Dashboard & Home</a>
+                </li>
+                <!-- Dropdown Item met Geneste Lijst (2e niveau) -->
+                <li>
+                    <a href="#">Kennis & Thema's ▾</a>
+                    <!-- Geneste ul voor de dropdown menu inhoud -->
                     <ul class="dropdown">
-                        <li><a href="binairstelsel.html">💻 Binairstelsel (0 & 1)</a></li>
-                        <li><a href="kleurmodellen.html">🎨 Kleurmodellen (RGB & CMYK)</a></li>
+                        <li><a href="#" onclick="showPage('binair')">💻 Binairstelsel (0 & 1)</a></li>
+                        <li><a href="#" onclick="showPage('kleur')">🎨 Kleurmodellen (RGB & CMYK)</a></li>
                     </ul>
                 </li>
-                <li><a href="index.html#goals">Doelen</a></li>
+                <li><a href="#energy-section" onclick="showPage('home')">Energy Planner</a></li>
+                <li><a href="#goals-section" onclick="showPage('home')">Doelen</a></li>
             </ul>
         </nav>
+
+        <!-- Actieknop rechts -->
+        <div class="flex items-center gap-3">
+            <button onclick="scrollToPlanner()" class="pill-btn px-5 py-2.5 text-xs bg-[#F3E1E1] hover:bg-[#EACACA] text-stone-900 border border-stone-300">
+                [ + Nieuwe Planning ]
+            </button>
+        </div>
     </header>
 
-    <!-- HOOFDINHOUD PAGINA 2: BINAIRSTELSEL -->
-    <main class="max-w-4xl mx-auto px-6 flex-1 w-full space-y-8 py-8">
-        
-        <div class="text-center space-y-3">
-            <span class="text-xs uppercase font-bold tracking-widest text-emerald-800 bg-[#E1EFE6] px-3 py-1 rounded-full border border-emerald-200">
-                Dagelijkse Kennis
-            </span>
-            <h1 class="serif-heading text-4xl sm:text-5xl text-stone-900">Het Binairstelsel (0 en 1)</h1>
-            <p class="text-stone-600 text-sm max-w-md mx-auto">
-                Hoe computers rekenen en communiceren met slechts twee cijfers.
-            </p>
-        </div>
+    <!-- ==========================================================================
+         HOOFDINHOUD (MAIN) - PAGINA 1: DASHBOARD & HOMEPAGE
+         ========================================================================== -->
+    <main class="max-w-6xl mx-auto px-6 flex-1 w-full space-y-12 py-8">
 
-        <!-- Kaart met afbeelding en uitleg -->
-        <div class="bg-white rounded-3xl p-6 sm:p-8 border border-stone-200 shadow-sm space-y-6">
-            
-            <!-- Afbeelding toevoegen met alt-tekst (Zoals voorgeschreven in de opdracht) -->
-            <div class="rounded-2xl overflow-hidden bg-stone-100 border border-stone-200 flex justify-center p-4">
-                <img src="https://placehold.co/600x300/E1EFE6/1C1917?text=Binaire+Code+01001001" 
-                     alt="Illustratie van binaire code met enen en nullen" 
-                     class="max-w-full h-auto rounded-xl">
-            </div>
+        <!-- ==========================================
+             SECTIE 1: HOMEPAGE / DASHBOARD VIEW
+             ========================================== -->
+        <div id="page-home" class="page-section active space-y-12">
 
-            <!-- Inhoudelijke uitleg -->
-            <div class="space-y-4 text-stone-700 leading-relaxed text-sm">
-                <h3 class="text-lg font-bold text-stone-900">Wat is het binairstelsel?</h3>
-                <p>
-                    Het binair stelsel (of 2-tallig stelsel) is een rekensysteem dat alleen werkt met de getallen <strong>0</strong> en <strong>1</strong>. 
-                    Wij mensen rekenen meestal met het 10-tallig stelsel (0 t/m 9), maar computers gebruiken schakelaars die alleen 'uit' (0) of 'aan' (1) kunnen staan.
+            <!-- 1. HERO SECTION -->
+            <section id="hero-section" class="text-center max-w-3xl mx-auto pt-2 space-y-5">
+                <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#E1EFE6] border border-emerald-200 text-xs font-semibold text-emerald-900">
+                    <i data-lucide="sparkles" class="w-3.5 h-3.5 text-emerald-700"></i>
+                    <span>Je leven. Op één rustige plek.</span>
+                </div>
+
+                <h1 class="serif-heading text-5xl sm:text-6xl font-normal text-stone-900 leading-tight">
+                    Plan minder. <span class="italic text-emerald-800">Leef meer.</span>
+                </h1>
+
+                <!-- Paragraaf met de visie -->
+                <p class="text-base sm:text-lg text-stone-600 font-light max-w-xl mx-auto">
+                    LumaDay brengt je dagelijkse planning, energie, focus, gewoontes en doelen samen in één rustgevende workspace.
                 </p>
 
-                <!-- Blok-element: Ongeordende lijst met voorbeelden -->
-                <div class="p-4 bg-[#F4F4EE] rounded-2xl border border-stone-200">
-                    <h4 class="font-bold text-stone-900 mb-2">Voorbeeld van Binair Tellen:</h4>
-                    <ul class="list-disc list-inside space-y-1 font-mono text-xs text-stone-800">
-                        <li>0 in ons stelsel = <strong>0000</strong> binair</li>
-                        <li>1 in ons stelsel = <strong>0001</strong> binair</li>
-                        <li>2 in ons stelsel = <strong>0010</strong> binair</li>
-                        <li>3 in ons stelsel = <strong>0011</strong> binair</li>
-                        <li>4 in ons stelsel = <strong>0100</strong> binair</li>
-                    </ul>
+                <div class="flex flex-wrap items-center justify-center gap-4 pt-2">
+                    <button onclick="scrollToPlanner()" class="pill-btn px-7 py-3.5 text-xs font-bold uppercase tracking-wider bg-[#F3E1E1] hover:bg-[#EACACA] text-stone-900 border border-stone-300 shadow-sm">
+                        [ Start gratis planning ]
+                    </button>
+                    <a href="#energy-section" class="pill-btn px-7 py-3.5 text-xs font-bold uppercase tracking-wider bg-[#E1EFE6] hover:bg-[#CDE3D5] text-stone-900 border border-stone-300">
+                        [ Bekijk hoe het werkt ]
+                    </a>
                 </div>
+            </section>
+
+            <!-- 2. ENERGY PLANNER SWITCHER (UNIEKE FEATURE) -->
+            <section id="energy-section" class="max-w-4xl mx-auto">
+                <div class="luma-card bg-white rounded-3xl p-6 sm:p-8 border border-stone-200 shadow-sm space-y-6">
+                    <div class="text-center space-y-2">
+                        <span class="text-[11px] uppercase tracking-widest font-bold text-emerald-800 bg-[#E1EFE6] px-3 py-1 rounded-full border border-emerald-200">
+                            Unieke Feature
+                        </span>
+                        <h2 class="serif-heading text-3xl sm:text-4xl text-stone-900">Plan op basis van hoe je je voelt.</h2>
+                        <p class="text-xs sm:text-sm text-stone-600 max-w-md mx-auto">
+                            Niet iedere dag heeft dezelfde energie. Kies jouw gemoedstoestand van vandaag en LumaDay past je dag-advies aan.
+                        </p>
+                    </div>
+
+                    <!-- Drie interactieve energie-knoppen -->
+                    <div class="flex flex-wrap justify-center gap-3 pt-2">
+                        <button onclick="setEnergyState('low')" id="btn-low" class="pill-btn px-6 py-3 text-xs bg-[#F3E1E1] hover:bg-[#EACACA] text-stone-900 border border-stone-300">
+                            <span class="text-base mr-2">☹️</span>
+                            <span>Low Energy</span>
+                        </button>
+                        <button onclick="setEnergyState('good')" id="btn-good" class="pill-btn px-6 py-3 text-xs bg-stone-100 hover:bg-stone-200 text-stone-900 border border-stone-300 ring-2 ring-stone-900">
+                            <span class="text-base mr-2">😐</span>
+                            <span>Good (Normaal)</span>
+                        </button>
+                        <button onclick="setEnergyState('energized')" id="btn-energized" class="pill-btn px-6 py-3 text-xs bg-[#E1EFE6] hover:bg-[#CDE3D5] text-stone-900 border border-stone-300">
+                            <span class="text-base mr-2">⚡</span>
+                            <span>Energized!</span>
+                        </button>
+                    </div>
+
+                    <!-- Dynamisch adviesblok -->
+                    <div id="energy-advice-box" class="p-4 bg-[#F4F4EE] rounded-2xl border border-stone-200 text-xs text-stone-700 text-center max-w-lg mx-auto">
+                        <strong>Normale Modus (78% Energie):</strong> Een evenwichtige dag met ruimte voor overleg, diepe focus en voldoende rust.
+                    </div>
+                </div>
+            </section>
+
+            <!-- 3. INTERACTIEF DASHBOARD & ZELF PLANNING MAKEN -->
+            <section id="planner-section" class="max-w-5xl mx-auto space-y-6">
+                
+                <div class="flex flex-col md:flex-row gap-6">
+                    
+                    <!-- LINKERKANT: Het dagschema en overzicht -->
+                    <div class="md:w-7/12 luma-card space-y-6">
+                        <div class="flex items-center justify-between border-b border-stone-200 pb-4">
+                            <div>
+                                <span class="text-[10px] font-bold uppercase tracking-wider text-emerald-800 bg-[#E1EFE6] px-2.5 py-1 rounded-full border border-emerald-200" id="day-status-badge">
+                                    ✨ Your day looks Productive
+                                </span>
+                                <h2 class="text-2xl font-bold text-stone-900 mt-2">Good morning, Roos.</h2>
+                                <p class="text-xs text-stone-500 font-mono">Friday, September 11</p>
+                            </div>
+                            <!-- Mini statistieken -->
+                            <div class="text-right space-y-1">
+                                <div class="text-xs font-bold text-stone-700" id="stat-energy">⚡ 78% energy</div>
+                                <div class="text-xs text-stone-500" id="stat-priorities">🎯 <span id="task-count">4</span> Prioriteiten</div>
+                                <div class="text-xs text-stone-500">🧘 1 Focus sessie</div>
+                            </div>
+                        </div>
+
+                        <!-- GETEKENDE TIJDSLIJN MET OVALE BUBBELS -->
+                        <div class="space-y-3" id="schedule-list">
+                            <!-- Wordt dynamisch opgebouwd via JavaScript -->
+                        </div>
+                    </div>
+
+                    <!-- RECHTERKANT: FORMULIER OM ZELF PLANNING TE MAKEN -->
+                    <div class="md:w-5/12 luma-card bg-[#F4F4EE] space-y-5 border-2 border-stone-300">
+                        <div class="border-b border-stone-200 pb-3">
+                            <h3 class="text-lg font-bold text-stone-900 flex items-center gap-2">
+                                <i data-lucide="plus-circle" class="w-5 h-5 text-emerald-700"></i>
+                                <span>Zelf Planning Maken</span>
+                            </h3>
+                            <p class="text-xs text-stone-600 mt-0.5">Voeg je eigen afspraken of taken toe aan je dagschema.</p>
+                        </div>
+
+                        <!-- Formulier om taak toe te voegen -->
+                        <form id="add-task-form" onsubmit="handleAddTask(event)" class="space-y-4">
+                            <div>
+                                <label class="block text-xs font-bold text-stone-700 mb-1" for="input-time">Tijdstip:</label>
+                                <input type="text" id="input-time" placeholder="bijv. 10:30" required class="w-full px-3 py-2 rounded-xl border border-stone-300 text-xs focus:outline-none focus:ring-2 focus:ring-stone-800 bg-white">
+                            </div>
+
+                            <div>
+                                <label class="block text-xs font-bold text-stone-700 mb-1" for="input-title">Activiteit / Taak:</label>
+                                <input type="text" id="input-title" placeholder="bijv. Wiskunde Huiswerk" required class="w-full px-3 py-2 rounded-xl border border-stone-300 text-xs focus:outline-none focus:ring-2 focus:ring-stone-800 bg-white">
+                            </div>
+
+                            <div>
+                                <label class="block text-xs font-bold text-stone-700 mb-1" for="input-tag">Categorie / Tag:</label>
+                                <select id="input-tag" class="w-full px-3 py-2 rounded-xl border border-stone-300 text-xs focus:outline-none focus:ring-2 focus:ring-stone-800 bg-white">
+                                    <option value="Focus">🧠 Deep Work / Focus</option>
+                                    <option value="Overleg">💬 Overleg / Meeting</option>
+                                    <option value="Sport">🏋️ Sport & Bewegen</option>
+                                    <option value="Vrij">☕ Vrije Tijd / Rust</option>
+                                    <option value="School">📚 School / Studie</option>
+                                </select>
+                            </div>
+
+                            <button type="submit" class="w-full pill-btn py-3 text-xs bg-[#E1EFE6] hover:bg-[#CDE3D5] text-stone-900 border border-stone-400 font-bold">
+                                + Voeg toe aan Planning
+                            </button>
+                        </form>
+
+                        <div class="p-3 rounded-xl bg-white/70 border border-stone-200 text-[11px] text-stone-500">
+                            💡 <strong>Tip:</strong> Je toegevoegde taken worden automatisch opgeslagen op jouw apparaat!
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- 4. GEWOONTES (STREAKS), FOCUS TIMER & ZELF DOELEN INSTELLEN -->
+            <section class="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6">
+                
+                <!-- BLOK 1: STREAKS & GEWOONTES -->
+                <div class="luma-card space-y-4">
+                    <div class="flex items-center justify-between border-b border-stone-200 pb-3">
+                        <h3 class="text-base font-bold text-stone-900 flex items-center gap-2">
+                            <i data-lucide="flame" class="w-4 h-4 text-amber-600"></i>
+                            <span>Streaks & Gewoontes</span>
+                        </h3>
+                    </div>
+
+                    <div class="space-y-2.5 text-xs" id="streaks-container">
+                        <!-- Dynamische gewoontes -->
+                    </div>
+                </div>
+
+                <!-- BLOK 2: FOCUS TIMER -->
+                <div class="luma-card bg-[#F4F4EE] space-y-4 text-center flex flex-col justify-between border border-stone-300">
+                    <div>
+                        <span class="text-[10px] font-bold uppercase tracking-wider text-emerald-800 bg-[#E1EFE6] px-2.5 py-1 rounded-full border border-emerald-200">
+                            Focus Modus
+                        </span>
+                        <h3 class="text-base font-bold text-stone-900 mt-2">Start Focus Sessie</h3>
+                        <p class="text-xs text-stone-500 mt-1">25 minuten ononderbroken werken.</p>
+                    </div>
+
+                    <div class="py-4 font-mono text-4xl font-bold text-stone-900" id="timer-display">
+                        25:00
+                    </div>
+
+                    <div class="flex justify-center gap-2">
+                        <button onclick="toggleTimer()" id="timer-btn" class="pill-btn px-6 py-2.5 text-xs bg-[#E1EFE6] hover:bg-[#CDE3D5] text-stone-900 border border-stone-300">
+                            ▶️ Start
+                        </button>
+                        <button onclick="resetTimer()" class="pill-btn px-4 py-2.5 text-xs bg-stone-200 hover:bg-stone-300 text-stone-800 border border-stone-300">
+                            ↺ Reset
+                        </button>
+                    </div>
+                </div>
+
+                <!-- BLOK 3: DOELEN CASCADE -->
+                <div class="luma-card space-y-3">
+                    <span class="text-[10px] font-bold uppercase tracking-wider text-pink-800 bg-[#F3E1E1] px-2.5 py-1 rounded-full border border-pink-200">
+                        Doelen Hiërarchie
+                    </span>
+                    <h3 class="text-base font-bold text-stone-900">Van visie naar actie:</h3>
+
+                    <div class="space-y-2 text-xs">
+                        <div class="p-2.5 rounded-xl bg-stone-50 border border-stone-200">
+                            <span class="text-[10px] text-stone-400 font-bold block">JAARDOEL</span>
+                            <span class="font-semibold text-stone-800">"Ik wil fit worden"</span>
+                        </div>
+                        <div class="p-2.5 rounded-xl bg-stone-50 border border-stone-200 border-l-4 border-l-emerald-400">
+                            <span class="text-[10px] text-emerald-700 font-bold block">KWARTAAL</span>
+                            <span class="font-semibold text-stone-800">10 kg afvallen</span>
+                        </div>
+                        <div class="p-2.5 rounded-xl bg-stone-900 text-white">
+                            <span class="text-[10px] text-emerald-400 font-bold block">VANDAAG ACTIE</span>
+                            <input type="text" id="today-goal-input" value="1.5 uur stevig wandelen" onblur="saveGoal(this.value)" class="bg-transparent text-xs font-semibold text-white focus:outline-none w-full border-b border-stone-700 pb-1 mt-0.5">
+                        </div>
+                    </div>
+                </div>
+
+            </section>
+        </div>
+
+        <!-- ==========================================================================
+             SECTIE 2: BINAIRSTELSEL PAGINA (PAGINA 2 UIT SCHOOLOPDRACHT)
+             ========================================================================== -->
+        <div id="page-binair" class="page-section max-w-4xl mx-auto space-y-8">
+            <div class="text-center space-y-3">
+                <span class="text-xs uppercase font-bold tracking-widest text-emerald-800 bg-[#E1EFE6] px-3.5 py-1 rounded-full border border-emerald-200">
+                    Dagelijkse Kennis Module
+                </span>
+                <h1 class="serif-heading text-4xl sm:text-5xl text-stone-900">Het Binairstelsel (0 en 1)</h1>
+                <p class="text-stone-600 text-sm max-w-md mx-auto">
+                    Hoe computers rekenen en communiceren met slechts twee cijfers.
+                </p>
             </div>
 
-            <!-- Terugknop Anchor link -->
-            <div class="pt-4 border-t border-stone-200 flex justify-between items-center">
-                <a href="index.html" class="pill-btn px-6 py-2.5 text-xs bg-[#F3E1E1] hover:bg-[#EACACA] text-stone-900 border border-stone-300">
-                    ← Terug naar Homepage
-                </a>
-                <a href="kleurmodellen.html" class="pill-btn px-6 py-2.5 text-xs bg-[#E1EFE6] hover:bg-[#CDE3D5] text-stone-900 border border-stone-300">
-                    Volgende: Kleurmodellen →
-                </a>
+            <div class="bg-white rounded-3xl p-6 sm:p-8 border border-stone-200 shadow-sm space-y-6">
+                <!-- Afbeelding met alt-tekst (Voorschrift schoolopdracht) -->
+                <div class="rounded-2xl overflow-hidden bg-stone-100 border border-stone-200 flex justify-center p-6">
+                    <img src="https://placehold.co/600x260/E1EFE6/1C1917?text=Binaire+Code:+01001001" 
+                         alt="Illustratie van binaire code met enen en nullen op een computerscherm" 
+                         class="max-w-full h-auto rounded-xl">
+                </div>
+
+                <div class="space-y-4 text-stone-700 leading-relaxed text-sm">
+                    <h3 class="text-lg font-bold text-stone-900">Wat is het binairstelsel?</h3>
+                    <p>
+                        Het binair stelsel (of 2-tallig stelsel) is een rekensysteem dat alleen werkt met de getallen <strong>0</strong> en <strong>1</strong>. 
+                        Wij mensen rekenen met het 10-tallig stelsel (0 t/m 9), maar microprocessoren in computers gebruiken schakelaars die 'uit' (0) of 'aan' (1) staan.
+                    </p>
+
+                    <!-- Interatieve Binaire Omreken Maken -->
+                    <div class="p-5 bg-[#F4F4EE] rounded-2xl border border-stone-200 space-y-3">
+                        <h4 class="font-bold text-stone-900 text-sm">💻 Probeer het zelf uit: Zet een getal om naar Binair</h4>
+                        <div class="flex gap-3">
+                            <input type="number" id="decimal-input" placeholder="Typ een getal (bijv. 25)" class="px-3 py-2 rounded-xl border border-stone-300 text-xs w-full max-w-xs bg-white">
+                            <button onclick="convertBinary()" class="pill-btn px-5 py-2 text-xs bg-[#E1EFE6] text-stone-900 border border-stone-300 font-bold">
+                                Omrekenen
+                            </button>
+                        </div>
+                        <div id="binary-result" class="text-xs font-mono font-bold text-emerald-800 pt-1">
+                            Binair resultaat verschijnt hier...
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Navigatieknop terug -->
+                <div class="pt-4 border-t border-stone-200 flex justify-between">
+                    <button onclick="showPage('home')" class="pill-btn px-6 py-2.5 text-xs bg-[#F3E1E1] hover:bg-[#EACACA] text-stone-900 border border-stone-300">
+                        ← Terug naar Dashboard
+                    </button>
+                    <button onclick="showPage('kleur')" class="pill-btn px-6 py-2.5 text-xs bg-[#E1EFE6] hover:bg-[#CDE3D5] text-stone-900 border border-stone-300">
+                        Volgende: Kleurmodellen →
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- ==========================================================================
+             SECTIE 3: KLEURMODELLEN PAGINA (PAGINA 3 UIT SCHOOLOPDRACHT)
+             ========================================================================== -->
+        <div id="page-kleur" class="page-section max-w-4xl mx-auto space-y-8">
+            <div class="text-center space-y-3">
+                <span class="text-xs uppercase font-bold tracking-widest text-pink-800 bg-[#F3E1E1] px-3.5 py-1 rounded-full border border-pink-200">
+                    Vormgeving & Design Module
+                </span>
+                <h1 class="serif-heading text-4xl sm:text-5xl text-stone-900">Kleurmodellen: RGB vs. CMYK</h1>
+                <p class="text-stone-600 text-sm max-w-md mx-auto">
+                    Ontdek het verschil tussen kleuren op digitale schermen en gedrukte inkt.
+                </p>
+            </div>
+
+            <div class="bg-white rounded-3xl p-6 sm:p-8 border border-stone-200 shadow-sm space-y-6">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- RGB Kaart -->
+                    <div class="p-5 rounded-2xl bg-[#F4F4EE] border border-stone-200 space-y-3">
+                        <div class="w-10 h-10 rounded-full bg-stone-900 text-white flex items-center justify-center font-bold text-xs">
+                            RGB
+                        </div>
+                        <h3 class="text-base font-bold text-stone-900">RGB (Schermen)</h3>
+                        <p class="text-xs text-stone-600 leading-relaxed">
+                            Staat voor <strong>Rood, Groen en Blauw</strong>. Dit is een licht-gebaseerd kleurmodel voor monitoren en smartphones. Licht combineren geeft wit.
+                        </p>
+                    </div>
+
+                    <!-- CMYK Kaart -->
+                    <div class="p-5 rounded-2xl bg-[#F4F4EE] border border-stone-200 space-y-3">
+                        <div class="w-10 h-10 rounded-full bg-pink-300 text-stone-900 flex items-center justify-center font-bold text-xs">
+                            CMYK
+                        </div>
+                        <h3 class="text-base font-bold text-stone-900">CMYK (Drukwerk)</h3>
+                        <p class="text-xs text-stone-600 leading-relaxed">
+                            Staat voor <strong>Cyan, Magenta, Yellow en Key (Zwart)</strong>. Dit kleurmodel gebruikt fysieke inkt op papier. Meer inkt maakt het resultaat donkerder.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Navigatieknop terug -->
+                <div class="pt-4 border-t border-stone-200 flex justify-between">
+                    <button onclick="showPage('binair')" class="pill-btn px-6 py-2.5 text-xs bg-[#E1EFE6] hover:bg-[#CDE3D5] text-stone-900 border border-stone-300">
+                        ← Vorige: Binairstelsel
+                    </button>
+                    <button onclick="showPage('home')" class="pill-btn px-6 py-2.5 text-xs bg-[#F3E1E1] hover:bg-[#EACACA] text-stone-900 border border-stone-300">
+                        Terug naar Dashboard →
+                    </button>
+                </div>
             </div>
         </div>
 
     </main>
 
-    <!-- FOOTER -->
-    <footer class="max-w-6xl mx-auto px-6 py-8 w-full border-t border-stone-200 flex justify-between text-xs text-stone-500">
-        <div>&copy; 2026 LumaDay - Binairstelsel Module</div>
-        <div class="flex gap-4">
-            <a href="index.html" class="hover:text-stone-900">Home</a>
-            <a href="kleurmodellen.html" class="hover:text-stone-900">Kleurmodellen</a>
+    <!-- FOOTER VAN DE WEBSITE -->
+    <footer class="max-w-6xl mx-auto px-6 py-8 w-full border-t border-stone-200 flex flex-col sm:flex-row justify-between items-center text-xs text-stone-500 gap-4 mt-12">
+        <div>
+            &copy; 2026 LumaDay - Schoolproject Webdevelopment.
+        </div>
+        <div class="flex gap-6">
+            <a href="#" onclick="showPage('home')" class="hover:text-stone-900">Home</a>
+            <a href="#" onclick="showPage('binair')" class="hover:text-stone-900">Binairstelsel</a>
+            <a href="#" onclick="showPage('kleur')" class="hover:text-stone-900">Kleurmodellen</a>
         </div>
     </footer>
 
+    <!-- ==========================================================================
+         JAVASCRIPT LOGICA
+         Regelt de interactiviteit, het toevoegen van taken, opslaan en timer.
+         ========================================================================== -->
     <script>
+        // Datastructuur voor dagschema (wordt bewaard in LocalStorage)
+        let scheduleTasks = JSON.parse(localStorage.getItem('lumaday_tasks')) || [
+            { id: 1, time: "09:00", title: "Team Meeting", tag: "Overleg", done: false },
+            { id: 2, time: "11:00", title: "Deep work (Focus Studie)", tag: "Focus", done: false },
+            { id: 3, time: "13:15", title: "Gym & Sportsessie", tag: "Sport", done: false },
+            { id: 4, time: "14:45", title: "Free time & Ontspanning", tag: "Vrij", done: false },
+            { id: 5, time: "17:00", title: "Huiswerk & Opdrachten", tag: "School", done: false }
+        ];
+
+        // Datastructuur voor gewoontes
+        let habits = JSON.parse(localStorage.getItem('lumaday_habits')) || [
+            { id: 1, name: "Water drinken", streak: 14 },
+            { id: 2, name: "Boek lezen (15 min)", streak: 9 },
+            { id: 3, name: "Wandelen", streak: 25 }
+        ];
+
+        // Functie voor het wisselen van pagina's (Home, Binair, Kleur)
+        function showPage(pageId) {
+            document.querySelectorAll('.page-section').forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            const target = document.getElementById('page-' + pageId);
+            if (target) {
+                target.classList.add('active');
+            }
+
+            // Update nav actieve stijl
+            const navHome = document.getElementById('nav-home');
+            if (pageId === 'home') {
+                navHome.classList.add('bg-pink-100', 'text-stone-900');
+            } else {
+                navHome.classList.remove('bg-pink-100', 'text-stone-900');
+            }
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Functie voor het renderen van het dagschema
+        function renderSchedule() {
+            const container = document.getElementById('schedule-list');
+            const taskCountEl = document.getElementById('task-count');
+            container.innerHTML = '';
+
+            taskCountEl.innerText = scheduleTasks.length;
+
+            if (scheduleTasks.length === 0) {
+                container.innerHTML = '<p class="text-xs text-stone-500 italic py-4 text-center">Nog geen taken ingepland. Voeg er een toe via het formulier!</p>';
+                return;
+            }
+
+            scheduleTasks.forEach((item) => {
+                const div = document.createElement('div');
+                div.className = "oval-task-badge flex items-center justify-between shadow-sm " + (item.done ? 'opacity-50 line-through bg-stone-100' : '');
+                
+                div.innerHTML = `
+                    <div class="flex items-center gap-3">
+                        <input type="checkbox" ${item.done ? 'checked' : ''} onclick="toggleTaskDone(${item.id})" class="w-4 h-4 accent-stone-800 cursor-pointer">
+                        <span class="text-xs font-bold font-mono text-stone-600">${item.time}</span>
+                        <span class="text-xs font-semibold text-stone-900">${item.title}</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <span class="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-white text-stone-700 border border-stone-300">${item.tag}</span>
+                        <button onclick="deleteTask(${item.id})" class="text-stone-400 hover:text-red-500 text-xs font-bold px-1">✕</button>
+                    </div>
+                `;
+                container.appendChild(div);
+            });
+        }
+
+        // Taak toevoegen via het formulier
+        function handleAddTask(e) {
+            e.preventDefault();
+            const timeInput = document.getElementById('input-time').value;
+            const titleInput = document.getElementById('input-title').value;
+            const tagInput = document.getElementById('input-tag').value;
+
+            const newTask = {
+                id: Date.now(),
+                time: timeInput,
+                title: titleInput,
+                tag: tagInput,
+                done: false
+            };
+
+            scheduleTasks.push(newTask);
+            localStorage.setItem('lumaday_tasks', JSON.stringify(scheduleTasks));
+            
+            // Formulier leegmaken
+            document.getElementById('input-time').value = '';
+            document.getElementById('input-title').value = '';
+
+            renderSchedule();
+        }
+
+        // Taak afvinken
+        function toggleTaskDone(id) {
+            scheduleTasks = scheduleTasks.map(task => {
+                if (task.id === id) task.done = !task.done;
+                return task;
+            });
+            localStorage.setItem('lumaday_tasks', JSON.stringify(scheduleTasks));
+            renderSchedule();
+        }
+
+        // Taak verwijderen
+        function deleteTask(id) {
+            scheduleTasks = scheduleTasks.filter(task => task.id !== id);
+            localStorage.setItem('lumaday_tasks', JSON.stringify(scheduleTasks));
+            renderSchedule();
+        }
+
+        // Gewoontes renderen
+        function renderHabits() {
+            const container = document.getElementById('streaks-container');
+            container.innerHTML = '';
+
+            habits.forEach(habit => {
+                const div = document.createElement('div');
+                div.className = "flex items-center justify-between p-2.5 rounded-xl bg-stone-50 border border-stone-200";
+                div.innerHTML = `
+                    <span class="font-medium text-stone-800">${habit.name}</span>
+                    <div class="flex items-center gap-2">
+                        <span class="font-mono font-bold text-amber-700 bg-amber-50 px-2 py-0.5 rounded-md border border-amber-200">${habit.streak}d</span>
+                        <button onclick="incrementStreak(${habit.id})" class="px-2 py-0.5 rounded bg-emerald-100 hover:bg-emerald-200 text-emerald-800 font-bold text-xs">+</button>
+                    </div>
+                `;
+                container.appendChild(div);
+            });
+        }
+
+        function incrementStreak(id) {
+            habits = habits.map(h => {
+                if (h.id === id) h.streak += 1;
+                return h;
+            });
+            localStorage.setItem('lumaday_habits', JSON.stringify(habits));
+            renderHabits();
+        }
+
+        // Energie status aanpassen
+        function setEnergyState(state) {
+            const adviceBox = document.getElementById('energy-advice-box');
+            const statEnergy = document.getElementById('stat-energy');
+            const dayStatusBadge = document.getElementById('day-status-badge');
+
+            ['low', 'good', 'energized'].forEach(s => {
+                const btn = document.getElementById('btn-' + s);
+                if (btn) btn.classList.remove('ring-2', 'ring-stone-900');
+            });
+
+            document.getElementById('btn-' + state).classList.add('ring-2', 'ring-stone-900');
+
+            if (state === 'low') {
+                statEnergy.innerText = '⚡ 35% energy';
+                dayStatusBadge.innerText = '😴 Taking it easy today';
+                adviceBox.innerHTML = '<strong>Lage Energie Modus:</strong> Focus op lichte taken, neem extra pauzes en wandel even buiten.';
+            } else if (state === 'good') {
+                statEnergy.innerText = '⚡ 78% energy';
+                dayStatusBadge.innerText = '✨ Your day looks Productive';
+                adviceBox.innerHTML = '<strong>Normale Modus (78% Energie):</strong> Een evenwichtige dag met ruimte voor overleg, diepe focus en voldoende rust.';
+            } else if (state === 'energized') {
+                statEnergy.innerText = '⚡ 95% energy';
+                dayStatusBadge.innerText = '🔥 High Performance Mode!';
+                adviceBox.innerHTML = '<strong>Energized Modus:</strong> Geweldig! Pak vandaag je lastigste doelen en focus-projecten als eerste aan.';
+            }
+        }
+
+        // Focus Timer Logica
+        let timerSeconds = 1500;
+        let timerInterval = null;
+
+        function toggleTimer() {
+            const btn = document.getElementById('timer-btn');
+            if (timerInterval) {
+                clearInterval(timerInterval);
+                timerInterval = null;
+                btn.innerText = '▶️ Start';
+            } else {
+                btn.innerText = '⏸️ Pauze';
+                timerInterval = setInterval(() => {
+                    if (timerSeconds > 0) {
+                        timerSeconds--;
+                        updateTimerDisplay();
+                    } else {
+                        clearInterval(timerInterval);
+                        alert('Focus sessie afgerond!');
+                    }
+                }, 1000);
+            }
+        }
+
+        function resetTimer() {
+            clearInterval(timerInterval);
+            timerInterval = null;
+            timerSeconds = 1500;
+            updateTimerDisplay();
+            document.getElementById('timer-btn').innerText = '▶️ Start';
+        }
+
+        function updateTimerDisplay() {
+            const mins = Math.floor(timerSeconds / 60);
+            const secs = timerSeconds % 60;
+            document.getElementById('timer-display').innerText = 
+                `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+        }
+
+        // Binaire Omrekening Tool
+        function convertBinary() {
+            const num = parseInt(document.getElementById('decimal-input').value);
+            const resultEl = document.getElementById('binary-result');
+            if (isNaN(num)) {
+                resultEl.innerText = "Voer een geldig getal in!";
+            } else {
+                resultEl.innerText = `Het getal ${num} is in Binair: ${num.toString(2)}`;
+            }
+        }
+
+        function scrollToPlanner() {
+            showPage('home');
+            document.getElementById('planner-section').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Pagina initialisatie bij laden
         window.onload = function() {
             if (typeof lucide !== 'undefined') lucide.createIcons();
+            renderSchedule();
+            renderHabits();
         };
     </script>
 </body>
