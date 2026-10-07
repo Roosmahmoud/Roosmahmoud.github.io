@@ -1,20 +1,11 @@
 <!DOCTYPE html>
 <html lang="nl" class="h-full">
 <head>
-    <!-- ==========================================================================
-         METADATA EN BRONNEN
-         ========================================================================== -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LumaDay Kennis - Het Binairstelsel</title>
-
-    <!-- Tailwind CSS via CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-
-    <!-- Externe CSS opmaak -->
     <link rel="stylesheet" href="opmaak.css">
-
-    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -25,15 +16,15 @@
     <header class="top-header">
         <div class="header-container">
             <a href="index.html" class="flex items-center gap-2.5 text-decoration-none">
-                <div class="w-9 h-9 rounded-full bg-stone-900 flex items-center justify-center text-white font-serif italic text-xl shadow-sm">
-                    L
-                </div>
-                <span class="font-bold tracking-tight text-xl text-stone-900">LumaDay Kennis</span>
+                <div class="w-9 h-9 rounded-full bg-stone-900 flex items-center justify-center text-white font-serif italic text-xl shadow-sm">L</div>
+                <span class="font-bold tracking-tight text-xl">LumaDay Kennis</span>
             </a>
 
             <nav>
                 <ul class="main-menu">
-                    <li><a href="index.html">Home / Dashboard</a></li>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="planning.html">Mijn Planning</a></li>
+                    <li><a href="timer.html">Stopwatch & Timer</a></li>
                     <li>
                         <a href="#" class="active">Kennismodules ▾</a>
                         <ul class="dropdown">
@@ -41,71 +32,70 @@
                             <li><a href="kleurmodellen.html">🎨 Kleurmodellen (RGB & CMYK)</a></li>
                         </ul>
                     </li>
-                    <li><a href="index.html#planner-section">Mijn Planning</a></li>
+                    <li><a href="over.html">Over LumaDay</a></li>
                 </ul>
             </nav>
+
+            <div class="flex items-center gap-2">
+                <button onclick="toggleDarkMode()" id="theme-toggle-btn" class="pill-btn px-3 py-1.5 text-xs bg-stone-200 text-stone-800">🌙 Donker</button>
+                <a href="login.html" class="pill-btn px-4 py-2 text-xs bg-[#F3E1E1] text-stone-900" id="nav-login-btn">🔑 Inloggen</a>
+            </div>
         </div>
     </header>
 
-    <!-- HOOFDINHOUD PAGINA 2: BINAIRSTELSEL -->
     <main class="max-w-4xl mx-auto px-6 flex-1 w-full space-y-8 py-8">
-        
         <div class="text-center space-y-3">
             <span class="text-xs uppercase font-bold tracking-widest text-emerald-800 bg-[#E1EFE6] px-3 py-1 rounded-full border border-emerald-200">
                 Informatica Module 1
             </span>
-            <h1 class="serif-heading text-4xl sm:text-5xl text-stone-900">Het Binairstelsel (0 en 1)</h1>
+            <h1 class="serif-heading text-4xl sm:text-5xl">Het Binairstelsel (0 en 1)</h1>
             <p class="text-stone-600 text-sm max-w-md mx-auto">
                 Ontdek hoe computers rekenen en communiceren met slechts twee cijfers.
             </p>
         </div>
 
-        <div class="luma-card bg-white p-6 sm:p-8 space-y-6">
-            
-            <!-- Afbeelding met alt-attribuut voor toegankelijkheid -->
-            <div class="rounded-2xl overflow-hidden bg-stone-100 border border-stone-200 flex justify-center p-4">
-                <img src="https://placehold.co/600x250/E1EFE6/1C1917?text=Binaire+Code+01001001" 
-                     alt="Illustratie van binaire code getallen nullen en enen" 
-                     class="max-w-full h-auto rounded-xl">
-            </div>
-
-            <!-- Inhoudelijke uitleg -->
-            <div class="space-y-4 text-stone-700 leading-relaxed text-sm">
-                <h3 class="text-lg font-bold text-stone-900">Wat is het binairstelsel?</h3>
+        <div class="luma-card p-6 sm:p-8 space-y-6">
+            <div class="space-y-4 leading-relaxed text-sm">
+                <h3 class="text-lg font-bold">Wat is het binairstelsel?</h3>
                 <p>
                     Het binaire stelsel is een 2-tallig stelsel dat uitsluitend werkt met de getallen <strong>0</strong> en <strong>1</strong>. 
-                    Mensen gebruiken gewoonlijk het 10-tallige stelsel (0 t/m 9), maar microprocessoren in computers bestaan uit microscopische schakelaars die alleen 'uit' (0) of 'aan' (1) kunnen staan.
+                    Microprocessoren in computers bestaan uit microscopische schakelaars die alleen 'uit' (0) of 'aan' (1) kunnen staan.
                 </p>
 
                 <!-- Binaire omrekenmodule -->
-                <div class="p-5 bg-[#F4F4EE] rounded-2xl border border-stone-300 space-y-3">
-                    <h4 class="font-bold text-stone-900 text-sm">🧮 Interactieve Omreken-tool:</h4>
-                    <p class="text-xs text-stone-600">Typ een getal in om het direct om te rekenen naar binaire code:</p>
-                    
-                    <div class="flex gap-2">
-                        <input type="number" id="decimal-input" placeholder="bijv. 12" oninput="convertBinary()" class="px-3 py-2 rounded-xl border border-stone-300 text-xs w-full bg-white">
-                    </div>
+                <div class="p-5 bg-[#F4F4EE] rounded-2xl border border-stone-300 space-y-3 text-stone-800">
+                    <h4 class="font-bold text-sm">🧮 Interactieve Omreken-tool:</h4>
+                    <p class="text-xs">Typ een getal in om het direct om te rekenen naar binaire code:</p>
+                    <input type="number" id="decimal-input" placeholder="bijv. 12" oninput="convertBinary()" class="px-3 py-2 rounded-xl border border-stone-300 text-xs w-full bg-white text-stone-900">
                     <div class="p-3 bg-white rounded-xl border border-stone-200 font-mono text-xs font-bold text-emerald-800">
                         Binair resultaat: <span id="binary-output" class="text-stone-900">0000</span>
                     </div>
                 </div>
+
+                <!-- IDEE 1: INTERACTIEVE KENNISQUIZ -->
+                <div class="p-6 bg-[#E1EFE6] rounded-2xl border border-emerald-300 space-y-4 text-emerald-950 mt-8">
+                    <h4 class="font-bold text-base flex items-center gap-2">🧠 Test je kennis: Binairstelsel Quiz!</h4>
+                    <p class="text-xs">Beantwoord de onderstaande vraag:</p>
+                    
+                    <div class="space-y-2 text-xs">
+                        <p class="font-bold">Vraag: Wat is het binaire getal voor het decimale getal 4?</p>
+                        <button onclick="checkQuiz('A', false)" class="quiz-option">A) 011</button>
+                        <button onclick="checkQuiz('B', true)" class="quiz-option">B) 100</button>
+                        <button onclick="checkQuiz('C', false)" class="quiz-option">C) 101</button>
+                    </div>
+
+                    <div id="quiz-feedback" class="hidden p-3 rounded-xl font-bold text-xs text-center"></div>
+                </div>
             </div>
 
-            <!-- Navigatieknop terug -->
             <div class="pt-4 border-t border-stone-200 flex justify-between items-center">
-                <a href="index.html" class="pill-btn px-5 py-2 text-xs bg-[#F3E1E1] text-stone-900">
-                    ← Terug naar Dashboard
-                </a>
-                <a href="kleurmodellen.html" class="pill-btn px-5 py-2 text-xs bg-[#E1EFE6] text-stone-900">
-                    Volgende: Kleurmodellen →
-                </a>
+                <a href="index.html" class="pill-btn px-5 py-2 text-xs bg-[#F3E1E1] text-stone-900">← Terug naar Dashboard</a>
+                <a href="kleurmodellen.html" class="pill-btn px-5 py-2 text-xs bg-[#E1EFE6] text-stone-900">Volgende: Kleurmodellen →</a>
             </div>
         </div>
-
     </main>
 
-    <!-- FOOTER -->
-    <footer class="max-w-6xl mx-auto px-6 py-8 w-full border-t border-stone-200 flex justify-between text-xs text-stone-500">
+    <footer class="max-w-5xl mx-auto px-6 py-8 w-full border-t border-stone-200 flex justify-between text-xs text-stone-500">
         <div>&copy; 2026 LumaDay - Binairstelsel Module</div>
         <div class="flex gap-4">
             <a href="index.html" class="hover:text-stone-900">Home</a>
@@ -117,12 +107,41 @@
         function convertBinary() {
             const val = document.getElementById('decimal-input').value;
             const output = document.getElementById('binary-output');
-            if (val === '') {
-                output.innerText = '0000';
+            output.innerText = (val === '') ? '0000' : Number(val).toString(2);
+        }
+
+        function checkQuiz(option, isCorrect) {
+            const fb = document.getElementById('quiz-feedback');
+            fb.classList.remove('hidden', 'bg-emerald-200', 'bg-red-200', 'text-emerald-900', 'text-red-900');
+            if (isCorrect) {
+                fb.classList.add('bg-emerald-200', 'text-emerald-900');
+                fb.innerText = '🎉 Helemaal goed! 100 is inderdaad 4 in binaire code!';
             } else {
-                output.innerText = Number(val).toString(2);
+                fb.classList.add('bg-red-200', 'text-red-900');
+                fb.innerText = '❌ Helaas! Probeer het nog eens.';
             }
         }
+
+        function toggleDarkMode() {
+            document.body.classList.toggle('dark-mode');
+            localStorage.setItem('lumaday_darkmode', document.body.classList.contains('dark-mode') ? 'enabled' : 'disabled');
+            updateDarkBtnText();
+        }
+
+        function updateDarkBtnText() {
+            const btn = document.getElementById('theme-toggle-btn');
+            if (btn) btn.innerText = document.body.classList.contains('dark-mode') ? '☀️ Licht' : '🌙 Donker';
+        }
+
+        window.onload = function() {
+            if (localStorage.getItem('lumaday_darkmode') === 'enabled') document.body.classList.add('dark-mode');
+            updateDarkBtnText();
+            const user = JSON.parse(localStorage.getItem('lumaday_user'));
+            if (user) {
+                document.getElementById('nav-login-btn').innerText = `👤 ${user.name}`;
+                document.getElementById('nav-login-btn').href = "login.html";
+            }
+        };
     </script>
 </body>
 </html>
