@@ -1,1 +1,469 @@
+<!DOCTYPE html>
+<html lang="nl" class="h-full">
+<head>
+    <!-- ==========================================================================
+         METADATA EN EXTERNE LIBRARIES
+         ========================================================================== -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LumaDay - Personal Life Dashboard</title>
 
+    <!-- Tailwind CSS via CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Koppeling met ons externe CSS-bestand -->
+    <link rel="stylesheet" href="opmaak.css">
+
+    <!-- Lucide Iconen Library -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body class="min-h-full flex flex-col justify-between antialiased">
+
+    <!-- ==========================================================================
+         HEADER & NAVIGATIEMENU MET DROPDOWN (PAGINA 1 HOOFDNAVIGATIE)
+         ========================================================================== -->
+    <header class="max-w-6xl mx-auto px-6 py-6 w-full flex items-center justify-between border-b border-stone-200/60 bg-white/50 backdrop-blur-sm sticky top-0 z-50">
+        <!-- Logo -->
+        <a href="index.html" class="flex items-center gap-2 text-decoration-none">
+            <div class="w-9 h-9 rounded-full bg-stone-900 flex items-center justify-center text-white font-serif italic text-xl shadow-sm">
+                L
+            </div>
+            <span class="font-bold tracking-tight text-xl text-stone-900">LumaDay</span>
+        </a>
+
+        <!-- Navigatiemenu opgebouwd met UL en LI -->
+        <nav>
+            <ul class="main-menu">
+                <li>
+                    <a href="index.html" class="bg-pink-100 text-stone-900">Dashboard</a>
+                </li>
+                <!-- Dropdown met navigatie naar de overige HTML-pagina's -->
+                <li>
+                    <a href="#">Kennis & Thema's ▾</a>
+                    <ul class="dropdown">
+                        <li><a href="binairstelsel.html">💻 Binairstelsel (0 & 1)</a></li>
+                        <li><a href="kleurmodellen.html">🎨 Kleurmodellen (RGB & CMYK)</a></li>
+                    </ul>
+                </li>
+                <li><a href="#energy-section">Energy Planner</a></li>
+                <li><a href="#goals-section">Doelen</a></li>
+            </ul>
+        </nav>
+
+        <!-- Actieknop -->
+        <div class="flex items-center gap-3">
+            <button onclick="scrollToPlanner()" class="pill-btn px-5 py-2.5 text-xs bg-[#F3E1E1] hover:bg-[#EACACA] text-stone-900 border border-stone-300">
+                [ + Nieuwe Planning ]
+            </button>
+        </div>
+    </header>
+
+    <!-- ==========================================================================
+         HOOFDINHOUD (MAIN)
+         ========================================================================== -->
+    <main class="max-w-6xl mx-auto px-6 flex-1 w-full space-y-12 py-8">
+
+        <!-- 1. HERO SECTION -->
+        <section id="hero-section" class="text-center max-w-3xl mx-auto pt-2 space-y-5">
+            <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#E1EFE6] border border-emerald-200 text-xs font-semibold text-emerald-900">
+                <i data-lucide="sparkles" class="w-3.5 h-3.5 text-emerald-700"></i>
+                <span>Je leven. Op één rustige plek.</span>
+            </div>
+
+            <h1 class="serif-heading text-5xl sm:text-6xl font-normal text-stone-900 leading-tight">
+                Plan minder. <span class="italic text-emerald-800">Leef meer.</span>
+            </h1>
+
+            <p class="text-base sm:text-lg text-stone-600 font-light max-w-xl mx-auto">
+                LumaDay brengt je dagelijkse planning, energie, focus, gewoontes en doelen samen in één rustgevende workspace.
+            </p>
+
+            <div class="flex flex-wrap items-center justify-center gap-4 pt-2">
+                <button onclick="scrollToPlanner()" class="pill-btn px-7 py-3.5 text-xs font-bold uppercase tracking-wider bg-[#F3E1E1] hover:bg-[#EACACA] text-stone-900 border border-stone-300 shadow-sm">
+                    [ Start gratis planning ]
+                </button>
+                <a href="#energy-section" class="pill-btn px-7 py-3.5 text-xs font-bold uppercase tracking-wider bg-[#E1EFE6] hover:bg-[#CDE3D5] text-stone-900 border border-stone-300">
+                    [ Bekijk hoe het werkt ]
+                </a>
+            </div>
+        </section>
+
+        <!-- 2. ENERGY PLANNER SWITCHER -->
+        <section id="energy-section" class="max-w-4xl mx-auto">
+            <div class="luma-card bg-white rounded-3xl p-6 sm:p-8 border border-stone-200 shadow-sm space-y-6">
+                <div class="text-center space-y-2">
+                    <span class="text-[11px] uppercase tracking-widest font-bold text-emerald-800 bg-[#E1EFE6] px-3 py-1 rounded-full border border-emerald-200">
+                        Unieke Feature
+                    </span>
+                    <h2 class="serif-heading text-3xl sm:text-4xl text-stone-900">Plan op basis van hoe je je voelt.</h2>
+                    <p class="text-xs sm:text-sm text-stone-600 max-w-md mx-auto">
+                        Niet iedere dag heeft dezelfde energie. Kies jouw gemoedstoestand van vandaag en LumaDay past je dag-advies aan.
+                    </p>
+                </div>
+
+                <div class="flex flex-wrap justify-center gap-3 pt-2">
+                    <button onclick="setEnergyState('low')" id="btn-low" class="pill-btn px-6 py-3 text-xs bg-[#F3E1E1] hover:bg-[#EACACA] text-stone-900 border border-stone-300">
+                        <span class="text-base mr-2">☹️</span>
+                        <span>Low Energy</span>
+                    </button>
+                    <button onclick="setEnergyState('good')" id="btn-good" class="pill-btn px-6 py-3 text-xs bg-stone-100 hover:bg-stone-200 text-stone-900 border border-stone-300 ring-2 ring-stone-900">
+                        <span class="text-base mr-2">😐</span>
+                        <span>Good (Normaal)</span>
+                    </button>
+                    <button onclick="setEnergyState('energized')" id="btn-energized" class="pill-btn px-6 py-3 text-xs bg-[#E1EFE6] hover:bg-[#CDE3D5] text-stone-900 border border-stone-300">
+                        <span class="text-base mr-2">⚡</span>
+                        <span>Energized!</span>
+                    </button>
+                </div>
+
+                <div id="energy-advice-box" class="p-4 bg-[#F4F4EE] rounded-2xl border border-stone-200 text-xs text-stone-700 text-center max-w-lg mx-auto">
+                    <strong>Normale Modus (78% Energie):</strong> Een evenwichtige dag met ruimte voor overleg, diepe focus en voldoende rust.
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. INTERACTIEF DASHBOARD & ZELF PLANNING MAKEN -->
+        <section id="planner-section" class="max-w-5xl mx-auto space-y-6">
+            <div class="flex flex-col md:flex-row gap-6">
+                
+                <!-- LINKERKANT: Het dagschema overzicht -->
+                <div class="md:w-7/12 luma-card space-y-6">
+                    <div class="flex items-center justify-between border-b border-stone-200 pb-4">
+                        <div>
+                            <span class="text-[10px] font-bold uppercase tracking-wider text-emerald-800 bg-[#E1EFE6] px-2.5 py-1 rounded-full border border-emerald-200" id="day-status-badge">
+                                ✨ Productieve Dag
+                            </span>
+                            <h2 class="text-2xl font-bold text-stone-900 mt-2">Mijn Dagschema</h2>
+                            <p class="text-xs text-stone-500 font-mono">Vandaag</p>
+                        </div>
+                        <div class="text-right space-y-1">
+                            <div class="text-xs font-bold text-stone-700" id="stat-energy">⚡ 78% energy</div>
+                            <div class="text-xs text-stone-500" id="stat-priorities">🎯 <span id="task-count">0</span> Taken</div>
+                        </div>
+                    </div>
+
+                    <!-- Lijst waar nieuwe taken dynamic verschijnen -->
+                    <div class="space-y-3" id="schedule-list">
+                        <!-- Wordt gevuld via JavaScript -->
+                    </div>
+                </div>
+
+                <!-- RECHTERKANT: FORMULIER OM ZELF PLANNING TE MAKEN -->
+                <div class="md:w-5/12 luma-card bg-[#F4F4EE] space-y-5 border-2 border-stone-300">
+                    <div class="border-b border-stone-200 pb-3">
+                        <h3 class="text-lg font-bold text-stone-900 flex items-center gap-2">
+                            <i data-lucide="plus-circle" class="w-5 h-5 text-emerald-700"></i>
+                            <span>Zelf Planning Maken</span>
+                        </h3>
+                        <p class="text-xs text-stone-600 mt-0.5">Voeg je eigen afspraken of taken toe aan je dagschema.</p>
+                    </div>
+
+                    <form id="add-task-form" onsubmit="handleAddTask(event)" class="space-y-4">
+                        <div>
+                            <label class="block text-xs font-bold text-stone-700 mb-1" for="input-time">Tijdstip:</label>
+                            <input type="text" id="input-time" placeholder="bijv. 10:30" required class="w-full px-3 py-2 rounded-xl border border-stone-300 text-xs focus:outline-none focus:ring-2 focus:ring-stone-800 bg-white">
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-bold text-stone-700 mb-1" for="input-title">Activiteit / Taak:</label>
+                            <input type="text" id="input-title" placeholder="bijv. Wiskunde Huiswerk" required class="w-full px-3 py-2 rounded-xl border border-stone-300 text-xs focus:outline-none focus:ring-2 focus:ring-stone-800 bg-white">
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-bold text-stone-700 mb-1" for="input-tag">Categorie / Tag:</label>
+                            <select id="input-tag" class="w-full px-3 py-2 rounded-xl border border-stone-300 text-xs focus:outline-none focus:ring-2 focus:ring-stone-800 bg-white">
+                                <option value="Focus">🧠 Deep Work / Focus</option>
+                                <option value="Overleg">💬 Overleg / Meeting</option>
+                                <option value="Sport">🏋️ Sport & Bewegen</option>
+                                <option value="Vrij">☕ Vrije Tijd / Rust</option>
+                                <option value="School">📚 School / Studie</option>
+                            </select>
+                        </div>
+
+                        <button type="submit" class="w-full pill-btn py-3 text-xs bg-[#E1EFE6] hover:bg-[#CDE3D5] text-stone-900 border border-stone-400 font-bold">
+                            + Voeg toe aan Planning
+                        </button>
+                    </form>
+
+                    <div class="p-3 rounded-xl bg-white/70 border border-stone-200 text-[11px] text-stone-500">
+                        💡 <strong>Tip:</strong> Je toegevoegde taken worden automatisch opgeslagen in je browser!
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- 4. GEWOONTES, FOCUS TIMER & DOELEN -->
+        <section id="goals-section" class="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6">
+            
+            <!-- STREAKS & GEWOONTES -->
+            <div class="luma-card space-y-4">
+                <div class="flex items-center justify-between border-b border-stone-200 pb-3">
+                    <h3 class="text-base font-bold text-stone-900 flex items-center gap-2">
+                        <i data-lucide="flame" class="w-4 h-4 text-amber-600"></i>
+                        <span>Streaks & Gewoontes</span>
+                    </h3>
+                </div>
+                <div class="space-y-2.5 text-xs" id="streaks-container">
+                    <!-- Dynamic van JS -->
+                </div>
+            </div>
+
+            <!-- FOCUS TIMER -->
+            <div class="luma-card bg-[#F4F4EE] space-y-4 text-center flex flex-col justify-between border border-stone-300">
+                <div>
+                    <span class="text-[10px] font-bold uppercase tracking-wider text-emerald-800 bg-[#E1EFE6] px-2.5 py-1 rounded-full border border-emerald-200">
+                        Focus Modus
+                    </span>
+                    <h3 class="text-base font-bold text-stone-900 mt-2">Start Focus Sessie</h3>
+                    <p class="text-xs text-stone-500 mt-1">25 minuten ononderbroken werken.</p>
+                </div>
+
+                <div class="py-4 font-mono text-4xl font-bold text-stone-900" id="timer-display">
+                    25:00
+                </div>
+
+                <div class="flex justify-center gap-2">
+                    <button onclick="toggleTimer()" id="timer-btn" class="pill-btn px-6 py-2.5 text-xs bg-[#E1EFE6] hover:bg-[#CDE3D5] text-stone-900 border border-stone-300">
+                        ▶️ Start
+                    </button>
+                    <button onclick="resetTimer()" class="pill-btn px-4 py-2.5 text-xs bg-stone-200 hover:bg-stone-300 text-stone-800 border border-stone-300">
+                        ↺ Reset
+                    </button>
+                </div>
+            </div>
+
+            <!-- DOELEN -->
+            <div class="luma-card space-y-3">
+                <span class="text-[10px] font-bold uppercase tracking-wider text-pink-800 bg-[#F3E1E1] px-2.5 py-1 rounded-full border border-pink-200">
+                    Doelen Hiërarchie
+                </span>
+                <h3 class="text-base font-bold text-stone-900">Van visie naar actie:</h3>
+
+                <div class="space-y-2 text-xs">
+                    <div class="p-2.5 rounded-xl bg-stone-50 border border-stone-200">
+                        <span class="text-[10px] text-stone-400 font-bold block">JAARDOEL</span>
+                        <span class="font-semibold text-stone-800">"Slaag voor mijn examens"</span>
+                    </div>
+                    <div class="p-2.5 rounded-xl bg-stone-50 border border-stone-200 border-l-4 border-l-emerald-400">
+                        <span class="text-[10px] text-emerald-700 font-bold block">KWARTAAL</span>
+                        <span class="font-semibold text-stone-800">Webdevelopment project opleveren</span>
+                    </div>
+                    <div class="p-2.5 rounded-xl bg-stone-900 text-white">
+                        <span class="text-[10px] text-emerald-400 font-bold block">ACTIE VANDAAG</span>
+                        <input type="text" id="today-goal-input" value="1.5 uur werken aan HTML & CSS" class="bg-transparent text-xs font-semibold text-white focus:outline-none w-full border-b border-stone-700 pb-1 mt-0.5">
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+    </main>
+
+    <!-- FOOTER VAN DE WEBSITE -->
+    <footer class="max-w-6xl mx-auto px-6 py-8 w-full border-t border-stone-200 flex flex-col sm:flex-row justify-between items-center text-xs text-stone-500 gap-4 mt-12">
+        <div>
+            &copy; 2026 LumaDay - Personal Dashboard.
+        </div>
+        <div class="flex gap-6">
+            <a href="index.html" class="hover:text-stone-900 font-bold">Home</a>
+            <a href="binairstelsel.html" class="hover:text-stone-900">Binairstelsel</a>
+            <a href="kleurmodellen.html" class="hover:text-stone-900">Kleurmodellen</a>
+        </div>
+    </footer>
+
+    <!-- ==========================================================================
+         JAVASCRIPT LOGICA
+         ========================================================================== -->
+    <script>
+        let scheduleTasks = JSON.parse(localStorage.getItem('lumaday_tasks')) || [
+            { id: 1, time: "09:00", title: "Team Meeting / Les", tag: "Overleg", done: false },
+            { id: 2, time: "11:00", title: "Deep work (Informatica Studie)", tag: "Focus", done: false },
+            { id: 3, time: "13:15", title: "Wandeling & Pauze", tag: "Vrij", done: false },
+            { id: 4, time: "14:45", title: "Programmeren & Opdrachten", tag: "School", done: false }
+        ];
+
+        let habits = JSON.parse(localStorage.getItem('lumaday_habits')) || [
+            { id: 1, name: "Water drinken", streak: 14 },
+            { id: 2, name: "Boek lezen (15 min)", streak: 9 },
+            { id: 3, name: "Wandelen", streak: 25 }
+        ];
+
+        function renderSchedule() {
+            const container = document.getElementById('schedule-list');
+            const taskCountEl = document.getElementById('task-count');
+            container.innerHTML = '';
+
+            taskCountEl.innerText = scheduleTasks.length;
+
+            if (scheduleTasks.length === 0) {
+                container.innerHTML = '<p class="text-xs text-stone-500 italic py-4 text-center">Nog geen taken ingepland. Voeg er een toe via het formulier hiernaast!</p>';
+                return;
+            }
+
+            scheduleTasks.forEach((item) => {
+                const div = document.createElement('div');
+                div.className = "oval-task-badge flex items-center justify-between shadow-sm " + (item.done ? 'opacity-50 line-through bg-stone-100' : '');
+                
+                div.innerHTML = `
+                    <div class="flex items-center gap-3">
+                        <input type="checkbox" ${item.done ? 'checked' : ''} onclick="toggleTaskDone(${item.id})" class="w-4 h-4 accent-stone-800 cursor-pointer">
+                        <span class="text-xs font-bold font-mono text-stone-600">${item.time}</span>
+                        <span class="text-xs font-semibold text-stone-900">${item.title}</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <span class="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-white text-stone-700 border border-stone-300">${item.tag}</span>
+                        <button onclick="deleteTask(${item.id})" class="text-stone-400 hover:text-red-500 text-xs font-bold px-1" title="Verwijderen">✕</button>
+                    </div>
+                `;
+                container.appendChild(div);
+            });
+        }
+
+        function handleAddTask(e) {
+            e.preventDefault();
+            const timeInput = document.getElementById('input-time').value;
+            const titleInput = document.getElementById('input-title').value;
+            const tagInput = document.getElementById('input-tag').value;
+
+            const newTask = {
+                id: Date.now(),
+                time: timeInput,
+                title: titleInput,
+                tag: tagInput,
+                done: false
+            };
+
+            scheduleTasks.push(newTask);
+            localStorage.setItem('lumaday_tasks', JSON.stringify(scheduleTasks));
+            
+            document.getElementById('input-time').value = '';
+            document.getElementById('input-title').value = '';
+
+            renderSchedule();
+        }
+
+        function toggleTaskDone(id) {
+            scheduleTasks = scheduleTasks.map(task => {
+                if (task.id === id) task.done = !task.done;
+                return task;
+            });
+            localStorage.setItem('lumaday_tasks', JSON.stringify(scheduleTasks));
+            renderSchedule();
+        }
+
+        function deleteTask(id) {
+            scheduleTasks = scheduleTasks.filter(task => task.id !== id);
+            localStorage.setItem('lumaday_tasks', JSON.stringify(scheduleTasks));
+            renderSchedule();
+        }
+
+        function renderHabits() {
+            const container = document.getElementById('streaks-container');
+            container.innerHTML = '';
+
+            habits.forEach(habit => {
+                const div = document.createElement('div');
+                div.className = "flex items-center justify-between p-2.5 rounded-xl bg-stone-50 border border-stone-200";
+                div.innerHTML = `
+                    <span class="font-medium text-stone-800">${habit.name}</span>
+                    <div class="flex items-center gap-2">
+                        <span class="font-mono font-bold text-amber-700 bg-amber-50 px-2 py-0.5 rounded-md border border-amber-200">${habit.streak}d</span>
+                        <button onclick="incrementStreak(${habit.id})" class="px-2 py-0.5 rounded bg-emerald-100 hover:bg-emerald-200 text-emerald-800 font-bold text-xs">+</button>
+                    </div>
+                `;
+                container.appendChild(div);
+            });
+        }
+
+        function incrementStreak(id) {
+            habits = habits.map(h => {
+                if (h.id === id) h.streak += 1;
+                return h;
+            });
+            localStorage.setItem('lumaday_habits', JSON.stringify(habits));
+            renderHabits();
+        }
+
+        function setEnergyState(state) {
+            const adviceBox = document.getElementById('energy-advice-box');
+            const statEnergy = document.getElementById('stat-energy');
+            const dayStatusBadge = document.getElementById('day-status-badge');
+
+            ['low', 'good', 'energized'].forEach(s => {
+                const btn = document.getElementById('btn-' + s);
+                if (btn) btn.classList.remove('ring-2', 'ring-stone-900');
+            });
+
+            document.getElementById('btn-' + state).classList.add('ring-2', 'ring-stone-900');
+
+            if (state === 'low') {
+                statEnergy.innerText = '⚡ 35% energy';
+                dayStatusBadge.innerText = '😴 Rustige dag voorgesteld';
+                adviceBox.innerHTML = '<strong>Lage Energie Modus:</strong> Focus op lichte taken, neem extra pauzes en wandel even buiten.';
+            } else if (state === 'good') {
+                statEnergy.innerText = '⚡ 78% energy';
+                dayStatusBadge.innerText = '✨ Productieve dag';
+                adviceBox.innerHTML = '<strong>Normale Modus (78% Energie):</strong> Een evenwichtige dag met ruimte voor overleg, diepe focus en voldoende rust.';
+            } else if (state === 'energized') {
+                statEnergy.innerText = '⚡ 95% energy';
+                dayStatusBadge.innerText = '🔥 High Performance Mode!';
+                adviceBox.innerHTML = '<strong>Energized Modus:</strong> Geweldig! Pak vandaag je lastigste doelen en focus-projecten als eerste aan.';
+            }
+        }
+
+        let timerSeconds = 1500;
+        let timerInterval = null;
+
+        function toggleTimer() {
+            const btn = document.getElementById('timer-btn');
+            if (timerInterval) {
+                clearInterval(timerInterval);
+                timerInterval = null;
+                btn.innerText = '▶️ Start';
+            } else {
+                btn.innerText = '⏸️ Pauze';
+                timerInterval = setInterval(() => {
+                    if (timerSeconds > 0) {
+                        timerSeconds--;
+                        updateTimerDisplay();
+                    } else {
+                        clearInterval(timerInterval);
+                        alert('Focus sessie afgerond!');
+                    }
+                }, 1000);
+            }
+        }
+
+        function resetTimer() {
+            clearInterval(timerInterval);
+            timerInterval = null;
+            timerSeconds = 1500;
+            updateTimerDisplay();
+            document.getElementById('timer-btn').innerText = '▶️ Start';
+        }
+
+        function updateTimerDisplay() {
+            const mins = Math.floor(timerSeconds / 60);
+            const secs = timerSeconds % 60;
+            document.getElementById('timer-display').innerText = 
+                `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+        }
+
+        function scrollToPlanner() {
+            document.getElementById('planner-section').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        window.onload = function() {
+            if (typeof lucide !== 'undefined') lucide.createIcons();
+            renderSchedule();
+            renderHabits();
+        };
+    </script>
+</body>
+</html>
