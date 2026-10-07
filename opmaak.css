@@ -1,15 +1,111 @@
+/* ==========================================================================
+LumaDay - Algemeen Externe Opmaak (opmaak.css)
+========================================================================== */
+
+/* 1. Algemene basisopmaak van de pagina /
+body {
+background-color: #FBFBF9; / Cream achtergrond */
+color: #1C1917;
+font-family: 'Plus Jakarta Sans', sans-serif;
+margin: 0;
+padding: 0;
+background-image: radial-gradient(#E7E5E4 0.75px, transparent 0.75px);
+background-size: 24px 24px;
+}
+
+.serif-heading {
+font-family: 'Instrument Serif', serif;
+}
+
+/* 2. Horizontale Navigatiebalk Bovenaan met Dropdown */
+header.top-header {
+background-color: rgba(255, 255, 255, 0.95);
+backdrop-filter: blur(8px);
+border-bottom: 1px solid #E7E5E4;
+position: sticky;
+top: 0;
+z-index: 100;
+}
+
+.header-container {
+max-width: 1150px;
+margin: 0 auto;
+padding: 1rem 1.5rem;
+display: flex;
+align-items: center;
+justify-content: space-between;
+}
+
+nav ul.main-menu {
+list-style-type: none;
+margin: 0;
+padding: 0;
+display: flex;
+flex-direction: row;
+align-items: center;
+gap: 0.5rem;
+}
+
+nav ul.main-menu > li {
+position: relative;
+}
+
+nav ul.main-menu a {
+text-decoration: none;
+color: #57534E;
+font-weight: 600;
+font-size: 0.875rem;
+padding: 0.5rem 1rem;
+display: inline-block;
+border-radius: 9999px;
+transition: all 0.2s ease-in-out;
+}
+
+nav ul.main-menu a:hover {
+color: #1C1917;
+background-color: #F3E1E1; /* Zachtroze achtergrond bij hover */
+}
+
+nav ul.main-menu a.active {
+background-color: #1C1917;
+color: #FFFFFF !important;
+}
+
+/* Dropdown Menu */
+nav ul.main-menu li .dropdown {
+display: none;
+position: absolute;
+top: 100%;
+left: 0;
+background-color: #FFFFFF;
+min-width: 220px;
+box-shadow: 0px 10px 25px rgba(0, 0, 0, 0.1);
+border: 1px solid #E7E5E4;
+border-radius: 1rem;
+padding: 0.5rem;
+z-index: 200;
+}
+
+nav ul.main-menu li:hover .dropdown {
+display: flex;
+flex-direction: column;
+gap: 0.25rem;
+}
+
+nav ul.main-menu li .dropdown a {
+color: #1C1917;
+border-radius: 0.5rem;
+padding: 0.5rem 0.75rem;
+width: 100%;
+box-sizing: border-box;
 font-weight: 500;
 }
 
 nav ul.main-menu li .dropdown a:hover {
-background-color: #E1EFE6; /* Mintgroen bij hover in dropdown */
+background-color: #E1EFE6;
 }
 
-/* ==========================================================================
-3. Kaarten, Knoppen en Modals (Pop-ups)
-========================================================================== */
-
-/* LumaDay Card Styling */
+/* 3. Kaarten, Knoppen en Kaart-containers */
 .luma-card {
 background-color: #FFFFFF;
 border: 1px solid #E7E5E4;
@@ -18,7 +114,6 @@ padding: 1.5rem;
 box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
 }
 
-/* Algemene Knoppen */
 .pill-btn {
 display: inline-flex;
 align-items: center;
@@ -28,6 +123,7 @@ font-weight: 600;
 cursor: pointer;
 transition: all 0.2s ease;
 border: 1px solid #D6D3D1;
+text-decoration: none;
 }
 
 .pill-btn:hover {
@@ -35,7 +131,6 @@ transform: translateY(-2px);
 box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
 }
 
-/* Taken Bijeenkomst / Badge */
 .task-item {
 background-color: #F4F4EE;
 border: 1px solid #E7E5E4;
@@ -53,35 +148,8 @@ text-decoration: line-through;
 background-color: #E7E5E4;
 }
 
-/* Modal (Pop-up vensters voor Inloggen & Meer Info) */
-.modal-backdrop {
-position: fixed;
-top: 0;
-left: 0;
-width: 100vw;
-height: 100vh;
-background-color: rgba(28, 25, 23, 0.5);
-backdrop-filter: blur(4px);
-display: flex;
-align-items: center;
-justify-content: center;
-z-index: 1000;
-opacity: 0;
-pointer-events: none;
-transition: opacity 0.25s ease;
-}
-
-.modal-backdrop.active {
-opacity: 1;
-pointer-events: auto;
-}
-
-.modal-content {
-background-color: #FFFFFF;
-border-radius: 1.5rem;
-padding: 2rem;
-max-width: 480px;
-width: 90%;
-border: 1px solid #E7E5E4;
-box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+/* Fun fact styling */
+.fun-fact-box {
+background: linear-gradient(135deg, #FFFDF8 0%, #F4F4EE 100%);
+border: 1.5px solid #E1EFE6;
 }
