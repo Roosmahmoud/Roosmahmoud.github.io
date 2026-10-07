@@ -1,20 +1,11 @@
 <!DOCTYPE html>
 <html lang="nl" class="h-full">
 <head>
-    <!-- ==========================================================================
-         METADATA EN BRONNEN
-         ========================================================================== -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LumaDay Kennis - Kleurmodellen (RGB & CMYK)</title>
-
-    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-
-    <!-- Externe CSS opmaak -->
     <link rel="stylesheet" href="opmaak.css">
-
-    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -25,15 +16,15 @@
     <header class="top-header">
         <div class="header-container">
             <a href="index.html" class="flex items-center gap-2.5 text-decoration-none">
-                <div class="w-9 h-9 rounded-full bg-stone-900 flex items-center justify-center text-white font-serif italic text-xl shadow-sm">
-                    L
-                </div>
-                <span class="font-bold tracking-tight text-xl text-stone-900">LumaDay Kennis</span>
+                <div class="w-9 h-9 rounded-full bg-stone-900 flex items-center justify-center text-white font-serif italic text-xl shadow-sm">L</div>
+                <span class="font-bold tracking-tight text-xl">LumaDay Kennis</span>
             </a>
 
             <nav>
                 <ul class="main-menu">
-                    <li><a href="index.html">Home / Dashboard</a></li>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="planning.html">Mijn Planning</a></li>
+                    <li><a href="timer.html">Stopwatch & Timer</a></li>
                     <li>
                         <a href="#" class="active">Kennismodules ▾</a>
                         <ul class="dropdown">
@@ -41,71 +32,107 @@
                             <li><a href="kleurmodellen.html">🎨 Kleurmodellen (RGB & CMYK)</a></li>
                         </ul>
                     </li>
-                    <li><a href="index.html#planner-section">Mijn Planning</a></li>
+                    <li><a href="over.html">Over LumaDay</a></li>
                 </ul>
             </nav>
+
+            <div class="flex items-center gap-2">
+                <button onclick="toggleDarkMode()" id="theme-toggle-btn" class="pill-btn px-3 py-1.5 text-xs bg-stone-200 text-stone-800">🌙 Donker</button>
+                <a href="login.html" class="pill-btn px-4 py-2 text-xs bg-[#F3E1E1] text-stone-900" id="nav-login-btn">🔑 Inloggen</a>
+            </div>
         </div>
     </header>
 
-    <!-- HOOFDINHOUD PAGINA 3: KLEURMODELLEN -->
     <main class="max-w-4xl mx-auto px-6 flex-1 w-full space-y-8 py-8">
-        
         <div class="text-center space-y-3">
             <span class="text-xs uppercase font-bold tracking-widest text-pink-800 bg-[#F3E1E1] px-3 py-1 rounded-full border border-pink-200">
                 Informatica Module 2
             </span>
-            <h1 class="serif-heading text-4xl sm:text-5xl text-stone-900">Kleurmodellen: RGB vs. CMYK</h1>
+            <h1 class="serif-heading text-4xl sm:text-5xl">Kleurmodellen: RGB vs. CMYK</h1>
             <p class="text-stone-600 text-sm max-w-md mx-auto">
                 Het verschil tussen kleur op een beeldscherm en kleur in drukwerk.
             </p>
         </div>
 
-        <div class="luma-card bg-white p-6 sm:p-8 space-y-6">
-            
+        <div class="luma-card p-6 sm:p-8 space-y-6">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <!-- RGB KAART -->
-                <div class="p-5 rounded-2xl bg-[#F4F4EE] border border-stone-200 space-y-3">
-                    <div class="w-10 h-10 rounded-full bg-stone-900 text-white flex items-center justify-center font-bold text-xs">
-                        RGB
-                    </div>
-                    <h3 class="text-base font-bold text-stone-900">RGB (Schermen)</h3>
-                    <p class="text-xs text-stone-600 leading-relaxed">
-                        Staat voor <strong>Rood, Groen en Blauw</strong>. Dit is een licht-gebaseerd kleurmodel voor monitoren en smartphones. Wanneer je alle kleuren licht samenvoegt, ontstaat wit licht.
+                <div class="p-5 rounded-2xl bg-[#F4F4EE] border border-stone-200 space-y-3 text-stone-800">
+                    <div class="w-10 h-10 rounded-full bg-stone-900 text-white flex items-center justify-center font-bold text-xs">RGB</div>
+                    <h3 class="text-base font-bold">RGB (Schermen)</h3>
+                    <p class="text-xs leading-relaxed">
+                        Staat voor <strong>Rood, Groen en Blauw</strong>. Dit is een licht-gebaseerd kleurmodel voor monitoren.
                     </p>
                 </div>
 
-                <!-- CMYK KAART -->
-                <div class="p-5 rounded-2xl bg-[#F4F4EE] border border-stone-200 space-y-3">
-                    <div class="w-10 h-10 rounded-full bg-pink-300 text-stone-900 flex items-center justify-center font-bold text-xs">
-                        CMYK
-                    </div>
-                    <h3 class="text-base font-bold text-stone-900">CMYK (Drukwerk)</h3>
-                    <p class="text-xs text-stone-600 leading-relaxed">
-                        Staat voor <strong>Cyan, Magenta, Yellow en Key (Zwart)</strong>. Dit kleurmodel gebruikt inkt op papier. Hoe meer inkt je mengt, hoe donkerder het resultaat wordt.
+                <div class="p-5 rounded-2xl bg-[#F4F4EE] border border-stone-200 space-y-3 text-stone-800">
+                    <div class="w-10 h-10 rounded-full bg-pink-300 text-stone-900 flex items-center justify-center font-bold text-xs">CMYK</div>
+                    <h3 class="text-base font-bold">CMYK (Drukwerk)</h3>
+                    <p class="text-xs leading-relaxed">
+                        Staat voor <strong>Cyan, Magenta, Yellow en Key (Zwart)</strong>. Gebruikt inkt op papier.
                     </p>
                 </div>
             </div>
 
-            <!-- NAVIGATIEKNOOP TERUG -->
+            <!-- IDEE 1: INTERACTIEVE KENNISQUIZ -->
+            <div class="p-6 bg-[#F3E1E1] rounded-2xl border border-pink-300 space-y-4 text-stone-900">
+                <h4 class="font-bold text-base flex items-center gap-2">🧠 Test je kennis: Kleurmodellen Quiz!</h4>
+                <div class="space-y-2 text-xs">
+                    <p class="font-bold">Vraag: Welk kleurmodel gebruik je als je een poster laat drukken op papier?</p>
+                    <button onclick="checkQuiz('RGB', false)" class="quiz-option">A) RGB</button>
+                    <button onclick="checkQuiz('CMYK', true)" class="quiz-option">B) CMYK</button>
+                </div>
+
+                <div id="quiz-feedback" class="hidden p-3 rounded-xl font-bold text-xs text-center"></div>
+            </div>
+
             <div class="pt-4 border-t border-stone-200 flex justify-between items-center">
-                <a href="binairstelsel.html" class="pill-btn px-5 py-2 text-xs bg-[#E1EFE6] text-stone-900">
-                    ← Vorige: Binairstelsel
-                </a>
-                <a href="index.html" class="pill-btn px-5 py-2 text-xs bg-[#F3E1E1] text-stone-900">
-                    Terug naar Home →
-                </a>
+                <a href="binairstelsel.html" class="pill-btn px-5 py-2 text-xs bg-[#E1EFE6] text-stone-900">← Vorige: Binairstelsel</a>
+                <a href="index.html" class="pill-btn px-5 py-2 text-xs bg-[#F3E1E1] text-stone-900">Terug naar Home →</a>
             </div>
         </div>
-
     </main>
 
-    <!-- FOOTER -->
-    <footer class="max-w-6xl mx-auto px-6 py-8 w-full border-t border-stone-200 flex justify-between text-xs text-stone-500">
+    <footer class="max-w-5xl mx-auto px-6 py-8 w-full border-t border-stone-200 flex justify-between text-xs text-stone-500">
         <div>&copy; 2026 LumaDay - Kleurmodellen Module</div>
         <div class="flex gap-4">
             <a href="index.html" class="hover:text-stone-900">Home</a>
             <a href="binairstelsel.html" class="hover:text-stone-900">Binairstelsel</a>
         </div>
     </footer>
+
+    <script>
+        function checkQuiz(option, isCorrect) {
+            const fb = document.getElementById('quiz-feedback');
+            fb.classList.remove('hidden', 'bg-emerald-200', 'bg-red-200', 'text-emerald-900', 'text-red-900');
+            if (isCorrect) {
+                fb.classList.add('bg-emerald-200', 'text-emerald-900');
+                fb.innerText = '🎉 Klopt! Drukwerk gebruikt altijd CMYK inkt!';
+            } else {
+                fb.classList.add('bg-red-200', 'text-red-900');
+                fb.innerText = '❌ Helaas! RGB is alleen voor beeldschermen.';
+            }
+        }
+
+        function toggleDarkMode() {
+            document.body.classList.toggle('dark-mode');
+            localStorage.setItem('lumaday_darkmode', document.body.classList.contains('dark-mode') ? 'enabled' : 'disabled');
+            updateDarkBtnText();
+        }
+
+        function updateDarkBtnText() {
+            const btn = document.getElementById('theme-toggle-btn');
+            if (btn) btn.innerText = document.body.classList.contains('dark-mode') ? '☀️ Licht' : '🌙 Donker';
+        }
+
+        window.onload = function() {
+            if (localStorage.getItem('lumaday_darkmode') === 'enabled') document.body.classList.add('dark-mode');
+            updateDarkBtnText();
+            const user = JSON.parse(localStorage.getItem('lumaday_user'));
+            if (user) {
+                document.getElementById('nav-login-btn').innerText = `👤 ${user.name}`;
+                document.getElementById('nav-login-btn').href = "login.html";
+            }
+        };
+    </script>
 </body>
 </html>
