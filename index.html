@@ -91,7 +91,7 @@
             </div>
         </section>
 
-        <!-- IDEE 4: HABIT & STREAK TRACKER -->
+        <!-- IDEE 4: DYNAMISCHE HABIT & STREAK TRACKER -->
         <section class="max-w-4xl mx-auto">
             <div class="luma-card p-6 sm:p-8 space-y-5">
                 <div class="flex items-center justify-between border-b border-stone-200 pb-3">
@@ -107,20 +107,18 @@
                     </div>
                 </div>
 
-                <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                    <label class="task-item cursor-pointer flex items-center gap-3">
-                        <input type="checkbox" id="habit-water" onchange="toggleHabit('water')" class="w-4 h-4 accent-stone-800">
-                        <span class="text-xs font-semibold">💧 1.5L Water Drinken</span>
-                    </label>
-                    <label class="task-item cursor-pointer flex items-center gap-3">
-                        <input type="checkbox" id="habit-read" onchange="toggleHabit('read')" class="w-4 h-4 accent-stone-800">
-                        <span class="text-xs font-semibold">📖 15 Min. Lezen</span>
-                    </label>
-                    <label class="task-item cursor-pointer flex items-center gap-3">
-                        <input type="checkbox" id="habit-walk" onchange="toggleHabit('walk')" class="w-4 h-4 accent-stone-800">
-                        <span class="text-xs font-semibold">🚶 Korte Wandeling</span>
-                    </label>
+                <!-- DYNAMISCHE LIJST VAN GEWOONTES -->
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-3" id="habits-container">
+                    <!-- Gewoontes worden hier via JavaScript ingeladen -->
                 </div>
+
+                <!-- FORMULIER OM NIEUWE GEWOONTE TOE TE VOEGEN -->
+                <form onsubmit="addCustomHabit(event)" class="flex gap-2 pt-3 border-t border-stone-200">
+                    <input type="text" id="new-habit-input" placeholder="✨ Nieuwe gewoonte (bijv. 🏃 2km hardlopen)..." required class="flex-1 px-3 py-2 rounded-xl border border-stone-300 text-xs bg-white text-stone-900 focus:outline-none focus:ring-2 focus:ring-stone-800">
+                    <button type="submit" class="pill-btn px-4 py-2 text-xs bg-[#E1EFE6] hover:bg-[#CDE3D5] text-stone-900 font-bold border-emerald-300">
+                        + Toevoegen
+                    </button>
+                </form>
             </div>
         </section>
 
@@ -224,32 +222,100 @@
             if (btn) btn.innerText = document.body.classList.contains('dark-mode') ? '☀️ Licht' : '🌙 Donker';
         }
 
-        /* Habit & Streak logica (Idee 4) */
-        function loadHabits() {
-            const habits = JSON.parse(localStorage.getItem('lumaday_habits')) || { water: false, read: false, walk: false, streak: 1 };
-            document.getElementById('habit-water').checked = habits.water;
-            document.getElementById('habit-read').checked = habits.read;
-            document.getElementById('habit-walk').checked = habits.walk;
-            document.getElementById('streak-count').innerText = `🔥 ${habits.streak} dag${habits.streak === 1 ? '' : 'en'}`;
+        /* DYNAMISCHE HABIT & STREAK TRACKER LOGICA */
+        const defaultHabits = [
+            { id: 1, title: "💧 1.5L Water Drinken", done: false },
+            { id: 2, title: "📖 15 Min. Lezen", done: false },
+            { id: 3, title: "🚶 Korte Wandeling", done: false }
+        ];
+
+        function getHabitData() {
+            const stored = localStorage.getItem('lumaday_habits_data');
+            if (stored) {
+                return JSON.parse(stored);
+            }
+            return { habits: defaultHabits, streak: 1 };
         }
 
-        function toggleHabit(type) {
-            let habits = JSON.parse(localStorage.getItem('lumaday_habits')) || { water: false, read: false, walk: false, streak: 1 };
-            habits[type] = document.getElementById(`habit-${type}`).checked;
+        function saveHabitData(data) {
+            localStorage.setItem('lumaday_habits_data', JSON.stringify(data));
+        }
+
+        function renderHabits() {
+            const data = getHabitData();
+            const container = document.getElementById('habits-container');
+            const streakCountEl = document.getElementById('streak-count');
             
-            // Verhoog streak als alle 3 afgevinkt zijn
-            if (habits.water && habits.read && habits.walk) {
-                habits.streak += 1;
-                alert('🎉 Top! Je hebt alle 3 de gewoontes vandaag afgevinkt! Streak verhoogd!');
+            streakCountEl.innerText = `🔥 ${data.streak} dag${data.streak === 1 ? '' : 'en'}`;
+            container.innerHTML = '';
+
+            if (data.habits.length === 0) {
+                container.innerHTML = '<p class="text-xs text-stone-500 italic col-span-3 text-center py-2">Nog geen gewoontes toegevoegd. Voeg er hieronder een toe!</p>';
+                return;
             }
-            localStorage.setItem('lumaday_habits', JSON.stringify(habits));
-            loadHabits();
+
+            data.habits.forEach(habit => {
+                const item = document.createElement('div');
+                item.className = `task-item cursor-pointer flex items-center justify-between ${habit.done ? 'done' : ''}`;
+                
+                item.innerHTML = `
+                    <label class="flex items-center gap-2 cursor-pointer flex-1">
+                        <input type="checkbox" ${habit.done ? 'checked' : ''} onchange="toggleHabitDone(${habit.id})" class="w-4 h-4 accent-stone-800">
+                        <span class="text-xs font-semibold">${habit.title}</span>
+                    </label>
+                    <button onclick="deleteHabit(${habit.id})" class="text-stone-400 hover:text-red-500 text-xs px-1 font-bold ml-2" title="Gewoonte verwijderen">✕</button>
+                `;
+                container.appendChild(item);
+            });
+        }
+
+        function toggleHabitDone(id) {
+            const data = getHabitData();
+            const habit = data.habits.find(h => h.id === id);
+            if (habit) {
+                habit.done = !habit.done;
+            }
+
+            // Controleer of ALLE gewoontes zijn afgevinkt
+            const allDone = data.habits.length > 0 && data.habits.every(h => h.done);
+            if (allDone) {
+                data.streak += 1;
+                alert('🎉 Geweldig! Je hebt alle gewoontes afgevinkt voor vandaag! Je streak is verhoogd!');
+            }
+
+            saveHabitData(data);
+            renderHabits();
+        }
+
+        function addCustomHabit(e) {
+            e.preventDefault();
+            const input = document.getElementById('new-habit-input');
+            const title = input.value.trim();
+
+            if (title) {
+                const data = getHabitData();
+                data.habits.push({
+                    id: Date.now(),
+                    title: title,
+                    done: false
+                });
+                saveHabitData(data);
+                input.value = '';
+                renderHabits();
+            }
+        }
+
+        function deleteHabit(id) {
+            const data = getHabitData();
+            data.habits = data.habits.filter(h => h.id !== id);
+            saveHabitData(data);
+            renderHabits();
         }
 
         window.onload = function() {
             initDarkMode();
             loadDailyFunFact();
-            loadHabits();
+            renderHabits();
             const user = JSON.parse(localStorage.getItem('lumaday_user'));
             if (user) {
                 document.getElementById('nav-login-btn').innerText = `👤 ${user.name}`;
